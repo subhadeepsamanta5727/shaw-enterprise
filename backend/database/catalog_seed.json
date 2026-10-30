@@ -1,0 +1,3016 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Writing Board",
+      "slug": "writing-board",
+      "description": "High-gloss non-magnetic whiteboards, blackboards, green chalkboards, glass boards, and acrylic white writing boards.",
+      "display_order": 1,
+      "is_active": true,
+      "image": "categories/writing-boards.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Display Notice Board",
+      "slug": "display-notice-board",
+      "description": "Pin-up felt bulletin boards, lockable covered display boards, key hanger boards, exhibition boards, cork boards, and grooved boards.",
+      "display_order": 2,
+      "is_active": true,
+      "image": "categories/display-notice-boards.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Magnetic Writing Board",
+      "slug": "magnetic-writing-board",
+      "description": "Magnetic-receptive whiteboard, green chalkboard, and magnetic toughened glass writing boards for markers and magnets.",
+      "display_order": 3,
+      "is_active": true,
+      "image": "categories/magnetic-writing-boards.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Graph Writing Board",
+      "slug": "graph-writing-board",
+      "description": "Precision permanent grid graph boards in white, black, and green for engineering, mathematics, science, and plotting.",
+      "display_order": 4,
+      "is_active": true,
+      "image": "categories/graph-writing-boards.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Metal Stand",
+      "slug": "metal-stand",
+      "description": "Heavy MS powder-coated 3-leg, 4-leg, trolley, revolving, lobby grooved, flip chart, magazine/newspaper, and folding stands.",
+      "display_order": 5,
+      "is_active": true,
+      "image": "categories/metal-stands.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Acrylic Product",
+      "slug": "acrylic-product",
+      "description": "Writing desk/table elevators, executive name plates, double-sided menu holders, business card holders, wall mount info pockets, literature racks, and display stands.",
+      "display_order": 6,
+      "is_active": true,
+      "image": "categories/acrylic-products.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Wooden Product",
+      "slug": "wooden-product",
+      "description": "Handcrafted artist wooden easels, stretched canvas boards, wooden dusters, wooden geometry teaching boxes, and pen stands.",
+      "display_order": 7,
+      "is_active": true,
+      "image": "categories/wooden-products.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Box",
+      "slug": "box",
+      "description": "Lockable MS sheet metal letter boxes, wall-mounted first aid emergency boxes, office suggestion boxes, and key hanger security boxes.",
+      "display_order": 8,
+      "is_active": true,
+      "image": "categories/boxes.jpg"
+    },
+    {
+      "id": 9,
+      "name": "School & Office Furniture",
+      "slug": "school-office-furniture",
+      "description": "Heavy institutional classroom dual desks, science lab tables, library book stacks, executive office desks, workstations, and reception counters.",
+      "display_order": 9,
+      "is_active": true,
+      "image": "categories/school-office-furniture.jpg"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "category": {
+        "id": 1,
+        "name": "Writing Board",
+        "slug": "writing-board"
+      },
+      "title": "White Writing Board (High-Gloss Non-Magnetic)",
+      "slug": "white-writing-board",
+      "sku": "SE-WB-01",
+      "short_description": "High-gloss melamine dry-erase white writing surface framed in 6063-T6 virgin aluminium with ABS safety corners.",
+      "description": "<p>Directly manufactured by Shaw Enterprise in College Street, Kolkata. Specially engineered for tuition centres, home study, and corporate presentation rooms.</p><ul><li>Effortless marker glide and 100% dry wipe erase with zero ghosting</li><li>Satin anodized aluminium frame with hidden wall hanging brackets</li><li>Pen tray included with every board</li><li>Weather-proof backing sheet to prevent warping in Kolkata humidity</li></ul>",
+      "main_image": "products/main/whiteboard.jpg",
+      "images": [
+        "products/main/whiteboard.jpg",
+        "products/main/whiteboard-corner.jpg"
+      ],
+      "mrp": 990,
+      "base_price": 749,
+      "discount_percent": 24,
+      "badge": "Popular",
+      "variants": [
+        {
+          "id": 101,
+          "name": "2x1.5 Feet (Home / Study)",
+          "price": 449,
+          "mrp": 600,
+          "is_default": false
+        },
+        {
+          "id": 102,
+          "name": "3x2 Feet (Office / Chamber)",
+          "price": 749,
+          "mrp": 990,
+          "is_default": true
+        },
+        {
+          "id": 103,
+          "name": "4x3 Feet (Standard Classroom)",
+          "price": 1450,
+          "mrp": 1950,
+          "is_default": false
+        },
+        {
+          "id": 104,
+          "name": "5x3 Feet (Lecture Room)",
+          "price": 1850,
+          "mrp": 2400,
+          "is_default": false
+        },
+        {
+          "id": 105,
+          "name": "6x4 Feet (Auditorium / Training)",
+          "price": 2890,
+          "mrp": 3800,
+          "is_default": false
+        },
+        {
+          "id": 106,
+          "name": "8x4 Feet (Full Wall)",
+          "price": 4200,
+          "mrp": 5500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Surface",
+          "spec_value": "High-Gloss Non-Magnetic White Melamine"
+        },
+        {
+          "spec_key": "Frame",
+          "spec_value": "Virgin Extruded Aluminium Alloy 6063-T6"
+        },
+        {
+          "spec_key": "Core",
+          "spec_value": "9mm High-Density Water-Resistant MDF"
+        },
+        {
+          "spec_key": "Corners",
+          "spec_value": "Virgin ABS Moulded Plastic Corners"
+        },
+        {
+          "spec_key": "Accessories Included",
+          "spec_value": "Marker Tray + Wall Clamps"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "category_id": 1,
+      "category": {
+        "id": 1,
+        "name": "Writing Board",
+        "slug": "writing-board"
+      },
+      "title": "Black Chalk Writing Board (Traditional Wooden & Aluminium Frame)",
+      "slug": "black-chalk-writing-board",
+      "sku": "SE-BCB-02",
+      "short_description": "Traditional deep-black non-reflective chalk writing board for smooth dustless chalk adhesion and high contrast.",
+      "description": "<p>The time-tested favourite for institutions, art schools, cafes, and restaurants. Matte black textured surface ensures high clarity chalk writing with minimal dust dispersion.</p><ul><li>Anti-glare textured black surface for maximum chalk readability</li><li>Reinforced aluminium or polished timber frame</li><li>Washable with damp cloth or dry duster wipe</li></ul>",
+      "main_image": "products/main/blackboard.jpg",
+      "images": [
+        "products/main/blackboard.jpg"
+      ],
+      "mrp": 950,
+      "base_price": 699,
+      "discount_percent": 26,
+      "variants": [
+        {
+          "id": 201,
+          "name": "2x1.5 Feet (Cafe / Study)",
+          "price": 420,
+          "mrp": 580,
+          "is_default": false
+        },
+        {
+          "id": 202,
+          "name": "3x2 Feet (Standard)",
+          "price": 699,
+          "mrp": 950,
+          "is_default": true
+        },
+        {
+          "id": 203,
+          "name": "4x3 Feet (Classroom)",
+          "price": 1390,
+          "mrp": 1850,
+          "is_default": false
+        },
+        {
+          "id": 204,
+          "name": "6x4 Feet (Institutional)",
+          "price": 2750,
+          "mrp": 3600,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Surface",
+          "spec_value": "Matte High-Contrast Blackboard"
+        },
+        {
+          "spec_key": "Frame",
+          "spec_value": "Aluminium Alloy / Solid Wood Border"
+        },
+        {
+          "spec_key": "Chalk Compatibility",
+          "spec_value": "Dustless, Calcium & Coloured Chalks"
+        },
+        {
+          "spec_key": "Warranty",
+          "spec_value": "3 Years Shaw Enterprise Guarantee"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "category_id": 1,
+      "category": {
+        "id": 1,
+        "name": "Writing Board",
+        "slug": "writing-board"
+      },
+      "title": "Green Chalk Writing Board (Matte Eye-Comfort Surface)",
+      "slug": "green-chalk-writing-board",
+      "sku": "SE-GCB-03",
+      "short_description": "School-recommended forest green chalk writing board with soothing matte finish that reduces eye strain.",
+      "description": "<p>Manufactured specifically for high-capacity school and college classrooms across West Bengal. Forest green surface provides maximum visibility under room lighting.</p>",
+      "main_image": "products/main/green-chalkboard.jpg",
+      "images": [
+        "products/main/green-chalkboard.jpg"
+      ],
+      "mrp": 990,
+      "base_price": 749,
+      "discount_percent": 24,
+      "variants": [
+        {
+          "id": 301,
+          "name": "2x1.5 Feet",
+          "price": 449,
+          "mrp": 600,
+          "is_default": false
+        },
+        {
+          "id": 302,
+          "name": "3x2 Feet",
+          "price": 749,
+          "mrp": 990,
+          "is_default": true
+        },
+        {
+          "id": 303,
+          "name": "4x3 Feet",
+          "price": 1450,
+          "mrp": 1950,
+          "is_default": false
+        },
+        {
+          "id": 304,
+          "name": "6x4 Feet",
+          "price": 2890,
+          "mrp": 3800,
+          "is_default": false
+        },
+        {
+          "id": 305,
+          "name": "8x4 Feet",
+          "price": 4200,
+          "mrp": 5500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Surface",
+          "spec_value": "Forest Green Matte Chalk Finish"
+        },
+        {
+          "spec_key": "Frame",
+          "spec_value": "Virgin Extruded Aluminium"
+        },
+        {
+          "spec_key": "Anti-Glare",
+          "spec_value": "100% Glare-Free from all viewing angles"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "category_id": 1,
+      "category": {
+        "id": 1,
+        "name": "Writing Board",
+        "slug": "writing-board"
+      },
+      "title": "Glass White Writing Board (Toughened Float Glass)",
+      "slug": "glass-white-writing-board",
+      "sku": "SE-GWB-04",
+      "short_description": "Ultra-modern 4mm/6mm tempered toughened glass whiteboard with stainless steel standoff mounts. 100% scratch and stain proof.",
+      "description": "<p>The pinnacle of executive boardroom and modern clinic design. Made with high-tensile architectural float glass that never stains, streaks, or degrades over decades.</p>",
+      "main_image": "products/main/glass-whiteboard.jpg",
+      "images": [
+        "products/main/glass-whiteboard.jpg"
+      ],
+      "mrp": 3200,
+      "base_price": 2490,
+      "discount_percent": 22,
+      "badge": "Premium",
+      "variants": [
+        {
+          "id": 401,
+          "name": "3x2 Feet (4mm Toughened Glass)",
+          "price": 2490,
+          "mrp": 3200,
+          "is_default": true
+        },
+        {
+          "id": 402,
+          "name": "4x3 Feet (6mm Toughened Glass)",
+          "price": 4890,
+          "mrp": 6200,
+          "is_default": false
+        },
+        {
+          "id": 403,
+          "name": "6x4 Feet (6mm Toughened Glass)",
+          "price": 8990,
+          "mrp": 11500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Glass Type",
+          "spec_value": "Tempered Toughened Safety Float Glass"
+        },
+        {
+          "spec_key": "Thickness",
+          "spec_value": "4mm to 6mm"
+        },
+        {
+          "spec_key": "Mounting",
+          "spec_value": "Solid Stainless Steel Standoff Studs"
+        },
+        {
+          "spec_key": "Stain Resistance",
+          "spec_value": "Permanent 100% Ghost-Free"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "category_id": 1,
+      "category": {
+        "id": 1,
+        "name": "Writing Board",
+        "slug": "writing-board"
+      },
+      "title": "Acrylic White Writing Board (Lightweight & Unbreakable)",
+      "slug": "acrylic-white-writing-board",
+      "sku": "SE-AWB-05",
+      "short_description": "Shatter-proof cast acrylic white writing board with crystal gloss finish and ultra-lightweight mounting.",
+      "description": "<p>Ideal for kindergarten schools, playrooms, and locations where glass cannot be used due to safety concerns. 100% unbreakable with brilliant marker clarity.</p>",
+      "main_image": "products/main/acrylic-whiteboard.jpg",
+      "images": [
+        "products/main/acrylic-whiteboard.jpg"
+      ],
+      "mrp": 1400,
+      "base_price": 990,
+      "discount_percent": 29,
+      "variants": [
+        {
+          "id": 501,
+          "name": "2x1.5 Feet (3mm Cast Acrylic)",
+          "price": 650,
+          "mrp": 900,
+          "is_default": false
+        },
+        {
+          "id": 502,
+          "name": "3x2 Feet (4mm Cast Acrylic)",
+          "price": 990,
+          "mrp": 1400,
+          "is_default": true
+        },
+        {
+          "id": 503,
+          "name": "4x3 Feet (5mm Cast Acrylic)",
+          "price": 2190,
+          "mrp": 2900,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Material",
+          "spec_value": "Virgin Grade A Cast Acrylic Sheet"
+        },
+        {
+          "spec_key": "Impact Resistance",
+          "spec_value": "17x Stronger than regular glass"
+        },
+        {
+          "spec_key": "Edge Finish",
+          "spec_value": "Diamond Polished Safe Rounded Edges"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "category_id": 2,
+      "category": {
+        "id": 2,
+        "name": "Display Notice Board",
+        "slug": "display-notice-board"
+      },
+      "title": "Pin Use Notice Board (Soft Board Felt / Fabric)",
+      "slug": "pin-use-notice-board",
+      "sku": "SE-PNB-06",
+      "short_description": "High-density self-healing felt fabric pin board with aluminium border. Available in Blue, Maroon, Green, and Grey.",
+      "description": "<p>Fabricated with high-density compressed sugarcane bagasse core board that holds push pins firmly without falling out. Available in vivid institutional colours.</p>",
+      "main_image": "products/main/notice-board.jpg",
+      "images": [
+        "products/main/notice-board.jpg"
+      ],
+      "mrp": 890,
+      "base_price": 649,
+      "discount_percent": 27,
+      "variants": [
+        {
+          "id": 601,
+          "name": "2x1.5 Feet (Blue / Maroon / Green)",
+          "price": 420,
+          "mrp": 590,
+          "is_default": false
+        },
+        {
+          "id": 602,
+          "name": "3x2 Feet (Standard Office)",
+          "price": 649,
+          "mrp": 890,
+          "is_default": true
+        },
+        {
+          "id": 603,
+          "name": "4x3 Feet (Institutional)",
+          "price": 1290,
+          "mrp": 1750,
+          "is_default": false
+        },
+        {
+          "id": 604,
+          "name": "6x4 Feet (Auditorium)",
+          "price": 2650,
+          "mrp": 3500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Surface",
+          "spec_value": "Anti-Fraying Flocked Felt Fabric"
+        },
+        {
+          "spec_key": "Core",
+          "spec_value": "High-Density Self-Healing Softboard"
+        },
+        {
+          "spec_key": "Frame",
+          "spec_value": "Satin Finish Anodized Aluminium"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "category_id": 2,
+      "category": {
+        "id": 2,
+        "name": "Display Notice Board",
+        "slug": "display-notice-board"
+      },
+      "title": "Cover Notice Board with Lock (Sliding Acrylic / Glass Door)",
+      "slug": "cover-notice-board-with-lock",
+      "sku": "SE-CNB-07",
+      "short_description": "Tamper-proof lockable showcase notice board with twin sliding acrylic or toughened glass doors and key lock.",
+      "description": "<p>Essential for apartment lobbies, banks, schools, and public corridors. Protects circulars, certificates, and announcements from tampering and dust.</p>",
+      "main_image": "products/main/cover-notice-board.jpg",
+      "images": [
+        "products/main/cover-notice-board.jpg"
+      ],
+      "mrp": 2900,
+      "base_price": 2190,
+      "discount_percent": 24,
+      "badge": "Lockable",
+      "variants": [
+        {
+          "id": 701,
+          "name": "3x2 Feet with Sliding Acrylic & Lock",
+          "price": 2190,
+          "mrp": 2900,
+          "is_default": true
+        },
+        {
+          "id": 702,
+          "name": "4x3 Feet with Sliding Acrylic & Lock",
+          "price": 3890,
+          "mrp": 4900,
+          "is_default": false
+        },
+        {
+          "id": 703,
+          "name": "6x4 Feet with Sliding Glass & Lock",
+          "price": 7490,
+          "mrp": 9500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Door Mechanism",
+          "spec_value": "Smooth Ball-Bearing Track Sliding Doors"
+        },
+        {
+          "spec_key": "Security",
+          "spec_value": "Cam Lock with 2 Duplicate Brass Keys"
+        },
+        {
+          "spec_key": "Internal Board",
+          "spec_value": "Choice of Pin-Up Felt or Magnetic Steel"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "category_id": 2,
+      "category": {
+        "id": 2,
+        "name": "Display Notice Board",
+        "slug": "display-notice-board"
+      },
+      "title": "Key Hanger Board (Numbered Hooks with Aluminium Frame)",
+      "slug": "key-hanger-board",
+      "sku": "SE-KHB-08",
+      "short_description": "Organized key storage board with brass/chrome-plated numbered hooks and heavy-duty aluminium border.",
+      "description": "<p>Designed for hotels, car showrooms, hospitals, schools, and factory security gates. Neatly holds and indexes all facility keys.</p>",
+      "main_image": "products/main/key-hanger-board.jpg",
+      "images": [
+        "products/main/key-hanger-board.jpg"
+      ],
+      "mrp": 1500,
+      "base_price": 1099,
+      "discount_percent": 27,
+      "variants": [
+        {
+          "id": 801,
+          "name": "24 Keys Capacity (Numbered 1-24)",
+          "price": 799,
+          "mrp": 1100,
+          "is_default": false
+        },
+        {
+          "id": 802,
+          "name": "48 Keys Capacity (Numbered 1-48)",
+          "price": 1099,
+          "mrp": 1500,
+          "is_default": true
+        },
+        {
+          "id": 803,
+          "name": "96 Keys Capacity (Numbered 1-96)",
+          "price": 1950,
+          "mrp": 2600,
+          "is_default": false
+        },
+        {
+          "id": 804,
+          "name": "150 Keys Capacity (Numbered 1-150)",
+          "price": 2990,
+          "mrp": 3900,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Hooks",
+          "spec_value": "Chrome-Plated Solid Brass / Steel Hooks"
+        },
+        {
+          "spec_key": "Indexing",
+          "spec_value": "Printed High-Visibility Key Numbers"
+        },
+        {
+          "spec_key": "Backing",
+          "spec_value": "Pre-Drilled Heavy Aluminium Casing"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "category_id": 2,
+      "category": {
+        "id": 2,
+        "name": "Display Notice Board",
+        "slug": "display-notice-board"
+      },
+      "title": "Exhibition Display Notice Board (Folding & Multi-Panel)",
+      "slug": "exhibition-display-notice-board",
+      "sku": "SE-ENB-09",
+      "short_description": "Modular folding exhibition pin-up panel system with 360° hinges for trade shows, science fairs, and art galleries.",
+      "description": "<p>Lightweight portable panels that fold flat for transit and set up in seconds in Zig-Zag, L-shape, or U-shape configurations.</p>",
+      "main_image": "products/main/exhibition-board.jpg",
+      "images": [
+        "products/main/exhibition-board.jpg"
+      ],
+      "mrp": 4500,
+      "base_price": 3490,
+      "discount_percent": 22,
+      "variants": [
+        {
+          "id": 901,
+          "name": "2-Panel Folding Display (6x3 ft each)",
+          "price": 3490,
+          "mrp": 4500,
+          "is_default": true
+        },
+        {
+          "id": 902,
+          "name": "3-Panel Folding Display (6x3 ft each)",
+          "price": 5190,
+          "mrp": 6600,
+          "is_default": false
+        },
+        {
+          "id": 903,
+          "name": "4-Panel Folding Display (6x3 ft each)",
+          "price": 6890,
+          "mrp": 8800,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Hinges",
+          "spec_value": "360° Heavy-Duty Steel Pivot Hinges"
+        },
+        {
+          "spec_key": "Fabric",
+          "spec_value": "Double-Sided Felt Fabric"
+        },
+        {
+          "spec_key": "Portability",
+          "spec_value": "Folds Flat with Optional Carry Bag"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "category_id": 2,
+      "category": {
+        "id": 2,
+        "name": "Display Notice Board",
+        "slug": "display-notice-board"
+      },
+      "title": "Cork Display Notice Board (Natural Self-Healing Cork)",
+      "slug": "cork-display-notice-board",
+      "sku": "SE-CDNB-10",
+      "short_description": "Natural organic Portuguese cork bulletin board with self-healing grain that conceals pin holes automatically.",
+      "description": "<p>Eco-friendly, warm organic aesthetic for creative studios, architecture firms, and home offices. Resilient cork layer firmly grips pins.</p>",
+      "main_image": "products/main/cork-board.jpg",
+      "images": [
+        "products/main/cork-board.jpg"
+      ],
+      "mrp": 1200,
+      "base_price": 890,
+      "discount_percent": 26,
+      "variants": [
+        {
+          "id": 1001,
+          "name": "2x1.5 Feet (Natural Cork)",
+          "price": 550,
+          "mrp": 750,
+          "is_default": false
+        },
+        {
+          "id": 1002,
+          "name": "3x2 Feet (Natural Cork)",
+          "price": 890,
+          "mrp": 1200,
+          "is_default": true
+        },
+        {
+          "id": 1003,
+          "name": "4x3 Feet (Natural Cork)",
+          "price": 1750,
+          "mrp": 2400,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Material",
+          "spec_value": "100% Natural Organic Cork Sheet"
+        },
+        {
+          "spec_key": "Self-Healing",
+          "spec_value": "Yes, Pin holes close naturally"
+        },
+        {
+          "spec_key": "Frame",
+          "spec_value": "Satin Aluminium or Natural Pine Wood"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "category_id": 2,
+      "category": {
+        "id": 2,
+        "name": "Display Notice Board",
+        "slug": "display-notice-board"
+      },
+      "title": "Grooved Board (Welcome Board with Changeable Letters & Figures)",
+      "slug": "grooved-board",
+      "sku": "SE-GB-11",
+      "short_description": "Golden / Silver grooved felt board with complete set of interchangeable English alphabets, numbers, and currency symbols.",
+      "description": "<p>The gold standard for hotel lobbies, bank interest rate displays, church hymns, seminar schedules, and auditorium entry doors.</p>",
+      "main_image": "products/main/grooved-board.jpg",
+      "images": [
+        "products/main/grooved-board.jpg"
+      ],
+      "mrp": 1600,
+      "base_price": 1190,
+      "discount_percent": 26,
+      "variants": [
+        {
+          "id": 1101,
+          "name": "2x1.5 Feet + 250 Letters & Numbers Set",
+          "price": 850,
+          "mrp": 1150,
+          "is_default": false
+        },
+        {
+          "id": 1102,
+          "name": "3x2 Feet + 350 Letters & Numbers Set",
+          "price": 1190,
+          "mrp": 1600,
+          "is_default": true
+        },
+        {
+          "id": 1103,
+          "name": "4x3 Feet + 500 Letters & Numbers Set",
+          "price": 2390,
+          "mrp": 3200,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Groove Type",
+          "spec_value": "Precision Extruded Horizontal Grooves"
+        },
+        {
+          "spec_key": "Letter Kit",
+          "spec_value": "Full Set of Push-in Golden/White Characters"
+        },
+        {
+          "spec_key": "Frame Finish",
+          "spec_value": "Anodized Gold or Metallic Silver"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "category_id": 3,
+      "category": {
+        "id": 3,
+        "name": "Magnetic Writing Board",
+        "slug": "magnetic-writing-board"
+      },
+      "title": "Magnetic White Board (Polymer Coated Steel)",
+      "slug": "magnetic-white-board",
+      "sku": "SE-MWB-12",
+      "short_description": "High-contrast scratch-resistant magnetic surface for smooth marker glide and 100% ghost-free dry erasing. Holds magnetic accessories.",
+      "description": "<p>Manufactured by Shaw Enterprise at our College Street facility. Features high-tensile imported polymer-coated steel surface that is magnetic receptive. Easily hold charts, notes, and accessories with magnets.</p>",
+      "main_image": "products/main/magnetic-whiteboard.jpg",
+      "images": [
+        "products/main/magnetic-whiteboard.jpg"
+      ],
+      "mrp": 1450,
+      "base_price": 1099,
+      "discount_percent": 24,
+      "badge": "Bestseller",
+      "variants": [
+        {
+          "id": 1201,
+          "name": "2x1.5 Feet (Home Study)",
+          "price": 699,
+          "mrp": 950,
+          "is_default": false
+        },
+        {
+          "id": 1202,
+          "name": "3x2 Feet (Office / Chamber)",
+          "price": 1099,
+          "mrp": 1450,
+          "is_default": true
+        },
+        {
+          "id": 1203,
+          "name": "4x3 Feet (Standard Classroom)",
+          "price": 2199,
+          "mrp": 2800,
+          "is_default": false
+        },
+        {
+          "id": 1204,
+          "name": "5x3 Feet (Lecture Room)",
+          "price": 2790,
+          "mrp": 3600,
+          "is_default": false
+        },
+        {
+          "id": 1205,
+          "name": "6x4 Feet (Auditorium / Training)",
+          "price": 4299,
+          "mrp": 5400,
+          "is_default": false
+        },
+        {
+          "id": 1206,
+          "name": "8x4 Feet (Full Wall)",
+          "price": 6199,
+          "mrp": 7800,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Surface",
+          "spec_value": "Magnetic Polymer Coated White Steel"
+        },
+        {
+          "spec_key": "Frame",
+          "spec_value": "Satin Finish Extruded Aluminium 6063-T6"
+        },
+        {
+          "spec_key": "Magnetic Adhesion",
+          "spec_value": "Strong attraction for neodymium & ferrite magnets"
+        },
+        {
+          "spec_key": "Warranty",
+          "spec_value": "5 Years Manufacturer Guarantee"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "category_id": 3,
+      "category": {
+        "id": 3,
+        "name": "Magnetic Writing Board",
+        "slug": "magnetic-writing-board"
+      },
+      "title": "Magnetic Green Chalk Board (Ceramic Vitreous Steel)",
+      "slug": "magnetic-green-chalk-board",
+      "sku": "SE-MGB-13",
+      "short_description": "Vitreous ceramic porcelain steel green chalkboard with 25-year scratch-proof guarantee. Anti-glare matte finish with magnetic grip.",
+      "description": "<p>The gold standard in educational writing surfaces. Ceramic porcelain steel fired at 800°C creates an impervious glass-like surface that never fades, scratches, or retains ghost marks. Built with heavy-duty aluminium border and ABS safety corners.</p>",
+      "main_image": "products/main/magnetic-green-board.jpg",
+      "images": [
+        "products/main/magnetic-green-board.jpg"
+      ],
+      "mrp": 1800,
+      "base_price": 1350,
+      "discount_percent": 25,
+      "badge": "25-Yr Durability",
+      "variants": [
+        {
+          "id": 1301,
+          "name": "2x1.5 Feet (Study)",
+          "price": 799,
+          "mrp": 1100,
+          "is_default": false
+        },
+        {
+          "id": 1302,
+          "name": "3x2 Feet (Standard)",
+          "price": 1350,
+          "mrp": 1800,
+          "is_default": true
+        },
+        {
+          "id": 1303,
+          "name": "4x3 Feet (Classroom)",
+          "price": 2690,
+          "mrp": 3500,
+          "is_default": false
+        },
+        {
+          "id": 1304,
+          "name": "6x4 Feet (Lecture Hall)",
+          "price": 5190,
+          "mrp": 6800,
+          "is_default": false
+        },
+        {
+          "id": 1305,
+          "name": "8x4 Feet (University)",
+          "price": 7490,
+          "mrp": 9800,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Surface",
+          "spec_value": "Vitreous Enamelled Ceramic Steel (Green)"
+        },
+        {
+          "spec_key": "Hardness",
+          "spec_value": "Mohs Scale 7+ (Scratch-Proof against coins & compasses)"
+        },
+        {
+          "spec_key": "Chalk Type",
+          "spec_value": "All regular and dust-free chalks"
+        },
+        {
+          "spec_key": "Warranty",
+          "spec_value": "25 Years Surface Guarantee"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "category_id": 3,
+      "category": {
+        "id": 3,
+        "name": "Magnetic Writing Board",
+        "slug": "magnetic-writing-board"
+      },
+      "title": "Magnetic Glass Writing Board (Steel Backed Toughened Glass)",
+      "slug": "magnetic-glass-writing-board",
+      "sku": "SE-MGWB-14",
+      "short_description": "Architectural toughened glass board with galvanized steel backing plate. Supports heavy rare-earth neodymium magnets.",
+      "description": "<p>High-end luxury board designed for C-suite executive rooms, creative agencies, and modern consultancy spaces. Pure crystal glass surface with magnetic retention.</p>",
+      "main_image": "products/main/magnetic-glass-board.jpg",
+      "images": [
+        "products/main/magnetic-glass-board.jpg"
+      ],
+      "mrp": 4200,
+      "base_price": 3290,
+      "discount_percent": 22,
+      "badge": "Luxury",
+      "variants": [
+        {
+          "id": 1401,
+          "name": "3x2 Feet (Magnetic Glass + 4 Neodymium Magnets)",
+          "price": 3290,
+          "mrp": 4200,
+          "is_default": true
+        },
+        {
+          "id": 1402,
+          "name": "4x3 Feet (Magnetic Glass + 6 Neodymium Magnets)",
+          "price": 6290,
+          "mrp": 8000,
+          "is_default": false
+        },
+        {
+          "id": 1403,
+          "name": "6x4 Feet (Magnetic Glass + 8 Neodymium Magnets)",
+          "price": 11490,
+          "mrp": 14500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Glass",
+          "spec_value": "4mm Extra-Clear Tempered Safety Glass"
+        },
+        {
+          "spec_key": "Backing",
+          "spec_value": "Integrated Galvanized Magnetic Steel Plate"
+        },
+        {
+          "spec_key": "Magnet Requirement",
+          "spec_value": "Requires Neodymium / Rare-Earth Magnets"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "category_id": 4,
+      "category": {
+        "id": 4,
+        "name": "Graph Writing Board",
+        "slug": "graph-writing-board"
+      },
+      "title": "White Graph Board (Permanent Fused Grid Lines)",
+      "slug": "white-graph-board",
+      "sku": "SE-WGB-15",
+      "short_description": "Dry-erase whiteboard with permanently fused 25mm × 25mm or 50mm × 50mm precision coordinate grid lines.",
+      "description": "<p>Specially developed for mathematics teachers, physics labs, and statistical presentation. The grid lines will never rub off or erase with markers.</p>",
+      "main_image": "products/main/white-graph-board.jpg",
+      "images": [
+        "products/main/white-graph-board.jpg"
+      ],
+      "mrp": 1800,
+      "base_price": 1390,
+      "discount_percent": 23,
+      "variants": [
+        {
+          "id": 1501,
+          "name": "3x2 Feet (1 Inch / 25mm Grid)",
+          "price": 1390,
+          "mrp": 1800,
+          "is_default": true
+        },
+        {
+          "id": 1502,
+          "name": "4x3 Feet (1 Inch / 25mm Grid)",
+          "price": 2690,
+          "mrp": 3500,
+          "is_default": false
+        },
+        {
+          "id": 1503,
+          "name": "6x4 Feet (2 Inch / 50mm Grid)",
+          "price": 4990,
+          "mrp": 6500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Grid Spacing",
+          "spec_value": "25mm x 25mm Precision Subdivided"
+        },
+        {
+          "spec_key": "Grid Durability",
+          "spec_value": "Permanently Silk-Screen Heat Fused"
+        },
+        {
+          "spec_key": "Dry Erase",
+          "spec_value": "100% Ghost Free"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "category_id": 4,
+      "category": {
+        "id": 4,
+        "name": "Graph Writing Board",
+        "slug": "graph-writing-board"
+      },
+      "title": "Black Graph Board (High-Contrast Chalk Grid)",
+      "slug": "black-graph-board",
+      "sku": "SE-BGB-16",
+      "short_description": "Traditional deep-black blackboard with permanent fine white coordinate graph grids for chalk plotting.",
+      "description": "<p>Classic board for teaching calculus, geometry, trigonometry, and coordinate graphs. Provides stark visual contrast for coloured chalk diagrams.</p>",
+      "main_image": "products/main/black-graph-board.jpg",
+      "images": [
+        "products/main/black-graph-board.jpg"
+      ],
+      "mrp": 1750,
+      "base_price": 1290,
+      "discount_percent": 26,
+      "variants": [
+        {
+          "id": 1601,
+          "name": "3x2 Feet (Permanent White Grid)",
+          "price": 1290,
+          "mrp": 1750,
+          "is_default": true
+        },
+        {
+          "id": 1602,
+          "name": "4x3 Feet (Permanent White Grid)",
+          "price": 2490,
+          "mrp": 3300,
+          "is_default": false
+        },
+        {
+          "id": 1603,
+          "name": "6x4 Feet (Permanent White Grid)",
+          "price": 4790,
+          "mrp": 6200,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Surface",
+          "spec_value": "Non-Reflective Matte Blackboard"
+        },
+        {
+          "spec_key": "Grid Lines",
+          "spec_value": "Permanent Weather-Proof White Print"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "category_id": 4,
+      "category": {
+        "id": 4,
+        "name": "Graph Writing Board",
+        "slug": "graph-writing-board"
+      },
+      "title": "Green Graph Board (Eye-Friendly Forest Green Chalk Grid)",
+      "slug": "green-graph-board",
+      "sku": "SE-GGB-17",
+      "short_description": "School standard forest green chalkboard with indelible white/yellow coordinate plotting grid lines.",
+      "description": "<p>The ultimate visual teaching aid for CBSE, ICSE, and West Bengal Board schools. Reduces student eye strain during long math and geometry sessions.</p>",
+      "main_image": "products/main/green-graph-board.jpg",
+      "images": [
+        "products/main/green-graph-board.jpg"
+      ],
+      "mrp": 1850,
+      "base_price": 1390,
+      "discount_percent": 25,
+      "variants": [
+        {
+          "id": 1701,
+          "name": "3x2 Feet (Green Graph)",
+          "price": 1390,
+          "mrp": 1850,
+          "is_default": true
+        },
+        {
+          "id": 1702,
+          "name": "4x3 Feet (Green Graph)",
+          "price": 2690,
+          "mrp": 3500,
+          "is_default": false
+        },
+        {
+          "id": 1703,
+          "name": "6x4 Feet (Green Graph)",
+          "price": 4990,
+          "mrp": 6500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Colour",
+          "spec_value": "Forest Green Matte"
+        },
+        {
+          "spec_key": "Grid Accuracy",
+          "spec_value": "±0.5mm Lab Calibrated"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "category_id": 5,
+      "category": {
+        "id": 5,
+        "name": "Metal Stand",
+        "slug": "metal-stand"
+      },
+      "title": "3-Leg Stand (Tripod Display Stand for Boards & Posters)",
+      "slug": "3-leg-stand",
+      "sku": "SE-MS-3L-18",
+      "short_description": "Heavy gauge tubular mild steel tripod display stand with adjustable clamps to fit boards from 2x1.5 ft up to 4x3 ft.",
+      "description": "<p>Portable and robust 3-legged tripod stand for classrooms, hotel lobbies, art exhibitions, and conferences. Telescopic adjustable height legs.</p>",
+      "main_image": "products/main/3leg-stand.jpg",
+      "images": [
+        "products/main/3leg-stand.jpg"
+      ],
+      "mrp": 1800,
+      "base_price": 1290,
+      "discount_percent": 28,
+      "variants": [
+        {
+          "id": 1801,
+          "name": "Standard 3-Leg Tripod (Max 4x3 ft Board)",
+          "price": 1290,
+          "mrp": 1800,
+          "is_default": true
+        },
+        {
+          "id": 1802,
+          "name": "Heavy-Duty 3-Leg Tripod (Max 5x3 ft Board)",
+          "price": 1690,
+          "mrp": 2200,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Material",
+          "spec_value": "Powder-Coated Mild Steel (MS Pipe)"
+        },
+        {
+          "spec_key": "Height Adjustment",
+          "spec_value": "Telescopic from 3.5 ft to 6 ft"
+        },
+        {
+          "spec_key": "Feet",
+          "spec_value": "Non-Skid Heavy Rubber Shoes"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "category_id": 5,
+      "category": {
+        "id": 5,
+        "name": "Metal Stand",
+        "slug": "metal-stand"
+      },
+      "title": "Four Leg Stand (Heavy-Duty Stationary Board Stand)",
+      "slug": "four-leg-stand",
+      "sku": "SE-MS-4L-19",
+      "short_description": "Ultra-stable 4-legged square tube metal frame stand for large writing and notice boards up to 6x4 ft.",
+      "description": "<p>Fabricated for schools and training centres where wall drilling is not permitted. Rigid 4-point stance prevents vibration while writing.</p>",
+      "main_image": "products/main/4leg-stand.jpg",
+      "images": [
+        "products/main/4leg-stand.jpg"
+      ],
+      "mrp": 2600,
+      "base_price": 1990,
+      "discount_percent": 23,
+      "variants": [
+        {
+          "id": 1901,
+          "name": "For 4x3 ft Boards",
+          "price": 1990,
+          "mrp": 2600,
+          "is_default": true
+        },
+        {
+          "id": 1902,
+          "name": "For 5x3 ft Boards",
+          "price": 2390,
+          "mrp": 3100,
+          "is_default": false
+        },
+        {
+          "id": 1903,
+          "name": "For 6x4 ft Boards",
+          "price": 2890,
+          "mrp": 3800,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Structure",
+          "spec_value": "25mm x 25mm Heavy Gauge Square MS Tubing"
+        },
+        {
+          "spec_key": "Coating",
+          "spec_value": "7-Tank Anti-Rust Epoxy Powder Coating"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "category_id": 5,
+      "category": {
+        "id": 5,
+        "name": "Metal Stand",
+        "slug": "metal-stand"
+      },
+      "title": "Trolley Stand (With 360° Lockable Castor Wheels)",
+      "slug": "trolley-stand",
+      "sku": "SE-MS-TR-20",
+      "short_description": "Mobile wheeled trolley stand with four heavy-duty nylon swivel castor wheels and foot locks.",
+      "description": "<p>Effortlessly roll writing boards between classrooms, conference halls, and department rooms. Foot-operated wheel brakes lock the stand firmly in place during writing.</p>",
+      "main_image": "products/main/trolley-stand.jpg",
+      "images": [
+        "products/main/trolley-stand.jpg"
+      ],
+      "mrp": 3200,
+      "base_price": 2490,
+      "discount_percent": 22,
+      "variants": [
+        {
+          "id": 2001,
+          "name": "For 4x3 ft Board",
+          "price": 2490,
+          "mrp": 3200,
+          "is_default": true
+        },
+        {
+          "id": 2002,
+          "name": "For 6x4 ft Board",
+          "price": 3490,
+          "mrp": 4500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Wheels",
+          "spec_value": "4x 50mm Industrial Castors with Foot Brakes"
+        },
+        {
+          "spec_key": "Base",
+          "spec_value": "H-Shaped Anti-Topple Wide Stance"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "category_id": 5,
+      "category": {
+        "id": 5,
+        "name": "Metal Stand",
+        "slug": "metal-stand"
+      },
+      "title": "Revolving Stand (Double-Sided 360° Board Rotator)",
+      "slug": "revolving-stand",
+      "sku": "SE-MS-REV-21",
+      "short_description": "Double-sided 360-degree rotating mobile board stand with precision brass lock pins and castor wheels.",
+      "description": "<p>Use both sides of your board! Seamlessly flip between Whiteboard on front and Green Chalkboard on back with quick-release rotational lock knobs.</p>",
+      "main_image": "products/main/revolving-stand.jpg",
+      "images": [
+        "products/main/revolving-stand.jpg"
+      ],
+      "mrp": 3800,
+      "base_price": 2890,
+      "discount_percent": 24,
+      "badge": "Popular",
+      "variants": [
+        {
+          "id": 2101,
+          "name": "Revolving Stand for 4x3 ft Boards",
+          "price": 2890,
+          "mrp": 3800,
+          "is_default": true
+        },
+        {
+          "id": 2102,
+          "name": "Revolving Stand for 5x3 ft Boards",
+          "price": 3390,
+          "mrp": 4400,
+          "is_default": false
+        },
+        {
+          "id": 2103,
+          "name": "Revolving Stand for 6x4 ft Boards",
+          "price": 3990,
+          "mrp": 5200,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Rotation",
+          "spec_value": "Full 360° with Multi-Angle Tightening Knobs"
+        },
+        {
+          "spec_key": "Mobility",
+          "spec_value": "Lockable Castor Wheels Included"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "category_id": 5,
+      "category": {
+        "id": 5,
+        "name": "Metal Stand",
+        "slug": "metal-stand"
+      },
+      "title": "Lobby Grooved Display Stand (Single / Double Pole)",
+      "slug": "lobby-grooved-display-stand",
+      "sku": "SE-MS-LOB-22",
+      "short_description": "Prestigious lobby pedestal stand for grooved welcome boards in gold/chrome finish with heavy cast-iron round base.",
+      "description": "<p>Found at luxury Kolkata hotels, corporate headquarters, and banquet halls. Heavy base ensures zero tipping even in high-traffic corridors.</p>",
+      "main_image": "products/main/lobby-stand.jpg",
+      "images": [
+        "products/main/lobby-stand.jpg"
+      ],
+      "mrp": 3100,
+      "base_price": 2390,
+      "discount_percent": 23,
+      "variants": [
+        {
+          "id": 2201,
+          "name": "Single Pole Brass Finish (for 2x1.5 ft Board)",
+          "price": 2390,
+          "mrp": 3100,
+          "is_default": true
+        },
+        {
+          "id": 2202,
+          "name": "Double Pole Stainless Steel (for 3x2 ft Board)",
+          "price": 3490,
+          "mrp": 4600,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Base",
+          "spec_value": "Heavy Cast Iron Weighted Anti-Topple Base"
+        },
+        {
+          "spec_key": "Finish",
+          "spec_value": "Mirror Brass or Satin Stainless Steel"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "category_id": 5,
+      "category": {
+        "id": 5,
+        "name": "Metal Stand",
+        "slug": "metal-stand"
+      },
+      "title": "Flip Chart Stand (Easel Style with Paper Pad Clamp)",
+      "slug": "flip-chart-stand",
+      "sku": "SE-MS-FC-23",
+      "short_description": "Magnetic dry-erase whiteboard easel with top-mounted universal paper pad clamp for seminar presentations.",
+      "description": "<p>Ideal for agile sprint meetings, workshops, and coaching seminars. Combines a magnetic whiteboard with a clamp for standard flip chart paper pads.</p>",
+      "main_image": "products/main/flip-chart-stand.jpg",
+      "images": [
+        "products/main/flip-chart-stand.jpg"
+      ],
+      "mrp": 3500,
+      "base_price": 2690,
+      "discount_percent": 23,
+      "variants": [
+        {
+          "id": 2301,
+          "name": "Tripod Flip Chart Stand",
+          "price": 2690,
+          "mrp": 3500,
+          "is_default": true
+        },
+        {
+          "id": 2302,
+          "name": "Mobile Round Base Flip Chart Stand with Wheels",
+          "price": 3890,
+          "mrp": 4900,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Paper Clamp",
+          "spec_value": "Spring-Loaded Quick-Release Top Bar"
+        },
+        {
+          "spec_key": "Writing Surface",
+          "spec_value": "Magnetic Dry-Erase Whiteboard 3x2 ft"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "category_id": 5,
+      "category": {
+        "id": 5,
+        "name": "Metal Stand",
+        "slug": "metal-stand"
+      },
+      "title": "Magazine & Newspaper Stand (Multi-Tier Display Rack)",
+      "slug": "magazine-newspaper-stand",
+      "sku": "SE-MS-MN-24",
+      "short_description": "Heavy duty wire/sheet multi-pocket magazine display rack with newspaper hanging rods for reception areas.",
+      "description": "<p>Keeps reception areas, hospital waiting rooms, and libraries neat and organized. Displays magazines face-out for easy browsing.</p>",
+      "main_image": "products/main/magazine-stand.jpg",
+      "images": [
+        "products/main/magazine-stand.jpg"
+      ],
+      "mrp": 2900,
+      "base_price": 2190,
+      "discount_percent": 24,
+      "variants": [
+        {
+          "id": 2401,
+          "name": "4-Tier Magazine Stand",
+          "price": 2190,
+          "mrp": 2900,
+          "is_default": true
+        },
+        {
+          "id": 2402,
+          "name": "6-Tier Newspaper & Magazine Stand with Wheels",
+          "price": 3290,
+          "mrp": 4200,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Tiers",
+          "spec_value": "4 to 6 Heavy Gauge Steel Display Pockets"
+        },
+        {
+          "spec_key": "Capacity",
+          "spec_value": "Up to 30 Magazines + 6 Newspapers"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "category_id": 5,
+      "category": {
+        "id": 5,
+        "name": "Metal Stand",
+        "slug": "metal-stand"
+      },
+      "title": "Metal Folding Stand (Compact Portable Easy-Carry)",
+      "slug": "metal-folding-stand",
+      "sku": "SE-MS-MF-25",
+      "short_description": "Lightweight scissor-folding tubular metal stand that collapses in 2 seconds for mobile trainers and exhibitions.",
+      "description": "<p>Engineered for visiting tutors and event organizers who need a quick, reliable stand that fits inside the trunk of a car.</p>",
+      "main_image": "products/main/folding-stand.jpg",
+      "images": [
+        "products/main/folding-stand.jpg"
+      ],
+      "mrp": 1650,
+      "base_price": 1190,
+      "discount_percent": 28,
+      "variants": [
+        {
+          "id": 2501,
+          "name": "Standard Metal Folding Stand",
+          "price": 1190,
+          "mrp": 1650,
+          "is_default": true
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Mechanism",
+          "spec_value": "Quick-Fold Scissor Hinge"
+        },
+        {
+          "spec_key": "Weight",
+          "spec_value": "Only 3.2 kg"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "category_id": 7,
+      "category": {
+        "id": 7,
+        "name": "Wooden Product",
+        "slug": "wooden-product"
+      },
+      "title": "Wooden Easel (6ft Easel, 5ft Easel, Mini Easel)",
+      "slug": "wooden-easel",
+      "sku": "SE-WD-EAS-26",
+      "short_description": "Handcrafted seasoned pine & beech wood artist easel with adjustable canvas mast and tilt angle.",
+      "description": "<p>Mastercrafted for fine art painters, wedding sign displays, and gallery exhibitions. Smooth sanded finish with brass wing nuts.</p>",
+      "main_image": "products/main/wooden-easel.jpg",
+      "images": [
+        "products/main/wooden-easel.jpg"
+      ],
+      "mrp": 1400,
+      "base_price": 990,
+      "discount_percent": 29,
+      "badge": "Artisan Wood",
+      "variants": [
+        {
+          "id": 2601,
+          "name": "Mini Tabletop Easel (12 to 18 Inch)",
+          "price": 349,
+          "mrp": 500,
+          "is_default": false
+        },
+        {
+          "id": 2602,
+          "name": "5 Feet Studio Easel",
+          "price": 990,
+          "mrp": 1400,
+          "is_default": true
+        },
+        {
+          "id": 2603,
+          "name": "6 Feet Master Studio Easel (Heavy Mast)",
+          "price": 1590,
+          "mrp": 2200,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Wood",
+          "spec_value": "Kiln-Dried Seasoned Pine / Beech"
+        },
+        {
+          "spec_key": "Finish",
+          "spec_value": "Natural Lacquered Smooth Polish"
+        },
+        {
+          "spec_key": "Hardware",
+          "spec_value": "Anti-Rust Solid Brass Knobs"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "category_id": 7,
+      "category": {
+        "id": 7,
+        "name": "Wooden Product",
+        "slug": "wooden-product"
+      },
+      "title": "Canvas Board (Frame Canvas, Board Canvas, MDF Board for Art & Craft)",
+      "slug": "canvas-board",
+      "sku": "SE-WD-CAN-27",
+      "short_description": "100% pure cotton primed canvas: Stretched Canvas with wooden frame, Canvas Panels, and MDF Boards for resin and acrylic art.",
+      "description": "<p>Triple gesso primed cotton surface suitable for oils, acrylics, watercolours, and resin art. Resistant to sagging and acid-free.</p>",
+      "main_image": "products/main/canvas-board.jpg",
+      "images": [
+        "products/main/canvas-board.jpg"
+      ],
+      "mrp": 450,
+      "base_price": 299,
+      "discount_percent": 34,
+      "variants": [
+        {
+          "id": 2701,
+          "name": "Canvas Board (10x12 Inch, Pack of 2)",
+          "price": 299,
+          "mrp": 450,
+          "is_default": true
+        },
+        {
+          "id": 2702,
+          "name": "Framed Stretched Canvas (12x16 Inch Wooden Stretcher)",
+          "price": 449,
+          "mrp": 650,
+          "is_default": false
+        },
+        {
+          "id": 2703,
+          "name": "Framed Stretched Canvas (18x24 Inch Wooden Stretcher)",
+          "price": 790,
+          "mrp": 1100,
+          "is_default": false
+        },
+        {
+          "id": 2704,
+          "name": "MDF Board for Art & Craft (12x12 Inch, Pack of 4)",
+          "price": 349,
+          "mrp": 500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Canvas Weight",
+          "spec_value": "10oz (380 GSM) 100% Cotton"
+        },
+        {
+          "spec_key": "Priming",
+          "spec_value": "Triple Acid-Free Titanium Acrylic Gesso"
+        },
+        {
+          "spec_key": "Frame",
+          "spec_value": "Kiln-Dried Pine Stretcher Bars"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "category_id": 7,
+      "category": {
+        "id": 7,
+        "name": "Wooden Product",
+        "slug": "wooden-product"
+      },
+      "title": "Wooden Duster (With Thick Woollen / Felt Base)",
+      "slug": "wooden-duster",
+      "sku": "SE-WD-DST-28",
+      "short_description": "Comfort-grip solid wooden handle chalk and whiteboard duster with thick, washable high-density felt wipe pad.",
+      "description": "<p>Long-lasting wooden blackboard/whiteboard duster built for heavy teacher and classroom usage. Does not scratch boards.</p>",
+      "main_image": "products/main/wooden-duster.jpg",
+      "images": [
+        "products/main/wooden-duster.jpg"
+      ],
+      "mrp": 180,
+      "base_price": 119,
+      "discount_percent": 34,
+      "variants": [
+        {
+          "id": 2801,
+          "name": "Single Wooden Duster",
+          "price": 119,
+          "mrp": 180,
+          "is_default": true
+        },
+        {
+          "id": 2802,
+          "name": "Pack of 5 Wooden Dusters (Institutional)",
+          "price": 499,
+          "mrp": 750,
+          "is_default": false
+        },
+        {
+          "id": 2803,
+          "name": "Pack of 12 Wooden Dusters (Wholesale)",
+          "price": 999,
+          "mrp": 1600,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Handle",
+          "spec_value": "Solid Natural Hardwood Grip"
+        },
+        {
+          "spec_key": "Wiper Pad",
+          "spec_value": "12mm Compressed Woollen Felt"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "category_id": 7,
+      "category": {
+        "id": 7,
+        "name": "Wooden Product",
+        "slug": "wooden-product"
+      },
+      "title": "Wooden Geo Box (Teacher Blackboard Geometry Instrument Set)",
+      "slug": "wooden-geo-box",
+      "sku": "SE-WD-GEO-29",
+      "short_description": "Complete large wooden geometry teaching kit: 100cm Ruler, 45° and 60° Set Squares, Protractor, and Chalk Compass with knob.",
+      "description": "<p>Indispensable teaching apparatus for mathematics and engineering faculties. Made from seasoned hardwood with bold, easy-to-read millimetre and degree graduations.</p>",
+      "main_image": "products/main/geo-box.jpg",
+      "images": [
+        "products/main/geo-box.jpg"
+      ],
+      "mrp": 1800,
+      "base_price": 1350,
+      "discount_percent": 25,
+      "badge": "Teacher Set",
+      "variants": [
+        {
+          "id": 2901,
+          "name": "Full 5-Piece Wooden Geometry Box Set",
+          "price": 1350,
+          "mrp": 1800,
+          "is_default": true
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Instruments",
+          "spec_value": "Meter Ruler, 2x Set Squares, Protractor, Compass"
+        },
+        {
+          "spec_key": "Material",
+          "spec_value": "Laminated Seasoned Timber with Handle Knobs"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "category_id": 7,
+      "category": {
+        "id": 7,
+        "name": "Wooden Product",
+        "slug": "wooden-product"
+      },
+      "title": "Wooden Pen Stand (Multi-Compartment Desktop Organizer)",
+      "slug": "wooden-pen-stand",
+      "sku": "SE-WD-PEN-30",
+      "short_description": "Executive polished wooden stationery organizer for markers, pens, clips, post-it pads, and mobile phone.",
+      "description": "<p>Handmade by skilled Kolkata carpenters. Adds a distinguished touch of classic elegance to teacher and principal desks.</p>",
+      "main_image": "products/main/wooden-pen-stand.jpg",
+      "images": [
+        "products/main/wooden-pen-stand.jpg"
+      ],
+      "mrp": 490,
+      "base_price": 349,
+      "discount_percent": 29,
+      "variants": [
+        {
+          "id": 3001,
+          "name": "3-Compartment Wooden Pen Stand",
+          "price": 349,
+          "mrp": 490,
+          "is_default": true
+        },
+        {
+          "id": 3002,
+          "name": "Executive Wooden Stand with Mobile Slot & Clock",
+          "price": 699,
+          "mrp": 950,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Material",
+          "spec_value": "Natural Sheesham / Teak Polish Pine"
+        },
+        {
+          "spec_key": "Finish",
+          "spec_value": "Gloss Lacquer Anti-Dust Finish"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "category_id": 6,
+      "category": {
+        "id": 6,
+        "name": "Acrylic Product",
+        "slug": "acrylic-product"
+      },
+      "title": "Writing Desk / Table Elevator (Ergonomic Slanted Acrylic Riser)",
+      "slug": "writing-desk-table-elevator",
+      "sku": "SE-AC-01-ELEV",
+      "short_description": "Ergonomic 20-degree angled clear acrylic writing surface riser with book ledge to promote healthy writing posture.",
+      "description": "<p><strong>Description :</strong></p><ul><li>* <strong>Ergonomic Elevation :</strong> 20-degree angled surface prevents cervical neck strain and posture fatigue.</li><li>* <strong>Standard Size :</strong> 14x12, 18x14, 20x16 Inch.</li><li>* <strong>Any Customized Size Available Here .</strong></li><li>* <strong>Display & Build :</strong> 5mm heavy-gauge clear virgin acrylic with integrated book-stop ledge and anti-slip silicone feet.</li><li>* <strong>Use for School, College, Office, and Home Study Desk.</strong></li></ul>",
+      "main_image": "products/main/desk-elevator.jpg",
+      "images": [
+        "products/main/desk-elevator.jpg"
+      ],
+      "mrp": 1450,
+      "base_price": 990,
+      "discount_percent": 32,
+      "variants": [
+        {
+          "id": 3101,
+          "name": "Standard Desk Elevator (14x12 Inch)",
+          "price": 990,
+          "mrp": 1450,
+          "is_default": true
+        },
+        {
+          "id": 3102,
+          "name": "Wide Desk Elevator (18x14 Inch)",
+          "price": 1390,
+          "mrp": 1900,
+          "is_default": false
+        },
+        {
+          "id": 3103,
+          "name": "Executive / Drafting Elevator (20x16 Inch)",
+          "price": 1790,
+          "mrp": 2400,
+          "is_default": false
+        },
+        {
+          "id": 3104,
+          "name": "Customized Size Available on Request",
+          "price": 1290,
+          "mrp": 1800,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Material",
+          "spec_value": "5mm Heavy-Duty Clear Cast Acrylic"
+        },
+        {
+          "spec_key": "Incline Angle",
+          "spec_value": "Ergonomic 20° Slope"
+        },
+        {
+          "spec_key": "Ledge",
+          "spec_value": "Integrated Book & Pencil Stop Lip"
+        },
+        {
+          "spec_key": "Applications",
+          "spec_value": "School, College, Office & Study Table"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "category_id": 6,
+      "category": {
+        "id": 6,
+        "name": "Acrylic Product",
+        "slug": "acrylic-product"
+      },
+      "title": "Acrylic Name Plates (Desk & Door Executive Display Plates)",
+      "slug": "acrylic-name-plates",
+      "sku": "SE-AC-02-NP",
+      "short_description": "Custom laser engraved or UV printed acrylic name plates for doctor chambers, advocate desks, and corporate cabins.",
+      "description": "<p><strong>Description :</strong></p><ul><li>* <strong>Standard Size :</strong> 8x2.5, 10x4, 12x5 Inch.</li><li>* <strong>Any Customized Size Available Here .</strong></li><li>* <strong>Display :</strong> High-gloss bevelled clear acrylic with gold/silver mirror borders or SS standoff studs.</li><li>* <strong>Use for School, College, Office, Clinic, and Any Party / Conference Hall.</strong></li></ul>",
+      "main_image": "products/main/name-plate.jpg",
+      "images": [
+        "products/main/name-plate.jpg"
+      ],
+      "mrp": 650,
+      "base_price": 449,
+      "discount_percent": 31,
+      "variants": [
+        {
+          "id": 3201,
+          "name": "Desk Triangular Acrylic Name Plate (8x2.5 Inch)",
+          "price": 449,
+          "mrp": 650,
+          "is_default": true
+        },
+        {
+          "id": 3202,
+          "name": "Door Mount Acrylic Plate with Golden SS Studs (10x4 Inch)",
+          "price": 799,
+          "mrp": 1100,
+          "is_default": false
+        },
+        {
+          "id": 3203,
+          "name": "Executive Double Glass Look Plate (12x5 Inch)",
+          "price": 1190,
+          "mrp": 1600,
+          "is_default": false
+        },
+        {
+          "id": 3204,
+          "name": "Customized Size & Logo UV Print",
+          "price": 699,
+          "mrp": 950,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Printing",
+          "spec_value": "UV Direct Print / Gold Foil Inlay"
+        },
+        {
+          "spec_key": "Mounting",
+          "spec_value": "Freestanding or SS Standoff Mounts"
+        },
+        {
+          "spec_key": "Applications",
+          "spec_value": "Doctor Chamber, Advocate Cabin, Office Reception"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "category_id": 6,
+      "category": {
+        "id": 6,
+        "name": "Acrylic Product",
+        "slug": "acrylic-product"
+      },
+      "title": "Acrylic Menu Holder (T-Shape & L-Shape Tabletop Displays)",
+      "slug": "acrylic-menu-holder",
+      "sku": "SE-AC-03-MH",
+      "short_description": "Display menu holder stand both side visible for school, college, office, restaurant, and any party.",
+      "description": "<p><strong>Description :</strong></p><ul><li>* <strong>Standard Size :</strong> 4x6, 5x8, 6x9, 8.5x12 Inch.</li><li>* <strong>Any Customized Size Available Here .</strong></li><li>* <strong>Display Menu Holder Stand Both Side Visible .</strong></li><li>* <strong>Use for School, College, Office, and Any Party.</strong></li></ul><p>Manufactured using ultra-pure cast acrylic sheets offering 94% glass-level clarity. Sturdy weighted base prevents toppling on busy tables and counters. Easy slide-in top/side loading for paper inserts.</p>",
+      "main_image": "products/main/menu-holder.jpg",
+      "images": [
+        "products/main/menu-holder.jpg"
+      ],
+      "mrp": 290,
+      "base_price": 180,
+      "discount_percent": 38,
+      "variants": [
+        {
+          "id": 3301,
+          "name": "4x6 Inch Both Side Visible Menu Holder",
+          "price": 180,
+          "mrp": 290,
+          "is_default": true
+        },
+        {
+          "id": 3302,
+          "name": "5x8 Inch Both Side Visible Menu Holder",
+          "price": 250,
+          "mrp": 390,
+          "is_default": false
+        },
+        {
+          "id": 3303,
+          "name": "6x9 Inch Both Side Visible Menu Holder",
+          "price": 320,
+          "mrp": 490,
+          "is_default": false
+        },
+        {
+          "id": 3304,
+          "name": "8.5x12 Inch (A4 Size) Both Side Visible Menu Holder",
+          "price": 450,
+          "mrp": 690,
+          "is_default": false
+        },
+        {
+          "id": 3305,
+          "name": "Any Customized Size Available on Request",
+          "price": 390,
+          "mrp": 590,
+          "is_default": false
+        },
+        {
+          "id": 3306,
+          "name": "Pack of 10 (4x6 Inch Party & Banquet Pack)",
+          "price": 1650,
+          "mrp": 2500,
+          "is_default": false
+        },
+        {
+          "id": 3307,
+          "name": "Pack of 5 (8.5x12 Inch School & Office Pack)",
+          "price": 1990,
+          "mrp": 3000,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Standard Size",
+          "spec_value": "4x6, 5x8, 6x9, 8.5x12 Inch & Customized"
+        },
+        {
+          "spec_key": "Display",
+          "spec_value": "Display Menu Holder Stand Both Side Visible"
+        },
+        {
+          "spec_key": "Use For",
+          "spec_value": "School, College, Office, and Any Party"
+        },
+        {
+          "spec_key": "Material",
+          "spec_value": "100% Cast Virgin Acrylic (Ultra Clear)"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "category_id": 6,
+      "category": {
+        "id": 6,
+        "name": "Acrylic Product",
+        "slug": "acrylic-product"
+      },
+      "title": "Acrylic Business Card Holder (Desktop & Counter Visiting Card Stand)",
+      "slug": "acrylic-business-card-holder",
+      "sku": "SE-AC-04-BCH",
+      "short_description": "Crystal-clear desktop visiting card dispensers and multi-tier organizers for reception desks and office tables.",
+      "description": "<p><strong>Description :</strong></p><ul><li>* <strong>Standard Capacity :</strong> Single Pocket (holds 50-60 cards), 2-Tier, and 4-Tier organizer (holds 250 cards).</li><li>* <strong>Any Customized Size Available Here .</strong></li><li>* <strong>Display :</strong> Transparent slanted front pocket for convenient single-handed card pickup.</li><li>* <strong>Use for School, College, Office, Clinic, and Any Party / Trade Fair Stall.</strong></li></ul>",
+      "main_image": "products/main/acrylic-display.jpg",
+      "images": [
+        "products/main/acrylic-display.jpg"
+      ],
+      "mrp": 190,
+      "base_price": 120,
+      "discount_percent": 37,
+      "variants": [
+        {
+          "id": 3401,
+          "name": "Single Pocket Desktop Card Stand (60 Cards)",
+          "price": 120,
+          "mrp": 190,
+          "is_default": true
+        },
+        {
+          "id": 3402,
+          "name": "2-Tier Dual Slot Visiting Card Stand",
+          "price": 199,
+          "mrp": 320,
+          "is_default": false
+        },
+        {
+          "id": 3403,
+          "name": "4-Tier Multi-Pocket Counter Organizer (250 Cards)",
+          "price": 399,
+          "mrp": 590,
+          "is_default": false
+        },
+        {
+          "id": 3404,
+          "name": "Wall Mount Single Visiting Card Pocket",
+          "price": 140,
+          "mrp": 220,
+          "is_default": false
+        },
+        {
+          "id": 3405,
+          "name": "Pack of 5 (Single Pocket Institutional Pack)",
+          "price": 499,
+          "mrp": 800,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Capacity",
+          "spec_value": "50 to 250 Standard Visiting Cards"
+        },
+        {
+          "spec_key": "Material",
+          "spec_value": "Crystal Clear Cast Acrylic (Smooth Polished Corners)"
+        },
+        {
+          "spec_key": "Applications",
+          "spec_value": "Office Table, Reception, Exhibition Stalls, Doctor Chambers"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "category_id": 6,
+      "category": {
+        "id": 6,
+        "name": "Acrylic Product",
+        "slug": "acrylic-product"
+      },
+      "title": "Wall Mount Information Holder (Clear Acrylic Notice & Certificate Pocket)",
+      "slug": "wall-mount-information-holder",
+      "sku": "SE-AC-05-WMIH",
+      "short_description": "Wall-mounted clear acrylic pocket for circulars, license certificates, fire exit maps, and safety notices.",
+      "description": "<p><strong>Description :</strong></p><ul><li>* <strong>Standard Size :</strong> 8.5x12 Inch (A4), 12x18 Inch (A3), and 6x8.5 Inch (A5).</li><li>* <strong>Any Customized Size Available Here .</strong></li><li>* <strong>Display :</strong> High-clarity front sleeve for rapid sheet replacement without unscrewing.</li><li>* <strong>Use for School, College, Office, Hospital, and Factory Floor.</strong></li></ul>",
+      "main_image": "products/main/info-holder.jpg",
+      "images": [
+        "products/main/info-holder.jpg"
+      ],
+      "mrp": 320,
+      "base_price": 199,
+      "discount_percent": 38,
+      "variants": [
+        {
+          "id": 3501,
+          "name": "A4 Size Wall Mount Information Pocket (8.5x12 Inch)",
+          "price": 199,
+          "mrp": 320,
+          "is_default": true
+        },
+        {
+          "id": 3502,
+          "name": "A3 Size Wall Mount Information Pocket (12x18 Inch)",
+          "price": 399,
+          "mrp": 580,
+          "is_default": false
+        },
+        {
+          "id": 3503,
+          "name": "A5 Size Wall Mount Information Pocket (6x8.5 Inch)",
+          "price": 149,
+          "mrp": 240,
+          "is_default": false
+        },
+        {
+          "id": 3504,
+          "name": "Pack of 5 (A4 Size Institutional Office Pack)",
+          "price": 890,
+          "mrp": 1400,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Standard Size",
+          "spec_value": "A4 (8.5x12), A3 (12x18), A5 (6x8.5 Inch)"
+        },
+        {
+          "spec_key": "Mounting",
+          "spec_value": "Pre-applied 3M Tape + Screw Holes"
+        },
+        {
+          "spec_key": "Clarity",
+          "spec_value": "Optical Grade Clear View"
+        },
+        {
+          "spec_key": "Applications",
+          "spec_value": "Notice Boards, License Certificates, Fire Exit Plans"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "category_id": 6,
+      "category": {
+        "id": 6,
+        "name": "Acrylic Product",
+        "slug": "acrylic-product"
+      },
+      "title": "Acrylic Literature Holders (Brochure, Pamphlet & Catalog Dispenser Stand)",
+      "slug": "acrylic-literature-holders",
+      "sku": "SE-AC-06-LH",
+      "short_description": "Multi-tier clear acrylic brochure dispensers and catalog display stands for desk or wall mounting.",
+      "description": "<p><strong>Description :</strong></p><ul><li>* <strong>Standard Size :</strong> A4 Size (8.5x12 Inch), A5 Pamphlet Size, and Tri-Fold DL (4x9 Inch).</li><li>* <strong>Any Customized Size Available Here .</strong></li><li>* <strong>Display :</strong> Upright display pockets hold marketing brochures, catalogs, and flyers without bending.</li><li>* <strong>Use for School, College, Office, Bank, and Any Party / Trade Exhibition.</strong></li></ul>",
+      "main_image": "products/main/acrylic-display.jpg",
+      "images": [
+        "products/main/acrylic-display.jpg"
+      ],
+      "mrp": 490,
+      "base_price": 340,
+      "discount_percent": 31,
+      "variants": [
+        {
+          "id": 3601,
+          "name": "A4 Single Pocket Literature Stand (Desk & Wall)",
+          "price": 340,
+          "mrp": 490,
+          "is_default": true
+        },
+        {
+          "id": 3602,
+          "name": "A4 3-Tier Stepped Brochure Stand",
+          "price": 790,
+          "mrp": 1150,
+          "is_default": false
+        },
+        {
+          "id": 3603,
+          "name": "A5 Leaflet & Pamphlet Dispenser Pocket",
+          "price": 240,
+          "mrp": 360,
+          "is_default": false
+        },
+        {
+          "id": 3604,
+          "name": "Tri-Fold DL Brochure Stand (4x9 Inch Flyer)",
+          "price": 199,
+          "mrp": 300,
+          "is_default": false
+        },
+        {
+          "id": 3605,
+          "name": "Pack of 3 (A4 Single Pocket Stands)",
+          "price": 890,
+          "mrp": 1350,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Tiers",
+          "spec_value": "Single Pocket, 3-Tier Stepped, or Wall Mount"
+        },
+        {
+          "spec_key": "Material",
+          "spec_value": "Cast Virgin Acrylic with Bevelled Edges"
+        },
+        {
+          "spec_key": "Applications",
+          "spec_value": "School Prospectuses, Bank Leaflets, Reception Catalogs"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "category_id": 6,
+      "category": {
+        "id": 6,
+        "name": "Acrylic Product",
+        "slug": "acrylic-product"
+      },
+      "title": "Acrylic QR Code Stand (UPI & Payment Scanner Display)",
+      "slug": "acrylic-qr-code-stand",
+      "sku": "SE-AC-07-QR",
+      "short_description": "Countertop angled acrylic stand for Google Pay, PhonePe, Paytm, and UPI QR codes with custom business branding slot.",
+      "description": "<p><strong>Description :</strong></p><ul><li>* <strong>Standard Size :</strong> 6x4 Inch, 7x5 Inch with Visiting Card Pocket.</li><li>* <strong>Any Customized Size Available Here .</strong></li><li>* <strong>Display :</strong> Angled L-Shape for effortless smartphone camera scanning.</li><li>* <strong>Use for Retail Shop, Clinic, Office Reception, Restaurant & Party Stalls.</strong></li></ul>",
+      "main_image": "products/main/qr-stand.jpg",
+      "images": [
+        "products/main/qr-stand.jpg"
+      ],
+      "mrp": 290,
+      "base_price": 180,
+      "discount_percent": 38,
+      "variants": [
+        {
+          "id": 3701,
+          "name": "Standard Angled QR Stand (6x4 Inch)",
+          "price": 180,
+          "mrp": 290,
+          "is_default": true
+        },
+        {
+          "id": 3702,
+          "name": "QR Stand with Attached Business Card Pocket",
+          "price": 260,
+          "mrp": 390,
+          "is_default": false
+        },
+        {
+          "id": 3703,
+          "name": "Custom Printed with Company Logo + QR (Pack of 3)",
+          "price": 590,
+          "mrp": 900,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Thickness",
+          "spec_value": "3mm Cast Clear Acrylic"
+        },
+        {
+          "spec_key": "Orientation",
+          "spec_value": "Angled L-Shape for Fast Scanning"
+        },
+        {
+          "spec_key": "Applications",
+          "spec_value": "Payment Counters, Billing Desks, Exhibition Stalls"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "category_id": 6,
+      "category": {
+        "id": 6,
+        "name": "Acrylic Product",
+        "slug": "acrylic-product"
+      },
+      "title": "Acrylic Display Stand (Shoe, Jewellery & Multi-Tier Exhibition Riser)",
+      "slug": "acrylic-display-stand",
+      "sku": "SE-AC-08-DISP",
+      "short_description": "Multi-tier acrylic riser display steps for retail showrooms, jewellery counters, cosmetics, and optical stores.",
+      "description": "<p><strong>Description :</strong></p><ul><li>* <strong>Standard Size :</strong> 3-Step Riser (9x6x4 Inch), 4-Step Riser (12x8x6 Inch).</li><li>* <strong>Any Customized Size Available Here .</strong></li><li>* <strong>Display :</strong> Tiered display levels give 360-degree visibility to showcased products.</li><li>* <strong>Use for School Trophy Showcases, Office Showrooms, Exhibitions & Parties.</strong></li></ul>",
+      "main_image": "products/main/acrylic-display.jpg",
+      "images": [
+        "products/main/acrylic-display.jpg"
+      ],
+      "mrp": 650,
+      "base_price": 440,
+      "discount_percent": 32,
+      "variants": [
+        {
+          "id": 3801,
+          "name": "3-Step Acrylic Display Riser Set",
+          "price": 440,
+          "mrp": 650,
+          "is_default": true
+        },
+        {
+          "id": 3802,
+          "name": "4-Step Exhibition Display Steps",
+          "price": 690,
+          "mrp": 990,
+          "is_default": false
+        },
+        {
+          "id": 3803,
+          "name": "Acrylic U-Riser Pedestals (Set of 3)",
+          "price": 550,
+          "mrp": 800,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Capacity",
+          "spec_value": "Holds up to 5kg per tier"
+        },
+        {
+          "spec_key": "Edges",
+          "spec_value": "Smooth Bevelled Safe Corners"
+        },
+        {
+          "spec_key": "Applications",
+          "spec_value": "Showcases, Exhibitions, Display Counters"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "category_id": 8,
+      "category": {
+        "id": 8,
+        "name": "Box",
+        "slug": "box"
+      },
+      "title": "MS Letter Box (Powder-Coated with Lock & Newspaper Holder)",
+      "slug": "ms-letter-box",
+      "sku": "SE-BX-LB-39",
+      "short_description": "Weatherproof heavy mild steel post box with mail slot, viewing window, lock with keys, and lower newspaper roll holder.",
+      "description": "<p>Durable outdoor letter box manufactured from corrosion-resistant MS sheet with electrostatic powder coating. Keeps your mail dry in Kolkata downpours.</p>",
+      "main_image": "products/main/letter-box.jpg",
+      "images": [
+        "products/main/letter-box.jpg"
+      ],
+      "mrp": 990,
+      "base_price": 699,
+      "discount_percent": 29,
+      "variants": [
+        {
+          "id": 3901,
+          "name": "Standard Letter Box (Red / Blue / Grey)",
+          "price": 699,
+          "mrp": 990,
+          "is_default": true
+        },
+        {
+          "id": 3902,
+          "name": "Large Deluxe Letter Box with Newspaper Tube",
+          "price": 990,
+          "mrp": 1390,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Material",
+          "spec_value": "Heavy Gauge Mild Steel Sheet"
+        },
+        {
+          "spec_key": "Lock",
+          "spec_value": "Built-in Cam Lock + 2 Brass Keys"
+        },
+        {
+          "spec_key": "Weatherproofing",
+          "spec_value": "Rainproof Slanted Overhang Lid"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "category_id": 8,
+      "category": {
+        "id": 8,
+        "name": "Box",
+        "slug": "box"
+      },
+      "title": "First Aid Box (Wall Mount Metal / Acrylic Emergency Cabinet)",
+      "slug": "first-aid-box",
+      "sku": "SE-BX-FA-40",
+      "short_description": "Factory and school mandatory first aid emergency cabinet with distinct red cross emblem, multi-shelves, and secure latch/lock.",
+      "description": "<p>Complies with West Bengal Factory Act & School Safety standards. Multi-compartment interior organizes bandages, antiseptics, and burn creams.</p>",
+      "main_image": "products/main/first-aid-box.jpg",
+      "images": [
+        "products/main/first-aid-box.jpg"
+      ],
+      "mrp": 1200,
+      "base_price": 849,
+      "discount_percent": 29,
+      "badge": "Safety Essential",
+      "variants": [
+        {
+          "id": 4001,
+          "name": "Metal First Aid Cabinet (3 Shelves, 12x10 Inch)",
+          "price": 849,
+          "mrp": 1200,
+          "is_default": true
+        },
+        {
+          "id": 4002,
+          "name": "Large Industrial Metal First Aid Box (16x12 Inch)",
+          "price": 1390,
+          "mrp": 1850,
+          "is_default": false
+        },
+        {
+          "id": 4003,
+          "name": "Clear Acrylic Front First Aid Box",
+          "price": 990,
+          "mrp": 1400,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Shelves",
+          "spec_value": "3 Fixed Compartment Tiers"
+        },
+        {
+          "spec_key": "Marking",
+          "spec_value": "Standard International Red Cross Graphic"
+        },
+        {
+          "spec_key": "Mounting",
+          "spec_value": "Wall Hanging Brackets on Back"
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "category_id": 8,
+      "category": {
+        "id": 8,
+        "name": "Box",
+        "slug": "box"
+      },
+      "title": "Suggestion Box (Complaint & Feedback Drop Box with Lock)",
+      "slug": "suggestion-box",
+      "sku": "SE-BX-SB-41",
+      "short_description": "Confidential suggestion and grievance drop box with drop slot, pen & form holder, and lock for HR departments and schools.",
+      "description": "<p>Mandatory for corporate compliance, colleges, and hospitals. Features top drop slot and side pocket to keep feedback cards and pens handy.</p>",
+      "main_image": "products/main/suggestion-box.jpg",
+      "images": [
+        "products/main/suggestion-box.jpg"
+      ],
+      "mrp": 1100,
+      "base_price": 790,
+      "discount_percent": 28,
+      "variants": [
+        {
+          "id": 4101,
+          "name": "Metal Suggestion Box with Lock",
+          "price": 790,
+          "mrp": 1100,
+          "is_default": true
+        },
+        {
+          "id": 4102,
+          "name": "Smoked Acrylic Executive Suggestion Box",
+          "price": 990,
+          "mrp": 1350,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Slot Size",
+          "spec_value": "120mm x 8mm Wide Confidential Drop Slot"
+        },
+        {
+          "spec_key": "Access",
+          "spec_value": "Hinged Front / Bottom Door with Key Lock"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "category_id": 8,
+      "category": {
+        "id": 8,
+        "name": "Box",
+        "slug": "box"
+      },
+      "title": "Key Hanger Box (Lockable Metal Key Security Cabinet)",
+      "slug": "key-hanger-box",
+      "sku": "SE-BX-KB-42",
+      "short_description": "Heavy gauge steel key management safe box with interior numbered hooks, key tags, and master cylinder lock.",
+      "description": "<p>Enclosed cabinet design keeps facility keys protected from unauthorized view or theft. Comes with assorted coloured key tags and labels.</p>",
+      "main_image": "products/main/key-box.jpg",
+      "images": [
+        "products/main/key-box.jpg"
+      ],
+      "mrp": 1800,
+      "base_price": 1290,
+      "discount_percent": 28,
+      "variants": [
+        {
+          "id": 4201,
+          "name": "20 Keys Capacity Box + Key Tags",
+          "price": 1290,
+          "mrp": 1800,
+          "is_default": true
+        },
+        {
+          "id": 4202,
+          "name": "48 Keys Capacity Box + Key Tags",
+          "price": 1890,
+          "mrp": 2500,
+          "is_default": false
+        },
+        {
+          "id": 4203,
+          "name": "100 Keys Capacity Box + Key Tags",
+          "price": 3190,
+          "mrp": 4200,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Cabinet Material",
+          "spec_value": "0.8mm Heavy Cold-Rolled Steel"
+        },
+        {
+          "spec_key": "Inclusions",
+          "spec_value": "Coloured Write-On Key Fobs Included"
+        },
+        {
+          "spec_key": "Security",
+          "spec_value": "Cylinder Lock with 2 Keys"
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "category_id": 9,
+      "category": {
+        "id": 9,
+        "name": "School & Office Furniture",
+        "slug": "school-office-furniture"
+      },
+      "title": "Class Room Furniture (School Dual Desk & Bench Set)",
+      "slug": "classroom-dual-desk-bench",
+      "sku": "SE-FN-CR-43",
+      "short_description": "Heavy-duty ergonomic dual student desk and attached bench with book shelf and bag hooks. Built with virgin MS pipe and prelaminated board.",
+      "description": "<p>Manufactured to withstand decades of rigorous school usage. Rounded corners prevent student injury, while powder-coated steel pipes resist corrosion.</p>",
+      "main_image": "products/main/classroom-desk.jpg",
+      "images": [
+        "products/main/classroom-desk.jpg"
+      ],
+      "mrp": 5500,
+      "base_price": 3990,
+      "discount_percent": 27,
+      "badge": "Institutional",
+      "variants": [
+        {
+          "id": 4301,
+          "name": "Primary Class Dual Desk (36x14 Inch Desk, Height 26 Inch)",
+          "price": 3490,
+          "mrp": 4800,
+          "is_default": false
+        },
+        {
+          "id": 4302,
+          "name": "High School Dual Desk (42x16 Inch Desk, Height 30 Inch)",
+          "price": 3990,
+          "mrp": 5500,
+          "is_default": true
+        },
+        {
+          "id": 4303,
+          "name": "Senior College Individual Study Chair with Writing Pad",
+          "price": 1690,
+          "mrp": 2300,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Frame",
+          "spec_value": "25mm Round / Square Mild Steel Tube 16-Gauge"
+        },
+        {
+          "spec_key": "Top Material",
+          "spec_value": "18mm Prelaminated MDF with 2mm PVC Edge Bending"
+        },
+        {
+          "spec_key": "Book Shelf",
+          "spec_value": "Integrated Perforated Metal Book Tray"
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "category_id": 9,
+      "category": {
+        "id": 9,
+        "name": "School & Office Furniture",
+        "slug": "school-office-furniture"
+      },
+      "title": "Lab Furniture (Science Laboratory Chemical-Resistant Worktable)",
+      "slug": "science-laboratory-worktable",
+      "sku": "SE-FN-LAB-44",
+      "short_description": "Laboratory worktable with acid/alkali resistant solid epoxy/granite worktop, reagent rack, sink provision, and gas/water tap sockets.",
+      "description": "<p>Installed in prominent Kolkata chemistry, biology, and physics school/college laboratories. Engineered to resist acid spills, heat, and heavy apparatus.</p>",
+      "main_image": "products/main/lab-table.jpg",
+      "images": [
+        "products/main/lab-table.jpg"
+      ],
+      "mrp": 14500,
+      "base_price": 10990,
+      "discount_percent": 24,
+      "badge": "Lab Grade",
+      "variants": [
+        {
+          "id": 4401,
+          "name": "Physics / General Lab Table (6x3 Feet Wooden/Laminate Top)",
+          "price": 6990,
+          "mrp": 9200,
+          "is_default": false
+        },
+        {
+          "id": 4402,
+          "name": "Chemistry Lab Workstation (6x3 Feet Granite Top + Reagent Shelf)",
+          "price": 10990,
+          "mrp": 14500,
+          "is_default": true
+        },
+        {
+          "id": 4403,
+          "name": "Full Lab Island Bench (8x4 Feet with PP Sink & 4 Taps)",
+          "price": 21900,
+          "mrp": 2800,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Worktop",
+          "spec_value": "18mm Black Jet Granite / Trespa Chemical Board"
+        },
+        {
+          "spec_key": "Framework",
+          "spec_value": "Heavy 50x25mm C-Frame Steel Structure"
+        },
+        {
+          "spec_key": "Chemical Resistance",
+          "spec_value": "Resistant to Acids, Alkalis & Organic Solvents"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "category_id": 9,
+      "category": {
+        "id": 9,
+        "name": "School & Office Furniture",
+        "slug": "school-office-furniture"
+      },
+      "title": "Library Furniture (Double-Sided Book Stacks & Reading Tables)",
+      "slug": "library-furniture-book-stacks",
+      "sku": "SE-FN-LIB-45",
+      "short_description": "Modular heavy-gauge steel library book shelving racks and 6-seater wooden reading tables with partition dividers.",
+      "description": "<p>Furnishing educational libraries since 2014. Heavy loading capacity of up to 100 kg per shelf without sagging.</p>",
+      "main_image": "products/main/library-rack.jpg",
+      "images": [
+        "products/main/library-rack.jpg"
+      ],
+      "mrp": 11000,
+      "base_price": 8490,
+      "discount_percent": 23,
+      "variants": [
+        {
+          "id": 4501,
+          "name": "Double-Sided Library Book Rack (6 Shelves, 6.5x3 ft)",
+          "price": 8490,
+          "mrp": 11000,
+          "is_default": true
+        },
+        {
+          "id": 4502,
+          "name": "6-Seater Library Reading Table (6x3 ft)",
+          "price": 7490,
+          "mrp": 9800,
+          "is_default": false
+        },
+        {
+          "id": 4503,
+          "name": "Periodic / Newspaper Display Stand for Library",
+          "price": 4200,
+          "mrp": 5500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Shelf Capacity",
+          "spec_value": "80 - 100 kg per tier"
+        },
+        {
+          "spec_key": "Coating",
+          "spec_value": "Electrostatic Epoxy Powder Coated"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "category_id": 9,
+      "category": {
+        "id": 9,
+        "name": "School & Office Furniture",
+        "slug": "school-office-furniture"
+      },
+      "title": "Office Desk & Table (Executive Cabin Table with Drawer Pedestal)",
+      "slug": "office-desk-and-table",
+      "sku": "SE-FN-OFD-46",
+      "short_description": "Executive wooden and metal office desk with 3-drawer lockable storage pedestal, wire management grommet, and modesty panel.",
+      "description": "<p>Sleek and professional desk for directors, managers, and administrative officers. Made with 25mm thick scratch-proof prelaminated particle board.</p>",
+      "main_image": "products/main/office-desk.jpg",
+      "images": [
+        "products/main/office-desk.jpg"
+      ],
+      "mrp": 8500,
+      "base_price": 6490,
+      "discount_percent": 24,
+      "variants": [
+        {
+          "id": 4601,
+          "name": "Manager Desk (4x2 Feet + 3 Drawers)",
+          "price": 4990,
+          "mrp": 6800,
+          "is_default": false
+        },
+        {
+          "id": 4602,
+          "name": "Executive Desk (5x2.5 Feet + 3 Drawers & Side Runner)",
+          "price": 6490,
+          "mrp": 8500,
+          "is_default": true
+        },
+        {
+          "id": 4603,
+          "name": "Director Cabin Table (6x3 Feet Luxury Finish)",
+          "price": 9990,
+          "mrp": 13500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Top Thickness",
+          "spec_value": "25mm Commercial Grade Prelam Board"
+        },
+        {
+          "spec_key": "Storage",
+          "spec_value": "Lockable 3-Tier Telescopic Drawer Pedestal"
+        },
+        {
+          "spec_key": "Edge Bending",
+          "spec_value": "2mm Machine-Glued Seamless PVC Edge"
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "category_id": 9,
+      "category": {
+        "id": 9,
+        "name": "School & Office Furniture",
+        "slug": "school-office-furniture"
+      },
+      "title": "Work Station (Modular 2-Seater / 4-Seater Office Cubicle Set)",
+      "slug": "modular-office-workstation",
+      "sku": "SE-FN-WS-47",
+      "short_description": "Contemporary modular office workstation with acoustic fabric pin-up partition screen, cable raceways, and individual drawer units.",
+      "description": "<p>Maximizes floor area efficiency while giving each team member personal space. Modular design allows easy expansion as team grows.</p>",
+      "main_image": "products/main/workstation.jpg",
+      "images": [
+        "products/main/workstation.jpg"
+      ],
+      "mrp": 18500,
+      "base_price": 13900,
+      "discount_percent": 25,
+      "variants": [
+        {
+          "id": 4701,
+          "name": "2-Seater Linear Workstation Set",
+          "price": 8900,
+          "mrp": 11800,
+          "is_default": false
+        },
+        {
+          "id": 4702,
+          "name": "4-Seater Back-to-Back Workstation Cluster",
+          "price": 13900,
+          "mrp": 18500,
+          "is_default": true
+        },
+        {
+          "id": 4703,
+          "name": "6-Seater Collaborative Workstation Pod",
+          "price": 21500,
+          "mrp": 28500,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Partition",
+          "spec_value": "Aluminium Tileable Screen with Fabric Pin-up"
+        },
+        {
+          "spec_key": "Wire Management",
+          "spec_value": "Inbuilt Dual Raceway for Data & Power Cables"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "category_id": 9,
+      "category": {
+        "id": 9,
+        "name": "School & Office Furniture",
+        "slug": "school-office-furniture"
+      },
+      "title": "Reception Counter (Modern Curved & Linear Front Office Desk)",
+      "slug": "modern-reception-counter",
+      "sku": "SE-FN-REC-48",
+      "short_description": "Imposing front-office reception counter with elevated customer ledge, LED profile lighting slot, and internal receptionist workspace.",
+      "description": "<p>Make a powerful first impression on visiting parents and clients. Custom fabricated in two-tone wood finishes with acrylic Shaw branding panel.</p>",
+      "main_image": "products/main/reception-counter.jpg",
+      "images": [
+        "products/main/reception-counter.jpg"
+      ],
+      "mrp": 19500,
+      "base_price": 14900,
+      "discount_percent": 24,
+      "badge": "Front Office",
+      "variants": [
+        {
+          "id": 4801,
+          "name": "Compact Linear Reception Desk (4x2 Feet)",
+          "price": 8900,
+          "mrp": 11800,
+          "is_default": false
+        },
+        {
+          "id": 4802,
+          "name": "Standard Curved Front Reception Counter (6x2.5 Feet)",
+          "price": 14900,
+          "mrp": 19500,
+          "is_default": true
+        },
+        {
+          "id": 4803,
+          "name": "Luxury L-Shaped Executive Reception Counter (8x5 Feet)",
+          "price": 24900,
+          "mrp": 32000,
+          "is_default": false
+        }
+      ],
+      "specifications": [
+        {
+          "spec_key": "Structure",
+          "spec_value": "Commercial Marine Grade Ply & Prelam Board"
+        },
+        {
+          "spec_key": "Lighting",
+          "spec_value": "Concealed LED Warm Strip Provision"
+        },
+        {
+          "spec_key": "Storage",
+          "spec_value": "Cash Drawer, Document Cupboard & CPU Space"
+        }
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "client_name": "Dr. Debabrata Sen",
+      "organization_name": "St. Xavier’s Collegiate Extension, Kolkata",
+      "role": "Academic Director",
+      "content": "We placed an order for 45 Ceramic Green Chalkboards and 20 Mobile Revolving Stands for our new block. Shaw Enterprise delivered well before the semester started, with perfect batten packaging. The ghost-free ceramic finish is unmatched.",
+      "rating": 5,
+      "is_featured": true
+    },
+    {
+      "id": 2,
+      "client_name": "Swati Bhattacharya",
+      "organization_name": "Pathfinder Coaching Institute, College Street",
+      "role": "Centre Head",
+      "content": "Being right in College Street, Shaw Enterprise is our go-to manufacturer. Their magnetic whiteboards withstand 10 hours of daily continuous marker writing without any residue or ghost stains.",
+      "rating": 5,
+      "is_featured": true
+    },
+    {
+      "id": 3,
+      "client_name": "Rohan Ganguly",
+      "organization_name": "Techno India Corporate Office, Salt Lake Sector V",
+      "role": "Admin & Infrastructure Lead",
+      "content": "From modular office workstations to glass white writing boards for our executive boardrooms, Mr. Indrajit Shaw provided direct factory wholesale rates and flawless installation.",
+      "rating": 5,
+      "is_featured": true
+    },
+    {
+      "id": 4,
+      "client_name": "Anirban Mitra",
+      "organization_name": "Apex Academy, Gariahat",
+      "role": "Managing Partner",
+      "content": "Custom dimensions ordered on WhatsApp on Tuesday were delivered on Thursday. The 360-degree castor revolving stands are exceptionally sturdy and don’t wobble during lecture writing.",
+      "rating": 5,
+      "is_featured": true
+    }
+  ],
+  "blogs": [
+    {
+      "id": 1,
+      "title": "Ceramic Steel vs Melamine Whiteboard: Which Surface Lasts Longer in Kolkata?",
+      "slug": "ceramic-steel-vs-melamine-whiteboard-comparison",
+      "meta_description": "Discover why ceramic vitreous steel writing boards resist Kolkata monsoon humidity and marker ghosting far better than cheap commercial melamine.",
+      "reading_time": 5,
+      "published_at": "2026-10-15",
+      "thumbnail_image": "blogs/whiteboard-guide.jpg",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "youtube_embed_id": "dQw4w9WgXcQ",
+      "content": "\n      <h2>The Science of Board Surfaces</h2>\n      <p>Educational institutions in West Bengal face a unique challenge: high atmospheric humidity during monsoons. Inferior commercial whiteboards absorb moisture through unsealed backings, leading to warped frames and stubborn marker ghosting within weeks.</p>\n      <h3>Vitreous Enamelled Ceramic Steel</h3>\n      <p>Manufactured by fusing porcelain enamel to heavy gauge steel at over 800°C, creating a glass-smooth surface that is 100% non-porous. Marker ink wipes off cleanly even after being left on the board for over 6 months.</p>\n      <h3>Key Advantages of Shaw Enterprise Boards</h3>\n      <ul>\n        <li><strong>Virgin 6063-T6 Aluminium:</strong> Resists bending under student weight or heavy vibration.</li>\n        <li><strong>Moisture-Resistant Backing:</strong> 0.25mm galvanized anti-rust backing prevents moisture ingress.</li>\n        <li><strong>Ghost-Free Warranty:</strong> Certified for over 100,000 erase cycles.</li>\n      </ul>\n    "
+    },
+    {
+      "id": 2,
+      "title": "How to Properly Clean & Restore Whiteboards: Factory Maintenance Hacks",
+      "slug": "how-to-properly-clean-and-maintain-whiteboards",
+      "meta_description": "Practical guide from Shaw Enterprise workshop on reviving stained writing boards and preventing dry-wipe marker residue.",
+      "reading_time": 4,
+      "published_at": "2026-10-20",
+      "thumbnail_image": "blogs/cleaning-tips.jpg",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "youtube_embed_id": "dQw4w9WgXcQ",
+      "content": "\n      <h2>Never Use Harsh Abrasives</h2>\n      <p>One of the most common mistakes schools make is cleaning writing boards with abrasive powders or harsh solvents like acetone. These destroy the micro-thin polymer coating, creating microscopic pores that permanently trap marker pigments.</p>\n      <h3>The Safe Shaw Enterprise Cleaning Protocol</h3>\n      <ol>\n        <li>Wipe board thoroughly with a clean micro-fibre felt duster.</li>\n        <li>Spray a 50/50 mixture of isopropyl alcohol and distilled water or our specialized Board Cleaner.</li>\n        <li>Allow solution to break down solvent waxes for 30 seconds.</li>\n        <li>Wipe dry with a clean micro-fibre towel in circular motions.</li>\n      </ol>\n    "
+    }
+  ]
+}
