@@ -338,8 +338,6 @@
       }
       startAutoplay();
     });
-    carousel.addEventListener('pointerenter', () => { paused = true; stopAutoplay(); });
-    carousel.addEventListener('pointerleave', () => { paused = false; startAutoplay(); });
     carousel.addEventListener('focusin', () => { paused = true; stopAutoplay(); });
     carousel.addEventListener('focusout', (event) => {
       if (!carousel.contains(event.relatedTarget)) {
