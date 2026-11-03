@@ -71,18 +71,19 @@ image. Docker uses a named volume for uploaded images and the catalog PDF.
 
 ## Deploy to Render
 
-The root `render.yaml` defines a Docker web service, a health check, and a
-persistent disk for uploads. In Render, create a Blueprint from the GitHub
-repository and provide the requested database and admin environment variables.
-Use a MySQL server that permits connections from Render; Render does not
-provide a managed MySQL service. The existing InfinityFree MySQL server may not
-allow connections from outside InfinityFree, so verify remote access before
-using it. Do not copy production credentials into Git or the Docker image.
+The root `render.yaml` defines a free Docker web service with a health check.
+In Render, create a Blueprint from the GitHub repository and provide the
+requested database and admin environment variables. Use a MySQL server that
+permits connections from Render; Render does not provide a managed MySQL
+service. The existing InfinityFree MySQL server may not allow connections from
+outside InfinityFree, so verify remote access before using it. Do not copy
+production credentials into Git or the Docker image.
 
-This Blueprint creates a paid web service because Render persistent disks
-require a paid instance. The disk is initialized with the existing bundled
-uploads on first start, then preserves newly uploaded media across deploys.
-The deployment uses a separate Render URL by default; change DNS or the custom
+The free service has an ephemeral filesystem and may sleep when idle. Bundled
+images are copied into its uploads directory at startup, but new admin uploads
+may be lost after a restart or redeploy. Use a paid instance with a persistent
+disk or external object storage before relying on durable uploads. The
+deployment uses a separate Render URL by default; change DNS or the custom
 domain only after verifying the Render deployment and database contents.
 
 ## Deploy to InfinityFree

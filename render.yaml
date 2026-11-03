@@ -2,14 +2,10 @@ services:
   - type: web
     name: shaw-enterprise
     runtime: docker
-    plan: starter
+    plan: free
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /api/health
-    disk:
-      name: shaw-enterprise-uploads
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: DB_HOST
         sync: false
