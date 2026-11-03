@@ -79,6 +79,10 @@ service. The existing InfinityFree MySQL server may not allow connections from
 outside InfinityFree, so verify remote access before using it. Do not copy
 production credentials into Git or the Docker image.
 
+For TiDB Cloud Starter or another MySQL provider requiring verified TLS, the
+Blueprint sets `DB_SSL_CA` to the container's system CA bundle. The database
+connection verifies the server certificate when this setting is present.
+
 The free service has an ephemeral filesystem and may sleep when idle. Bundled
 images are copied into its uploads directory at startup, but new admin uploads
 may be lost after a restart or redeploy. Use a paid instance with a persistent

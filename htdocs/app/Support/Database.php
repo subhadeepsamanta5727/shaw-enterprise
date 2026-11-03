@@ -17,6 +17,17 @@ class Database {
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ];
+            if ($db['ssl_ca'] !== null) {
+                if (!defined('PDO::MYSQL_ATTR_SSL_CA') || !defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')) {
+                    throw new RuntimeException('PDO MySQL SSL support is required when DB_SSL_CA is configured.');
+                }
+                if (!is_file($db['ssl_ca']) || !is_readable($db['ssl_ca'])) {
+                    throw new RuntimeException('DB_SSL_CA must point to a readable CA certificate bundle.');
+                }
+
+                $options[PDO::MYSQL_ATTR_SSL_CA] = $db['ssl_ca'];
+                $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = true;
+            }
 
             try {
                 self::$instance = new PDO($dsn, $db['user'], $db['password'], $options);

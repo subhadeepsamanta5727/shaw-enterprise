@@ -19,6 +19,7 @@ return [
         'dbname'   => shawEnv('DB_NAME') ?: 'shaw_enterprise',
         'user'     => shawEnv('DB_USER') ?: 'root',
         'password' => $databasePassword,
+        'ssl_ca'   => shawEnv('DB_SSL_CA') ?: null,
         'charset'  => 'utf8mb4',
     ],
     'app' => [
