@@ -1,135 +1,120 @@
-# Shaw Enterprise — Institutional E-Commerce & B2B Portal
+# Shaw Enterprise
 
-Production-ready, highly scalable, and 100% dynamic B2B/B2C E-commerce platform engineered for **Shaw Enterprise** (Kolkata-based manufacturer & wholesaler of writing boards, display equipment, classroom desks, and office furniture).
+## Project layout
 
----
-
-## 🛠️ Unified Architecture
-
-- **Frontend**: React 19 + Tailwind CSS (Vite Bundler) located in `resources/`
-- **Backend**: Native PHP REST API with MySQL located in `backend/`
-- **Database**: Local MySQL 8.0 (`shaw_enterprise`)
-- **Image Storage**: Local server folder `backend/uploads/`
-
-In the admin dashboard, editing a product supports multiple size/price variants
-(including a custom-size price), a product image gallery, short and full
-descriptions, and key/value specifications. Product images are stored in
-`backend/uploads/`; gallery paths, variants, and specifications are saved with
-the product in MySQL.
-
----
-
-## 📂 Project Structure
-
-```
-shaw-enterprise/
-├── backend/                       # Single Unified PHP Backend
-│   ├── config/
-│   │   ├── database.php           # Separate Backend Connection File (DB & Base URL)
-│   │   └── db_connect.php         # PDO Singleton Database Connection
-│   ├── controllers/               # PHP REST API Controllers
-│   │   ├── ProductController.php
-│   │   ├── CategoryController.php
-│   │   ├── ClientController.php   # Institutional clients (4 category toggles)
-│   │   ├── InquiryController.php  # RFQ quotes
-│   │   ├── OrderController.php    # Retail orders
-│   │   ├── SettingController.php  # Store & payment configs
-│   │   ├── UploadController.php   # Local image uploads
-│   │   ├── TestimonialController.php
-│   │   └── BlogController.php
-│   ├── database/                  # MySQL Migrations & Database Seeds
-│   ├── models/                    # Data Models
-│   ├── scripts/
-│   │   └── migrateAndSeed.js      # Automatic MySQL Schema & Seeder
-│   ├── uploads/                   # Local folder where all uploaded images are stored
-│   ├── .htaccess                  # Apache / cPanel URL rewriting
-│   ├── .env                       # Backend database environment config
-│   └── index.php                  # Central API Router & Static Image Server
-│
-├── resources/                     # Single Unified Frontend Application
-│   ├── js/
-│   │   ├── config/
-│   │   │   └── api.config.js      # Separate Frontend Connection File (Change endpoint here!)
-│   │   ├── services/
-│   │   │   └── api.js             # Central REST API Service
-│   │   ├── Pages/                 # Storefront & Admin Dashboard Pages
-│   │   ├── Components/            # UI Components & ImageUploadInput
-│   │   ├── app.jsx                # React Root SPA
-│   │   └── store.js               # Reactive Store synced with MySQL Backend
-│   └── css/
-│       └── app.css                # Tailwind CSS
-│
-├── .env                           # Frontend environment variables (VITE_API_BASE_URL)
-├── index.html                     # HTML Template
-├── vite.config.js                 # Vite Bundler & Dev Server Config
-└── package.json                   # Scripts & dependencies
+```text
+htdocs/              Upload the contents of this folder into the host's htdocs
+  app/                PHP API controllers, router, support, and views
+  assets/             Public CSS and JavaScript
+  config/             PHP configuration and local environment file
+  database/           SQL schema and initial data
+  storage/uploads/    Product images and uploaded catalog files
+  index.php           Front controller
+  .htaccess           URL routing and private-folder access rules
 ```
 
----
+## Requirements
 
-## 🔌 Separate Connection Files (Changing Endpoints in Production)
+- PHP 8.0+ with PDO MySQL and Fileinfo
+- MySQL/MariaDB provided by InfinityFree
 
-### 1. Frontend API Endpoint
-File: [`resources/js/config/api.config.js`](file:///c:/Users/CHINMOY/Desktop/work/shaw-enterprise/resources/js/config/api.config.js)
-```javascript
-export const API_BASE_URL =
-  import.meta.env?.VITE_API_BASE_URL || 'http://localhost:8000/api';
+## Configuration
 
-export const UPLOADS_BASE_URL =
-  import.meta.env?.VITE_UPLOADS_URL || 'http://localhost:8000/uploads';
-```
-*Change `API_BASE_URL` to your production URL (e.g. `https://api.shawenterprise.in/api`) or set `VITE_API_BASE_URL` in `.env` before building.*
+Copy `htdocs/config/.env.example` to `htdocs/config/.env`, then set the MySQL
+hostname, database name, username, password, and admin credentials using the
+values from InfinityFree's control panel. InfinityFree's MySQL host is not
+`localhost`. Do not upload or commit a local `config/.env`.
 
-### 2. Backend MySQL Database Connection
-File: [`backend/config/database.php`](file:///c:/Users/CHINMOY/Desktop/work/shaw-enterprise/backend/config/database.php)
-```php
-$databasePassword = getenv('DB_PASSWORD');
-if ($databasePassword === false || $databasePassword === '') {
-    throw new RuntimeException('DB_PASSWORD must be set in backend/.env or the environment.');
-}
+Set `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `htdocs/config/.env`. The password is
+stored in plaintext in this file, so keep `.env` private and never upload or
+commit it. Admin sessions are checked by PHP; write operations,
+order/inquiry administration, and uploads require an authenticated admin.
 
-return [
-    'db' => [
-        'host'     => getenv('DB_HOST') ?: '127.0.0.1',
-        'port'     => getenv('DB_PORT') ?: '3306',
-        'dbname'   => getenv('DB_NAME') ?: 'shaw_enterprise',
-        'user'     => getenv('DB_USER') ?: 'root',
-        'password' => $databasePassword,
-        'charset'  => 'utf8mb4',
-    ],
-    'app' => [
-        'base_url'    => getenv('APP_URL') ?: 'http://localhost:8000',
-        'uploads_dir' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'uploads',
-        'cors_origin' => '*',
-    ],
-];
-```
+## Admin CMS
 
----
+Sign in at `/admin` to manage products, categories, clients, testimonials, blog
+posts, and store settings. The dashboard includes inactive catalog items and
+unpublished posts so they can be edited or republished. Admins can also review
+legacy order records and inquiries and update their statuses. The storefront
+is a product catalog and enquiry site: customers request quotations directly;
+it has no cart, checkout, online payment, or public order-submission flow.
+Each product has a **Show price & MRP on product cards and details** control.
+It is off by default; when disabled, price fields are omitted from public
+product API responses.
 
-## 🚀 How to Run
+## Run locally
 
-Set `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD` in an
-untracked `backend/.env` file before starting the backend. `DB_PASSWORD` is
-required; do not commit the environment file. Frontend API URLs can be
-overridden with `VITE_API_BASE_URL` and `VITE_UPLOADS_URL` in the root `.env`.
+From the project root:
 
-### 1. Start Frontend Dev Server
 ```bash
-npm run dev
+php -S localhost:8000 -t htdocs htdocs/router.php
 ```
-Storefront runs at `http://localhost:5173/`
 
-### 2. Start PHP Backend Server
-```bash
-npm run php:serve
-# Or directly:
-php -S localhost:8000 -t backend
-```
-API runs at `http://localhost:8000/api`
+Open `http://localhost:8000`. `htdocs/.htaccess` handles front-controller
+routing on Apache.
 
-### 3. Re-seed MySQL Database
+## Run with Docker
+
+Build and run the PHP app from the repository root:
+
 ```bash
-npm run db:seed
+docker build -t shaw-enterprise .
+docker run --rm -p 8000:10000 \
+  --env-file htdocs/config/.env \
+  -e APP_URL=http://localhost:8000 \
+  -v shaw-enterprise-uploads:/var/data \
+  shaw-enterprise
 ```
-Populates all categories, products, clients, settings, testimonials, and blogs.
+
+The `.env` file supplies the MySQL and admin settings and is excluded from the
+image. Docker uses a named volume for uploaded images and the catalog PDF.
+
+## Deploy to Render
+
+The root `render.yaml` defines a Docker web service, a health check, and a
+persistent disk for uploads. In Render, create a Blueprint from the GitHub
+repository and provide the requested database and admin environment variables.
+Use a MySQL server that permits connections from Render; Render does not
+provide a managed MySQL service. The existing InfinityFree MySQL server may not
+allow connections from outside InfinityFree, so verify remote access before
+using it. Do not copy production credentials into Git or the Docker image.
+
+This Blueprint creates a paid web service because Render persistent disks
+require a paid instance. The disk is initialized with the existing bundled
+uploads on first start, then preserves newly uploaded media across deploys.
+The deployment uses a separate Render URL by default; change DNS or the custom
+domain only after verifying the Render deployment and database contents.
+
+## Deploy to InfinityFree
+
+1. In InfinityFree, create/activate the hosting account for
+   `shawenterprise.site.je`, then open that site's FTP account or File Manager.
+2. Open the **domain's** `htdocs` directory. Upload the **contents** of the
+   local `htdocs/` folder there so `index.php`, `.htaccess`, and `assets/` are
+   directly inside the remote `htdocs`; do not create an extra nested
+   `htdocs/htdocs` folder. Include `app/`, `config/`, `database/`, and
+   `storage/` alongside them. Do not upload `.git/` or your local
+   `config/.env`.
+   If using a ZIP, extract it on your computer first and confirm
+   `index.php` is at the extracted folder's top level and `config/.env` is not
+   included. Upload the extracted files through FTP, not the ZIP archive.
+3. Use FTP (for example FileZilla) to upload the folders and files. Avoid
+   uploading one large archive; InfinityFree has a 10 MB per-file upload
+   limit.
+4. In the InfinityFree control panel, create a MySQL database. Note its exact
+   database hostname, database name, username, and password.
+5. In remote `htdocs/config/`, copy `.env.example` to `.env`. Put the database
+   details from the panel in it, set `APP_URL=https://shawenterprise.site.je`
+   after HTTPS is enabled, and set your admin email and password hash. The
+   host field must use InfinityFree's database hostname, not `localhost`.
+6. Open the database in InfinityFree phpMyAdmin and import
+   `database/shaw_enterprise_database.sql`.
+   For an existing installation, run the applicable SQL files in
+   `database/migrations/` once before deploying application changes.
+7. Enable the available SSL certificate, then test the domain homepage,
+   `/api/health`, `/admin/login`, and image loading.
+
+All PHP application folders are inside the remote web root because InfinityFree
+stores website files in `htdocs`. The root `.htaccess` denies direct requests
+to `app/`, `config/`, `database/`, and `storage/`; requests for uploaded files
+are served through the PHP router.

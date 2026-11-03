@@ -1,0 +1,9 @@
+.git
+.git/**
+**/.git
+**/.env
+!**/.env.example
+**/*.log
+htdocs.zip
+shaw_enterprise_*.sql
+htdocs/database/*.sql
