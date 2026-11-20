@@ -291,7 +291,7 @@ textarea { resize: vertical; }
 }
 .floating-call-label {
   color: var(--navy);
-  border-left: 3px solid var(--golden);
+  border-left: 3px solid #ffd700;
 }
 .floating-whatsapp-label {
   color: #0f172a;
@@ -310,8 +310,8 @@ textarea { resize: vertical; }
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 .floating-call-icon {
-  background: var(--navy);
-  color: var(--golden);
+  background: #ffd700;
+  color: var(--navy);
 }
 .floating-whatsapp-icon {
   background: #25d366;
@@ -319,8 +319,8 @@ textarea { resize: vertical; }
 }
 .floating-call:hover .floating-call-icon {
   transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 12px 28px rgba(16, 33, 59, 0.55);
-  background: #0a1728;
+  box-shadow: 0 12px 28px rgba(255, 215, 0, 0.45);
+  background: #e6b800;
 }
 .floating-whatsapp:hover .floating-whatsapp-icon {
   transform: translateY(-3px) scale(1.04);
@@ -336,7 +336,7 @@ textarea { resize: vertical; }
 }
 .floating-call:focus-visible,
 .floating-whatsapp:focus-visible {
-  outline: 3px solid var(--golden);
+  outline: 3px solid #ffd700;
   outline-offset: 3px;
   border-radius: 50%;
 }
