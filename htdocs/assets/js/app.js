@@ -410,6 +410,10 @@
         dot.setAttribute('aria-current', String(active));
       });
     };
+    const configuredSeconds = Number(settings.sections?.hero?.slider_seconds);
+    const sliderDuration = (configuredSeconds && !isNaN(configuredSeconds) && configuredSeconds >= 1)
+      ? Math.round(configuredSeconds * 1000)
+      : 3500;
     const stopAutoplay = () => {
       if (timer !== null) window.clearInterval(timer);
       timer = null;
@@ -417,7 +421,7 @@
     const startAutoplay = () => {
       stopAutoplay();
       if (!paused && !reducedMotion.matches && !document.hidden && panels.length > 1) {
-        timer = window.setInterval(() => showSlide(activeSlide + 1), 6000);
+        timer = window.setInterval(() => showSlide(activeSlide + 1), sliderDuration);
       }
     };
     carousel.addEventListener('click', (event) => {
@@ -1016,7 +1020,8 @@
         const label = formatPageFieldLabel(path.at(-1) || 'Content');
         return `<label>${label}<input data-page-setting-path="${escapeHtml(JSON.stringify(path))}" value="${escapeHtml(value ?? '')}"></label>`;
       };
-      view.innerHTML = `<div class="admin-toolbar"><div><span class="eyebrow">Storefront content</span><h1>Page settings</h1></div><button class="button button-primary" data-save-settings>Save changes</button></div><p class="admin-settings-intro">Edit homepage imagery and content by section.</p><form class="admin-settings-form" data-settings-form data-settings-section="page"><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero banners</h2><p>Select up to five products. Each banner uses the selected product image and title and links to its product page.</p></div><div class="admin-settings-fields">${heroProductFields}</div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero fallback image</h2><p>Used when a selected product does not have an image.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">Fallback hero image<input name="hero_banner_url" value="${escapeHtml(state.settings.hero_banner_url || '')}"><input type="file" data-setting-upload="hero_banner_url" accept="image/*"></label></div></section>${editablePageSections.map(([sectionKey, sectionValue]) => `<section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>${sectionKey === 'about_home' ? 'About page image' : formatPageFieldLabel(sectionKey)}</h2><p>${sectionKey === 'about_home' ? 'Manage the image shown on the About page.' : 'Edit the content and items for this page section.'}</p></div><div class="admin-settings-fields">${renderPageFields(sectionValue, [sectionKey])}</div></section>`).join('')}</form>`;
+      const heroSliderSpeedField = `<label class="admin-settings-wide">Auto-slide interval (seconds)<input type="number" min="1" max="30" step="0.5" data-page-setting-path='["hero", "slider_seconds"]' value="${escapeHtml(sections.hero?.slider_seconds ?? 3.5)}"><small style="display:block;margin-top:4px;color:#64748b;">Duration each hero banner slide stays visible before rotating (default: 3.5 seconds).</small></label>`;
+      view.innerHTML = `<div class="admin-toolbar"><div><span class="eyebrow">Storefront content</span><h1>Page settings</h1></div><button class="button button-primary" data-save-settings>Save changes</button></div><p class="admin-settings-intro">Edit homepage imagery and content by section.</p><form class="admin-settings-form" data-settings-form data-settings-section="page"><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero banners</h2><p>Select up to five products. Each banner uses the selected product image and title and links to its product page.</p></div><div class="admin-settings-fields">${heroProductFields}${heroSliderSpeedField}</div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero fallback image</h2><p>Used when a selected product does not have an image.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">Fallback hero image<input name="hero_banner_url" value="${escapeHtml(state.settings.hero_banner_url || '')}"><input type="file" data-setting-upload="hero_banner_url" accept="image/*"></label></div></section>${editablePageSections.map(([sectionKey, sectionValue]) => `<section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>${sectionKey === 'about_home' ? 'About page image' : formatPageFieldLabel(sectionKey)}</h2><p>${sectionKey === 'about_home' ? 'Manage the image shown on the About page.' : 'Edit the content and items for this page section.'}</p></div><div class="admin-settings-fields">${renderPageFields(sectionValue, [sectionKey])}</div></section>`).join('')}</form>`;
       return;
     }
     const resource = adminResources[activeTab];
@@ -1463,13 +1468,14 @@
         let parent = updated.sections;
         let currentValue = currentSections;
         path.slice(0, -1).forEach((key) => {
+          if (!parent[key] || typeof parent[key] !== 'object') parent[key] = {};
           parent = parent[key];
-          currentValue = currentValue[key];
+          currentValue = currentValue ? currentValue[key] : undefined;
         });
         const key = path.at(-1);
-        const originalValue = currentValue[key];
+        const originalValue = currentValue ? currentValue[key] : undefined;
         const value = input.value;
-        parent[key] = typeof originalValue === 'number' && value !== '' ? Number(value) : value;
+        parent[key] = (typeof originalValue === 'number' || input.type === 'number') && value !== '' ? Number(value) : value;
       });
     }
     const settingsKeys = ['sections'].filter((key) => Object.prototype.hasOwnProperty.call(updated, key) && !pageSettingInputs.length && !heroProductInputs.length);
