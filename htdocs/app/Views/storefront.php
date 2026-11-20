@@ -151,13 +151,17 @@
                 </div>
                 <div>
                     <h3>Explore</h3>
-                    <a href="/products">Products</a>
                     <a href="/about">About us</a>
                     <a href="/clients">Our clients</a>
                     <a href="/blogs">Blog & guides</a>
                     <a href="/contact">Contact</a>
                     <button type="button" class="footer-action" data-open-custom>Custom size request</button>
                     <button type="button" class="footer-action" data-open-brochure>Download catalogue</button>
+                </div>
+                <div>
+                    <h3>Products</h3>
+                    <a href="/products">All products</a>
+                    <nav class="footer-product-categories" data-footer-product-categories aria-label="Product categories"></nav>
                 </div>
                 <div class="footer-contact">
                     <h3>Contact us</h3>
@@ -179,7 +183,10 @@
             </div>
             <div class="footer-bottom">
                 <span>© <span data-year><?= date('Y') ?></span> <span data-site-name><?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?></span>. All rights reserved. | Developed by <a href="https://preconetindia.com/" target="_blank" rel="noopener noreferrer">Preconet Global Solutions Pvt Ltd</a></span>
-                <a href="/admin/login">Admin</a>
+                <nav class="footer-bottom-links" aria-label="Site information">
+                    <a class="footer-bottom-link" href="/sitemap.xml">XML sitemap</a>
+                    <a class="footer-bottom-link" href="/robots.txt">robots.txt</a>
+                </nav>
             </div>
         </footer>
         <div class="floating-contact-stack" aria-label="Quick contact buttons">

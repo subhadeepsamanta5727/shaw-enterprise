@@ -111,6 +111,9 @@ try {
                 if (!str_starts_with($siteLogoUrl, 'http://') && !str_starts_with($siteLogoUrl, 'https://') && !str_starts_with($siteLogoUrl, '/')) {
                     $siteLogoUrl = '/uploads/' . ltrim($siteLogoUrl, '/');
                 }
+                if (preg_match('~(?:^|/)whatsapp-image-2026-11-19-at-7-05-04-pm-1795161854-1284\.jpeg(?:[?#]|$)~i', $siteLogoUrl)) {
+                    $siteLogoUrl = '/assets/images/shaw-enterprise-logo-20261120.jpeg';
+                }
             }
         }
     }

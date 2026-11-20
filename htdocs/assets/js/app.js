@@ -53,7 +53,10 @@
   }
 
   function siteLogoUrl(settings) {
-    return settings.logo_url || settings.site_logo || settings.logo || '';
+    const logoUrl = settings.logo_url || settings.site_logo || settings.logo || '';
+    return /(?:^|\/)whatsapp-image-2026-11-19-at-7-05-04-pm-1795161854-1284\.jpeg(?:[?#]|$)/i.test(logoUrl)
+      ? '/assets/images/shaw-enterprise-logo-20261120.jpeg'
+      : logoUrl;
   }
 
   function toast(message, error = false) {
@@ -146,11 +149,23 @@
       ${products.length ? `<ol class="products-menu-product-list">${products.map((product, index) => `<li><a href="/products/${encodeURIComponent(product.slug || product.id)}"><span class="products-menu-serial">${String(index + 1).padStart(2, '0')}</span><span>${escapeHtml(product.title)}</span><span aria-hidden="true">↗</span></a></li>`).join('')}</ol>` : '<p class="products-menu-empty">No products in this category yet.</p>'}`;
   }
 
+  function orderedProductCategories() {
+    return [...state.categories].sort((a, b) => Number(a.display_order || 0) - Number(b.display_order || 0) || Number(a.id) - Number(b.id));
+  }
+
+  function renderFooterProductCategories() {
+    const categoryLinks = document.querySelector('[data-footer-product-categories]');
+    if (!categoryLinks) return;
+    categoryLinks.innerHTML = orderedProductCategories()
+      .map((category) => `<a href="/products?category=${encodeURIComponent(category.slug)}">${escapeHtml(category.name)}</a>`)
+      .join('');
+  }
+
   function renderProductsMenu() {
     const menu = document.querySelector('[data-products-mega-menu]');
     const navProducts = document.querySelector('[data-nav-products]');
     if (!menu || !navProducts || !state.categories.length) return;
-    const categories = [...state.categories].sort((a, b) => Number(a.display_order || 0) - Number(b.display_order || 0) || Number(a.id) - Number(b.id));
+    const categories = orderedProductCategories();
     menu.innerHTML = `<div class="products-menu-categories" aria-label="Product categories">${categories.map((category, index) => `<a class="products-menu-category${index === 0 ? ' active' : ''}" href="/products?category=${encodeURIComponent(category.slug)}" data-menu-category="${escapeHtml(category.id)}" ${index === 0 ? 'aria-current="true"' : ''}><span class="products-menu-serial">${String(index + 1).padStart(2, '0')}</span><span>${escapeHtml(category.name)}</span><span aria-hidden="true">›</span></a>`).join('')}</div><div class="products-menu-preview" data-products-menu-preview></div>`;
     renderProductsMenuProducts(categories[0]);
     const selectCategory = (event) => {
@@ -712,9 +727,11 @@
     }
     if (!mapEmbedUrl) mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
     const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+    const businessEmail = String(settings.email || 'shaw.entt.edu@gmail.com').trim();
+    const officialEmail = String(settings.email_official || 'shawenterprise.in@gmail.com').trim();
     setContent(`${pageBanner('Contact Us', 'Tell us about your product, size or bulk order requirements.', null, 'Direct Factory Enquiry')}<section class="section"><div class="container">
       <div class="product-detail">
-      <div class="panel"><span class="eyebrow">Contact</span><h2>${escapeHtml(settings.site_name || 'Shaw Enterprise')}</h2><p>${escapeHtml(settings.tagline || '')}</p><h3>Registered office</h3><p>${escapeHtml(settings.registered_office_address || settings.address || '')}</p><p><strong>Phone:</strong> ${escapeHtml(settings.phone || '')}</p><p><strong>Email:</strong> ${escapeHtml(settings.email || '')}</p></div>
+      <div class="panel"><span class="eyebrow">Contact</span><h2>${escapeHtml(settings.site_name || 'Shaw Enterprise')}</h2><p>${escapeHtml(settings.tagline || '')}</p><h3>Registered office</h3><p>${escapeHtml(settings.registered_office_address || settings.address || '')}</p><p><strong>Phone:</strong> ${escapeHtml(settings.phone || '')}</p><p><strong>For business enquiries, product quotations and orders:</strong><br><a href="mailto:${escapeHtml(businessEmail)}">✉️ ${escapeHtml(businessEmail)}</a></p><p><strong>For official, corporate and administrative communication:</strong><br><a href="mailto:${escapeHtml(officialEmail)}">✉️ ${escapeHtml(officialEmail)}</a></p></div>
       <form class="panel form-stack" data-contact-form><h2>Send us a message</h2><label>Your name *<input name="client_name" required></label><div class="form-row"><label>Phone *<input name="phone" required></label><label>Email<input name="email" type="email"></label></div><label>Message *<textarea name="message" rows="5" required></textarea></label><input type="hidden" name="product_title" value="General enquiry"><button class="button button-primary" type="submit">Send message</button><div data-form-message></div></form>
       </div>
       <div class="contact-map"><div class="contact-map-heading"><div><span class="eyebrow">Find us</span><h2>Visit Shaw Enterprise</h2><p>${escapeHtml(address)}</p></div><a class="button button-outline" href="${escapeHtml(mapLink)}" target="_blank" rel="noopener noreferrer">Open in Google Maps <span aria-hidden="true">↗</span></a></div><iframe title="Map showing Shaw Enterprise registered office" src="${escapeHtml(mapEmbedUrl)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
@@ -1042,7 +1059,8 @@
             ['phone', 'Primary phone'],
             ['phone_secondary', 'Secondary phone'],
             ['whatsapp', 'WhatsApp number'],
-            ['email', 'Email address'],
+            ['email', 'Business email address'],
+            ['email_official', 'Official email address'],
             ['address', 'Business address'],
             ['registered_office_address', 'Registered office address'],
             ['workshop_address', 'Workshop address'],
@@ -1050,7 +1068,11 @@
           ],
         },
       ];
-      const renderSettingField = ([key, label]) => `<label>${label}<input name="${key}" value="${escapeHtml(state.settings[key] || '')}">${['logo_url', 'favicon_url', 'catalog_pdf_url'].includes(key) ? `<input type="file" data-setting-upload="${key}" accept="${key === 'catalog_pdf_url' ? 'application/pdf' : key === 'favicon_url' ? '.ico,image/x-icon,image/png,image/svg+xml,image/jpeg' : 'image/*'}">` : ''}</label>`;
+      const renderSettingField = ([key, label]) => {
+        const type = ['email', 'email_official'].includes(key) ? 'email' : 'text';
+        const fallbackValue = key === 'email_official' ? 'shawenterprise.in@gmail.com' : '';
+        return `<label>${label}<input name="${key}" type="${type}" value="${escapeHtml(state.settings[key] || fallbackValue)}">${['logo_url', 'favicon_url', 'catalog_pdf_url'].includes(key) ? `<input type="file" data-setting-upload="${key}" accept="${key === 'catalog_pdf_url' ? 'application/pdf' : key === 'favicon_url' ? '.ico,image/x-icon,image/png,image/svg+xml,image/jpeg' : 'image/*'}">` : ''}</label>`;
+      };
       const currentSocialLinks = state.settings.social_links && typeof state.settings.social_links === 'object' && !Array.isArray(state.settings.social_links) ? state.settings.social_links : {};
       const socialLinkKeys = [...new Set(['facebook', 'instagram', 'twitter', 'youtube', 'linkedin', 'whatsapp', ...Object.keys(currentSocialLinks)])];
       const socialLinkLabels = { facebook: 'Facebook', instagram: 'Instagram', twitter: 'Twitter / X', youtube: 'YouTube', linkedin: 'LinkedIn', whatsapp: 'WhatsApp' };
@@ -1632,6 +1654,7 @@
     try {
       await loadSharedData();
       renderProductsMenu();
+      renderFooterProductCategories();
       await renderPage();
     } catch (error) {
       console.error('Failed to initialize Shaw Enterprise:', error);
