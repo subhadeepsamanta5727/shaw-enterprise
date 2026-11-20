@@ -113,11 +113,23 @@
     return `<article class="card"><a class="card-image" href="/blogs/${encodeURIComponent(blog.slug || blog.id)}"><img loading="lazy" src="${escapeHtml(imageUrl(blog.thumbnail_image))}" alt="${escapeHtml(blog.title)}"></a><div class="card-body"><p>${escapeHtml(blog.author_name || 'Shaw Enterprise')} · ${escapeHtml(blog.created_at || '')}</p><a class="card-title" href="/blogs/${encodeURIComponent(blog.slug || blog.id)}">${escapeHtml(blog.title)}</a><p>${escapeHtml((blog.meta_description || blog.content || '').replace(/<[^>]*>/g, '').slice(0, 130))}</p><a class="button button-outline" href="/blogs/${encodeURIComponent(blog.slug || blog.id)}">Read article</a></div></article>`;
   }
 
-  function pageBanner(title, copy = '', crumbs = null) {
-    const breadcrumbLinks = Array.isArray(crumbs) && crumbs.length
-      ? `<a href="/">Home</a> / ${crumbs.map(([label, url]) => url ? `<a href="${escapeHtml(url)}">${escapeHtml(label)}</a>` : escapeHtml(label)).join(' / ')}`
-      : `<a href="/">Home</a> / ${escapeHtml(title)}`;
-    return `<section class="page-banner"><div class="container"><div class="breadcrumbs">${breadcrumbLinks}</div><h1>${escapeHtml(title)}</h1>${copy ? `<p class="lead">${escapeHtml(copy)}</p>` : ''}</div></section>`;
+  function pageBanner(title, copy = '', crumbs = null, badge = null) {
+    const breadcrumbHtml = Array.isArray(crumbs) && crumbs.length
+      ? `<a href="/">Home</a><span class="breadcrumb-sep">/</span>${crumbs.map(([label, url]) => url ? `<a href="${escapeHtml(url)}">${escapeHtml(label)}</a>` : `<span>${escapeHtml(label)}</span>`).join('<span class="breadcrumb-sep">/</span>')}`
+      : `<a href="/">Home</a><span class="breadcrumb-sep">/</span><span>${escapeHtml(title)}</span>`;
+    const defaultBadge = 'Shaw Enterprise • Kolkata';
+    const displayBadge = badge || defaultBadge;
+    return `<section class="page-banner">
+      <div class="page-banner-glow" aria-hidden="true"></div>
+      <div class="container page-banner-container">
+        <div class="page-banner-top">
+          <div class="breadcrumbs">${breadcrumbHtml}</div>
+          <span class="page-banner-badge"><span class="badge-dot" aria-hidden="true"></span>${escapeHtml(displayBadge)}</span>
+        </div>
+        <h1 class="page-banner-title">${escapeHtml(title)}</h1>
+        ${copy ? `<p class="lead page-banner-lead">${escapeHtml(copy)}</p>` : ''}
+      </div>
+    </section>`;
   }
 
   function setContent(html) {
@@ -469,7 +481,7 @@
     const categoryParam = params.get('category') || '';
     const selectedCategory = state.categories.find((item) => item.slug === categoryParam || String(item.id) === categoryParam);
     const category = selectedCategory?.slug || categoryParam;
-    setContent(`${pageBanner('Our Products', 'Browse writing boards, classroom furniture, display systems and accessories.')}
+    setContent(`${pageBanner('Our Products', 'Browse writing boards, classroom furniture, display systems and accessories.', null, 'Factory Direct Catalogue')}
       <section class="section products-section"><div class="container products-layout">
         <aside class="product-filter-panel" aria-label="Product filters"><div class="filter-panel-heading"><span class="eyebrow">Explore</span><h2>Categories</h2></div>
           <nav class="product-category-list" aria-label="Filter products by category">
@@ -525,7 +537,7 @@
       [categoryName, categorySlug],
       [item.title, null],
     ];
-    setContent(`${pageBanner(item.title, '', crumbs)}<section class="section"><div class="container product-detail">
+    setContent(`${pageBanner(item.title, '', crumbs, item.category_name || 'Writing & Display Boards')}<section class="section"><div class="container product-detail">
       <div>${images.length ? `<button class="product-image-viewer" type="button" data-open-product-image aria-label="View larger image: ${escapeHtml(item.title)}"><img class="product-main-image" data-main-image src="${escapeHtml(imageUrl(images[0]))}" alt="${escapeHtml(item.title)}"></button><div class="gallery-thumbs">${images.map((src, index) => `<img class="${index === 0 ? 'active' : ''}" data-gallery-image src="${escapeHtml(imageUrl(src))}" alt="${escapeHtml(item.title)} image ${index + 1}">`).join('')}</div>` : '<div class="product-image-empty product-detail-image-empty" role="img" aria-label="No product image available">Image coming soon</div>'}</div>
       <div><span class="eyebrow">${escapeHtml(item.category_name || 'Shaw Enterprise')}</span><h2>${escapeHtml(item.title)}</h2><p class="muted">${escapeHtml(item.sku || '')}</p>
       ${item.short_description ? `<p class="product-short-description">${escapeHtml(item.short_description)}</p>` : ''}
@@ -583,7 +595,7 @@
       { label: 'Boards Delivered', value: '50,000+', sub: 'Delivered Pan-India' },
     ];
 
-    setContent(`${pageBanner('About Shaw Enterprise', 'A Kolkata-based manufacturer and supplier of writing boards and educational products.')}
+    setContent(`${pageBanner('About Shaw Enterprise', 'A Kolkata-based manufacturer and supplier of writing boards and educational products.', null, `Since ${establishedYear} • College Street`)}
       <section class="section about-intro"><div class="container about-intro-grid">
         <div class="about-story"><span class="eyebrow">${escapeHtml(about.badge || 'About Shaw Enterprise')}</span><h2>${escapeHtml(aboutTitle)}</h2>
           <p>${escapeHtml(aboutP1)}</p>
@@ -620,7 +632,7 @@
       ['corporate_banks', 'Corporate / Bank'], ['others', 'Others'],
     ];
     state.clientCategory = 'all';
-    setContent(`${pageBanner('Our Clients', 'Institutions and organizations that trust Shaw Enterprise.')}<section class="section"><div class="container">
+    setContent(`${pageBanner('Our Clients', 'Institutions and organizations that trust Shaw Enterprise.', null, 'Trusted by 500+ Institutions')}<section class="section"><div class="container">
       <div class="toolbar"><input class="search-field" type="search" placeholder="Search institution or location…" data-client-search>${categories.map(([id, label]) => `<button class="button button-outline" type="button" data-client-category="${id}">${label}</button>`).join('')}</div>
       <div class="grid grid-3" data-clients-grid></div></div></section>`);
     filterClients('all');
@@ -638,7 +650,7 @@
     document.title = 'Insights & Guides | Shaw Enterprise Blog';
     const search = new URLSearchParams(location.search).get('search') || '';
     const rows = state.blogs.filter((blog) => `${blog.title} ${blog.content || ''}`.toLowerCase().includes(search.toLowerCase()));
-    setContent(`${pageBanner('Insights & Guides', 'Product advice, classroom ideas and tips from our team.')}<section class="section"><div class="container"><div class="toolbar"><input class="search-field" type="search" value="${escapeHtml(search)}" placeholder="Search articles…" data-blog-search></div><div class="grid grid-3" data-blog-grid>${rows.map(blogCard).join('') || '<p class="empty-state">No articles found.</p>'}</div></div></section>`);
+    setContent(`${pageBanner('Insights & Guides', 'Product advice, classroom ideas and tips from our team.', null, 'Articles & Guides')}<section class="section"><div class="container"><div class="toolbar"><input class="search-field" type="search" value="${escapeHtml(search)}" placeholder="Search articles…" data-blog-search></div><div class="grid grid-3" data-blog-grid>${rows.map(blogCard).join('') || '<p class="empty-state">No articles found.</p>'}</div></div></section>`);
   }
 
   async function renderBlog() {
@@ -649,7 +661,7 @@
       ['Blog', '/blogs'],
       [blog.title, null],
     ];
-    setContent(`${pageBanner(blog.title, 'By ' + (blog.author_name || 'Shaw Enterprise'), crumbs)}<article class="section"><div class="container" style="max-width:850px"><img class="product-main-image" style="height:360px" src="${escapeHtml(imageUrl(blog.thumbnail_image))}" alt="${escapeHtml(blog.title)}"><div class="article-content">${safeRichText(blog.content || '').replace(/\n/g, '<br>')}</div>${blog.video_url ? `<p><a class="button button-dark" href="${escapeHtml(blog.video_url)}" target="_blank" rel="noreferrer">Watch video</a></p>` : ''}<a href="/blogs" class="button button-outline">← All articles</a></div></article>`);
+    setContent(`${pageBanner(blog.title, 'By ' + (blog.author_name || 'Shaw Enterprise'), crumbs, 'Article Guide')}<article class="section"><div class="container" style="max-width:850px"><img class="product-main-image" style="height:360px" src="${escapeHtml(imageUrl(blog.thumbnail_image))}" alt="${escapeHtml(blog.title)}"><div class="article-content">${safeRichText(blog.content || '').replace(/\n/g, '<br>')}</div>${blog.video_url ? `<p><a class="button button-dark" href="${escapeHtml(blog.video_url)}" target="_blank" rel="noreferrer">Watch video</a></p>` : ''}<a href="/blogs" class="button button-outline">← All articles</a></div></article>`);
   }
 
   function renderImages() {
@@ -700,7 +712,7 @@
     }
     if (!mapEmbedUrl) mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
     const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
-    setContent(`${pageBanner('Contact Us', 'Tell us about your product, size or bulk order requirements.')}<section class="section"><div class="container">
+    setContent(`${pageBanner('Contact Us', 'Tell us about your product, size or bulk order requirements.', null, 'Direct Factory Enquiry')}<section class="section"><div class="container">
       <div class="product-detail">
       <div class="panel"><span class="eyebrow">Contact</span><h2>${escapeHtml(settings.site_name || 'Shaw Enterprise')}</h2><p>${escapeHtml(settings.tagline || '')}</p><h3>Registered office</h3><p>${escapeHtml(settings.registered_office_address || settings.address || '')}</p><p><strong>Phone:</strong> ${escapeHtml(settings.phone || '')}</p><p><strong>Email:</strong> ${escapeHtml(settings.email || '')}</p></div>
       <form class="panel form-stack" data-contact-form><h2>Send us a message</h2><label>Your name *<input name="client_name" required></label><div class="form-row"><label>Phone *<input name="phone" required></label><label>Email<input name="email" type="email"></label></div><label>Message *<textarea name="message" rows="5" required></textarea></label><input type="hidden" name="product_title" value="General enquiry"><button class="button button-primary" type="submit">Send message</button><div data-form-message></div></form>
