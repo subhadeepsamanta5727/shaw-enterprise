@@ -359,7 +359,16 @@
         : '<div class="hero-product-image-empty">Image coming soon</div>';
       return `<article class="hero-slide${index === 0 ? ' active' : ''}" data-hero-slide-panel="${index}" aria-hidden="${index === 0 ? 'false' : 'true'}">
         <div class="container hero-slide-layout">
-          <div class="hero-copy"><h1>${escapeHtml(slide.title)}</h1><a class="button button-primary" href="/products/${encodeURIComponent(slide.slug || slide.id)}">Explore product <span aria-hidden="true">→</span></a></div>
+          <div class="hero-copy">
+            <h1>${escapeHtml(slide.title)}</h1>
+            <div class="hero-actions">
+              <a class="button button-primary" href="/products/${encodeURIComponent(slide.slug || slide.id)}">Explore product <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="hero-slide-tagline">
+              <span class="hero-slide-tagline-icon" aria-hidden="true">★</span>
+              <p class="hero-slide-tagline-text"><strong>Shaw Enterprise</strong> - Manufacturer &amp; Imported of School TLM Product &amp; Office Stationery Product For ( B2B &amp; B2C )</p>
+            </div>
+          </div>
           <div class="hero-media">${media}</div>
         </div>
       </article>`;
