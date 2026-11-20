@@ -172,7 +172,7 @@ if ($resource === 'inquiries' || $resource === 'bulk-inquiries') {
         $ctrl->store();
     } elseif ($method === 'GET') {
         $ctrl->index();
-    } elseif ($method === 'PATCH' && $param && $subAction === 'status') {
+    } elseif (($method === 'PATCH' || $method === 'PUT') && $param) {
         $ctrl->updateStatus((int)$param);
     } elseif ($method === 'DELETE' && $param) {
         $ctrl->destroy((int)$param);

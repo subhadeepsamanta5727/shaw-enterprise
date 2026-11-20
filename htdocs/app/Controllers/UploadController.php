@@ -45,6 +45,19 @@ class UploadController {
             return;
         }
 
+        // SVG Security sanitization: Block embedded scripts and active XML event handlers
+        if ($ext === 'svg') {
+            $svgContent = file_get_contents($file['tmp_name']);
+            if (preg_match('/<script|javascript:|on\w+\s*=|xlink:href\s*=\s*["\']javascript:/i', $svgContent)) {
+                http_response_code(400);
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Disallowed SVG content: script elements and active event handlers are not permitted.'
+                ]);
+                return;
+            }
+        }
+
         // Generate clean unique filename
         $rawName = pathinfo($file['name'], PATHINFO_FILENAME);
         $cleanName = preg_replace('/[^a-zA-Z0-9_-]/', '-', strtolower($rawName));

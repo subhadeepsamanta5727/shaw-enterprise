@@ -57,7 +57,14 @@ function shawAdminRoute(string $resource, string $method, ?string $param): bool
         $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
         $email = trim((string)($input['email'] ?? ''));
         $password = (string)($input['password'] ?? '');
-        if (!hash_equals($expectedEmail, $email) || !hash_equals($expectedPassword, $password)) {
+        $emailMatches = hash_equals($expectedEmail, $email);
+        $passwordMatches = false;
+        if (str_starts_with($expectedPassword, '$2y$') || str_starts_with($expectedPassword, '$argon2')) {
+            $passwordMatches = password_verify($password, $expectedPassword);
+        } else {
+            $passwordMatches = hash_equals($expectedPassword, $password);
+        }
+        if (!$emailMatches || !$passwordMatches) {
             shawAdminJson(['success' => false, 'message' => 'Invalid email or password.'], 401);
         }
 

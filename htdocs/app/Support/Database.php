@@ -36,8 +36,9 @@ class Database {
                 header('Content-Type: application/json');
                 echo json_encode([
                     'success' => false,
-                    'message' => 'MySQL Database Connection Error: ' . $e->getMessage()
+                    'message' => 'Database connection failed. Please ensure the MySQL database is running and credentials are valid.'
                 ]);
+                error_log('MySQL Connection Error: ' . $e->getMessage());
                 exit;
             }
         }

@@ -388,8 +388,8 @@ class ProductController {
             $this->db->prepare("DELETE FROM product_specifications WHERE product_id = ?")->execute([$productId]);
             $stmt = $this->db->prepare("INSERT INTO product_specifications (product_id, spec_key, spec_value) VALUES (?, ?, ?)");
             foreach ($input['specifications'] as $specification) {
-                $key = trim($specification['spec_key'] ?? '');
-                $value = trim($specification['spec_value'] ?? '');
+                $key = trim($specification['spec_key'] ?? $specification['specification_key'] ?? $specification['key'] ?? '');
+                $value = trim($specification['spec_value'] ?? $specification['specification_value'] ?? $specification['value'] ?? '');
                 if ($key !== '' && $value !== '') {
                     $stmt->execute([$productId, $key, $value]);
                 }

@@ -338,6 +338,8 @@
       }
       startAutoplay();
     });
+    carousel.addEventListener('pointerenter', () => { paused = true; stopAutoplay(); });
+    carousel.addEventListener('pointerleave', () => { paused = false; startAutoplay(); });
     carousel.addEventListener('focusin', () => { paused = true; stopAutoplay(); });
     carousel.addEventListener('focusout', (event) => {
       if (!carousel.contains(event.relatedTarget)) {
@@ -409,7 +411,7 @@
       ${item.variants?.length ? `<h3>Choose size</h3><div class="variant-list">${item.variants.map((variant, index) => `<button type="button" class="variant-option ${index === 0 ? 'active' : ''}" data-variant="${index}">${escapeHtml(variant.size_label || variant.label || 'Standard')}</button>`).join('')}</div>` : ''}
       <div class="hero-actions"><button class="button button-dark" type="button" data-product-quote>Product Inquiry</button></div>
       ${item.full_description ? `<div class="product-description">${safeRichText(item.full_description)}</div>` : ''}
-      ${item.specifications?.length ? `<div class="panel"><h3>Specifications</h3>${item.specifications.map((spec) => `<p><strong>${escapeHtml(spec.specification_key || spec.key || '')}:</strong> ${escapeHtml(spec.specification_value || spec.value || '')}</p>`).join('')}</div>` : ''}
+      ${item.specifications?.length ? `<div class="panel"><h3>Specifications</h3>${item.specifications.map((spec) => `<p><strong>${escapeHtml(spec.specification_key || spec.spec_key || spec.key || '')}:</strong> ${escapeHtml(spec.specification_value || spec.spec_value || spec.value || '')}</p>`).join('')}</div>` : ''}
       </div></div></section><section class="section section-tight"><div class="container"><h2>You may also like</h2><div class="grid">${(item.relatedProducts || state.products.filter((p) => p.id !== item.id).slice(0, 4)).map(productCard).join('')}</div></div></section>`);
   }
 
@@ -612,6 +614,22 @@
       data.variant_details = `${data.width} ft × ${data.height} ft (${area.toFixed(1)} sq. ft)`;
     }
 
+    // Persist inquiry to MySQL backend so it appears in Admin CMS
+    request('/inquiries', {
+      method: 'POST',
+      body: {
+        client_name: data.client_name || '',
+        organization_name: data.organization_name || '',
+        email: data.email || '',
+        phone: data.phone || '',
+        product_title: data.product_title || 'Institutional Quotation',
+        variant_details: data.variant_details || '',
+        quantity: Math.max(1, Number(data.quantity) || 1),
+        delivery_city: data.delivery_city || 'Kolkata',
+        message: data.message || '',
+      },
+    }).catch((err) => console.warn('Could not record inquiry in MySQL:', err));
+
     const phone = String(state.settings.whatsapp || state.settings.phone || '').replace(/\D/g, '');
     if (phone.length < 8) {
       toast('WhatsApp contact number is not configured. Please contact us by phone or email.', true);
@@ -709,6 +727,13 @@
       booleans: ['is_active'],
       images: ['image'],
     },
+    inquiries: {
+      path: '/inquiries',
+      title: 'Inquiries',
+      fields: [],
+      columns: ['id', 'created_at', 'client_name', 'phone', 'organization_name', 'product_title', 'quantity', 'delivery_city', 'status'],
+      booleans: [],
+    },
     clients: {
       path: '/clients',
       title: 'Clients',
@@ -764,7 +789,7 @@
     }
     const tabs = ['overview', ...Object.keys(adminResources), 'site-settings', 'page-settings'];
     const tabLabels = { 'site-settings': 'Site settings', 'page-settings': 'Page settings' };
-    const tabIcons = { overview: '⌂', products: '▦', categories: '◫', clients: '♧', blogs: '▤', testimonials: '☆', 'site-settings': '⚙', 'page-settings': '▧' };
+    const tabIcons = { overview: '⌂', products: '▦', categories: '◫', inquiries: '✉', clients: '♧', blogs: '▤', testimonials: '☆', 'site-settings': '⚙', 'page-settings': '▧' };
     setContent(`<div class="admin-shell"><aside class="admin-nav"><a class="admin-nav-brand" href="/admin"><span>SE</span><strong>Shaw Enterprise</strong><small>Content management</small></a><div class="admin-nav-label">Workspace</div>${tabs.map((tab) => `<button type="button" data-admin-tab="${tab}" class="${state.adminTab === tab ? 'active' : ''}"><span class="admin-nav-icon" aria-hidden="true">${tabIcons[tab] || '•'}</span>${tabLabels[tab] || `${tab[0].toUpperCase()}${tab.slice(1)}`}</button>`).join('')}<div class="admin-nav-spacer"></div><button type="button" data-admin-logout><span class="admin-nav-icon" aria-hidden="true">↪</span>Sign out</button></aside><section class="admin-main"><header class="admin-topbar"><span><span class="admin-status-dot"></span>Management console</span><button type="button" class="admin-menu-toggle" data-admin-menu-toggle aria-label="Open admin menu" aria-expanded="false"><span aria-hidden="true">⋮</span></button><a href="/" target="_blank" rel="noreferrer">View website <span aria-hidden="true">↗</span></a></header><div class="admin-content" data-admin-view></div></section></div>`);
     loadAdminTab();
   }
@@ -777,20 +802,22 @@
     if (activeTab === 'overview') {
       view.innerHTML = '<div class="loading-state"><span class="spinner"></span>Loading dashboard…</div>';
       try {
-        const [products, categories, clients, blogs] = await Promise.all([
+        const [products, categories, clients, blogs, inquiries] = await Promise.all([
           request('/products?limit=100&admin=1'),
           request('/categories?admin=1'),
           request('/clients'),
           request('/blogs?admin=1'),
+          request('/inquiries').catch(() => ({ count: 0, data: [] })),
         ]);
         if (loadSequence !== state.adminLoadSequence) return;
         const stats = [
           ['products', 'Products', products.count ?? (products.data || []).length, '▦'],
           ['categories', 'Categories', categories.count ?? (categories.data || []).length, '◫'],
+          ['inquiries', 'Inquiries', inquiries.count ?? (inquiries.data || []).length, '✉'],
           ['clients', 'Clients', clients.count ?? (clients.data || []).length, '♧'],
           ['blogs', 'Blogs', blogs.count ?? (blogs.data || []).length, '▤'],
         ];
-        view.innerHTML = `<section class="admin-dashboard"><div class="admin-dashboard-heading"><span class="eyebrow">Workspace summary</span><h1>Dashboard overview</h1><p>Manage your catalogue and keep your storefront content up to date.</p></div><div class="stats-row">${stats.map(([tab, label, count, icon]) => `<button type="button" class="stat admin-stat" data-admin-shortcut="${tab}"><span class="admin-stat-icon" aria-hidden="true">${icon}</span><span class="admin-stat-copy"><strong>${escapeHtml(count)}</strong><span>${label}</span></span><span class="admin-stat-arrow" aria-hidden="true">↗</span></button>`).join('')}</div><section class="admin-quick-actions"><div class="admin-section-heading"><div><span class="eyebrow">Shortcuts</span><h2>Quick actions</h2><p>Jump directly to the content you want to manage.</p></div></div><div class="admin-shortcut-grid"><button type="button" data-admin-shortcut-create="products"><span class="admin-shortcut-icon">＋</span><span><strong>Add a product</strong><small>Create a new catalogue listing</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="categories"><span class="admin-shortcut-icon">◫</span><span><strong>Manage categories</strong><small>Organize your product range</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut-create="blogs"><span class="admin-shortcut-icon">＋</span><span><strong>Write a blog</strong><small>Publish a new article</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="clients"><span class="admin-shortcut-icon">♧</span><span><strong>Manage clients</strong><small>Update your client showcase</small></span><span class="admin-stat-arrow">→</span></button></div></section></section>`;
+        view.innerHTML = `<section class="admin-dashboard"><div class="admin-dashboard-heading"><span class="eyebrow">Workspace summary</span><h1>Dashboard overview</h1><p>Manage your catalogue and keep your storefront content up to date.</p></div><div class="stats-row">${stats.map(([tab, label, count, icon]) => `<button type="button" class="stat admin-stat" data-admin-shortcut="${tab}"><span class="admin-stat-icon" aria-hidden="true">${icon}</span><span class="admin-stat-copy"><strong>${escapeHtml(count)}</strong><span>${label}</span></span><span class="admin-stat-arrow" aria-hidden="true">↗</span></button>`).join('')}</div><section class="admin-quick-actions"><div class="admin-section-heading"><div><span class="eyebrow">Shortcuts</span><h2>Quick actions</h2><p>Jump directly to the content you want to manage.</p></div></div><div class="admin-shortcut-grid"><button type="button" data-admin-shortcut-create="products"><span class="admin-shortcut-icon">＋</span><span><strong>Add a product</strong><small>Create a new catalogue listing</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="categories"><span class="admin-shortcut-icon">◫</span><span><strong>Manage categories</strong><small>Organize your product range</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="inquiries"><span class="admin-shortcut-icon">✉</span><span><strong>View inquiries</strong><small>Customer quote requests</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut-create="blogs"><span class="admin-shortcut-icon">＋</span><span><strong>Write a blog</strong><small>Publish a new article</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="clients"><span class="admin-shortcut-icon">♧</span><span><strong>Manage clients</strong><small>Update your client showcase</small></span><span class="admin-stat-arrow">→</span></button></div></section></section>`;
       } catch (error) {
         if (loadSequence === state.adminLoadSequence) view.innerHTML = `<div class="notice notice-error">${escapeHtml(error.message)}</div>`;
       }
@@ -935,10 +962,16 @@
           productSerials[index] = serial;
         });
       }
+      if (activeTab === 'inquiries') {
+        state.inquiries = rows;
+      }
       view.querySelector('[data-admin-table]').innerHTML = rows.length ? `<div class="admin-table-panel"><div class="admin-table-heading"><div><strong>${escapeHtml(resource.title)}</strong><span>${rows.length} ${rows.length === 1 ? 'record' : 'records'}</span></div></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr>${showSerial ? '<th class="serial-column">S.No.</th>' : ''}${columns.map((key) => `<th>${escapeHtml(key.replaceAll('_', ' '))}</th>`).join('')}<th>Actions</th></tr></thead><tbody>${rows.map((row, index) => {
         const rowClass = productCategoryStarts.has(index) ? ' class="category-start"' : '';
         const cells = columns.map((key) => {
-          const value = row[key];
+          let value = row[key];
+          if (key === 'created_at' && value) {
+            value = new Date(value).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+          }
           const display = key === 'show_pricing'
             ? (isChecked(row.show_price) && isChecked(row.show_mrp) ? 'Yes' : 'No')
             : resource.booleans?.includes(key) || typeof value === 'boolean'
@@ -946,7 +979,9 @@
             : (value ?? '');
           return `<td>${escapeHtml(typeof display === 'object' ? JSON.stringify(display) : display)}</td>`;
         }).join('');
-        const actions = `${resource.fields.length ? `<button type="button" data-admin-edit="${escapeHtml(row.id)}">Edit</button>` : ''}<button type="button" class="danger" data-admin-delete="${escapeHtml(row.id)}">Delete</button>`;
+        const actions = activeTab === 'inquiries'
+          ? `<button type="button" data-inquiry-view="${escapeHtml(row.id)}">View</button><button type="button" data-inquiry-status="${escapeHtml(row.id)}" data-current-status="${escapeHtml(row.status || 'Pending')}">${row.status === 'Contacted' ? 'Mark Closed' : row.status === 'Closed' ? 'Reopen' : 'Mark Contacted'}</button><button type="button" class="danger" data-admin-delete="${escapeHtml(row.id)}">Delete</button>`
+          : `${resource.fields.length ? `<button type="button" data-admin-edit="${escapeHtml(row.id)}">Edit</button>` : ''}<button type="button" class="danger" data-admin-delete="${escapeHtml(row.id)}">Delete</button>`;
         const serial = activeTab === 'products' ? productSerials[index] : index + 1;
         return `<tr${rowClass} data-row-id="${escapeHtml(row.id)}">${showSerial ? `<td class="serial-column">${serial}</td>` : ''}${cells}<td class="admin-actions">${actions}</td></tr>`;
       }).join('')}</tbody></table></div>` : '<div class="empty-state">No records found.</div>';
@@ -1054,6 +1089,25 @@
       if (event.target.closest('[data-admin-create]')) openAdminEditor();
       const edit = event.target.closest('[data-admin-edit]');
       if (edit) openAdminEditor(edit.dataset.adminEdit);
+      const viewInquiry = event.target.closest('[data-inquiry-view]');
+      if (viewInquiry) {
+        const inq = (state.inquiries || []).find((i) => String(i.id) === String(viewInquiry.dataset.inquiryView));
+        if (inq) openInquiryDetail(inq);
+      }
+      const statusBtn = event.target.closest('[data-inquiry-status]');
+      if (statusBtn) {
+        const id = statusBtn.dataset.inquiryStatus;
+        const current = statusBtn.dataset.currentStatus;
+        const next = current === 'Pending' ? 'Contacted' : current === 'Contacted' ? 'Closed' : 'Pending';
+        try {
+          await request(`/inquiries/${encodeURIComponent(id)}`, { method: 'PATCH', body: { status: next } });
+          toast(`Inquiry #${id} status updated to ${next}.`);
+          loadAdminTab();
+          document.querySelector('[data-dialog="inquiry-detail"]')?.close();
+        } catch (err) {
+          toast(err.message, true);
+        }
+      }
       const del = event.target.closest('[data-admin-delete]');
       if (del) deleteAdminRecord(del.dataset.adminDelete);
       if (event.target.closest('[data-save-settings]')) saveSettings();
@@ -1092,6 +1146,33 @@
       }
     });
     document.querySelector('[data-admin-editor]').addEventListener('submit', saveAdminRecord);
+  }
+
+  function openInquiryDetail(inq) {
+    const dialog = document.querySelector('[data-dialog="inquiry-detail"]');
+    if (!dialog) return;
+    const cleanPhone = String(inq.phone || '').replace(/\D/g, '');
+    dialog.querySelector('[data-inquiry-detail-title]').textContent = `Inquiry #${inq.id} — ${inq.client_name}`;
+    const formattedDate = inq.created_at ? new Date(inq.created_at).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
+    dialog.querySelector('[data-inquiry-detail-content]').innerHTML = `
+      <p style="margin-bottom:6px;"><strong>Customer Name:</strong> ${escapeHtml(inq.client_name)}</p>
+      ${inq.organization_name ? `<p style="margin-bottom:6px;"><strong>School / Company:</strong> ${escapeHtml(inq.organization_name)}</p>` : ''}
+      <p style="margin-bottom:6px;"><strong>Phone:</strong> <a href="tel:${escapeHtml(cleanPhone)}">${escapeHtml(inq.phone)}</a> &nbsp;|&nbsp; <a href="https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hello ${inq.client_name}, regarding your quotation request for ${inq.product_title || 'Shaw Enterprise products'}:`)}" target="_blank" rel="noreferrer" class="button button-small button-dark" style="display:inline-block;padding:2px 8px;font-size:12px;">Chat on WhatsApp ↗</a></p>
+      ${inq.email ? `<p style="margin-bottom:6px;"><strong>Email:</strong> <a href="mailto:${escapeHtml(inq.email)}">${escapeHtml(inq.email)}</a></p>` : ''}
+      <p style="margin-bottom:6px;"><strong>Product / Requirement:</strong> ${escapeHtml(inq.product_title || 'General Enquiry')}</p>
+      ${inq.variant_details ? `<p style="margin-bottom:6px;"><strong>Size / Details:</strong> ${escapeHtml(inq.variant_details)}</p>` : ''}
+      <p style="margin-bottom:6px;"><strong>Quantity:</strong> ${escapeHtml(inq.quantity || 1)}</p>
+      <p style="margin-bottom:6px;"><strong>Delivery City:</strong> ${escapeHtml(inq.delivery_city || 'Kolkata')}</p>
+      <p style="margin-bottom:6px;"><strong>Status:</strong> <span class="badge">${escapeHtml(inq.status || 'Pending')}</span></p>
+      ${formattedDate ? `<p class="muted" style="margin-bottom:6px;"><small>Received on: ${escapeHtml(formattedDate)}</small></p>` : ''}
+      ${inq.message ? `<div style="margin-top:12px;padding:12px;background:var(--color-bg-subtle, #f8fafc);border-radius:6px;border:1px solid var(--color-border, #e2e8f0);"><strong>Customer Message:</strong><p style="white-space:pre-wrap;margin-top:4px;">${escapeHtml(inq.message)}</p></div>` : ''}
+      <div style="margin-top:16px;display:flex;gap:8px;">
+        <button class="button button-primary" type="button" data-inquiry-status="${escapeHtml(inq.id)}" data-current-status="${escapeHtml(inq.status || 'Pending')}">${inq.status === 'Contacted' ? 'Mark Closed' : inq.status === 'Closed' ? 'Reopen' : 'Mark Contacted'}</button>
+        <button class="button button-outline" type="button" data-close-dialog>Close</button>
+      </div>
+    `;
+    dialog.querySelectorAll('[data-close-dialog]').forEach((btn) => btn.addEventListener('click', () => dialog.close()));
+    dialog.showModal();
   }
 
   function openGalleryItem(item) {
@@ -1180,8 +1261,13 @@
     const button = form.querySelector('[type="submit"]');
     for (const key of ['images', 'variants', 'specifications']) {
       if (!Object.prototype.hasOwnProperty.call(values, key)) continue;
-      try { values[key] = JSON.parse(values[key] || '[]'); }
-      catch { toast(`${key} must be valid JSON.`, true); return; }
+      const raw = String(values[key] || '').trim();
+      if (!raw) {
+        values[key] = [];
+        continue;
+      }
+      try { values[key] = JSON.parse(raw); }
+      catch { toast(`${key} must be valid JSON or left blank.`, true); return; }
     }
     for (const key of resource.booleans || []) {
       values[key] = form.elements[key]?.checked ? 1 : 0;

@@ -107,6 +107,11 @@
         <h2 data-admin-editor-title>Add record</h2>
         <form class="form-stack" data-admin-editor></form>
     </dialog>
+    <dialog class="site-dialog" data-dialog="inquiry-detail">
+        <button class="dialog-close" type="button" data-close-dialog aria-label="Close">×</button>
+        <h2 data-inquiry-detail-title>Inquiry Details</h2>
+        <div data-inquiry-detail-content class="panel"></div>
+    </dialog>
     <dialog class="site-dialog gallery-dialog" data-dialog="gallery">
         <button class="dialog-close" type="button" data-close-dialog aria-label="Close">×</button>
         <img data-gallery-preview alt="">

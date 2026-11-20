@@ -1,9 +1,12 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    RewriteRule ^storage(/|$) index.php [QSA,L]
-    RewriteRule ^(app|config|database|storage)(/|$) - [F,L]
+    # Prevent direct access to sensitive system directories and files
     RewriteRule (^|/)\. - [F,L]
+    RewriteRule ^(app|config|database)(/.*)?$ - [F,L]
+    RewriteRule \.(env|sql|json|lock|md|log|sh|bat)$ - [F,L]
+
+    RewriteRule ^storage(/|$) index.php [QSA,L]
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
