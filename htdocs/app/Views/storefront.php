@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0f172a">
-    <meta name="description" content="Shaw Enterprise — manufacturer and wholesaler of writing boards, display systems, educational accessories and office furniture in Kolkata.">
-    <title><?= $title ?> | Shaw Enterprise</title>
+    <meta name="description" content="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> — manufacturer and wholesaler of writing boards, display systems, educational accessories and office furniture in Kolkata.">
+    <title><?= $title ?> | <?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="icon" data-favicon>
     <link rel="stylesheet" href="<?= $cssPath ?>">
     <script defer src="<?= $jsPath ?>?v=<?= filemtime(__DIR__ . '/../../assets/js/app.js') ?>"></script>
@@ -17,14 +17,16 @@
             <div class="announcement-inner">
                 <span data-announcement-tagline>Low Price | Best Quality | Premium Product</span>
                 <div class="announcement-contact">
-                    <a data-announcement-phone href="tel:+919933944007">09933944007</a>
-                    <a data-announcement-phone-secondary href="tel:+917003779114">07003779114</a>
-                    <a data-announcement-email href="mailto:shaw.entt.edu@gmail.com">shaw.entt.edu@gmail.com</a>
+                    <a data-announcement-phone href="tel:<?= htmlspecialchars($footerPhoneHref, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($footerPhone, ENT_QUOTES, 'UTF-8') ?></a>
+                    <?php if (!empty($footerPhoneSecondary)): ?>
+                    <a data-announcement-phone-secondary href="tel:<?= htmlspecialchars($footerPhoneSecondaryHref, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($footerPhoneSecondary, ENT_QUOTES, 'UTF-8') ?></a>
+                    <?php endif; ?>
+                    <a data-announcement-email href="mailto:<?= htmlspecialchars($footerEmail, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($footerEmail, ENT_QUOTES, 'UTF-8') ?></a>
                 </div>
             </div>
         </div>
         <header class="site-header">
-            <a class="brand" href="/" aria-label="Shaw Enterprise home">
+            <a class="brand" href="/" aria-label="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> home">
                 <span class="brand-mark">SE</span>
             </a>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation" data-menu-toggle>☰</button>
@@ -50,13 +52,45 @@
     <?php if (!$isAdminPage): ?>
         <footer class="site-footer">
             <div class="footer-grid">
-                <div><a class="brand brand-footer" href="/" aria-label="Shaw Enterprise home"><span class="brand-mark">SE</span></a><p>Quality writing boards, display systems and educational equipment, made in Kolkata.</p><div class="footer-social-links" data-footer-social-links aria-label="Social media"></div></div>
-                <div><h3>Explore</h3><a href="/products">Products</a><a href="/about">About us</a><a href="/clients">Our clients</a><a href="/blogs">Blog & guides</a><a href="/contact">Contact</a><button type="button" class="footer-action" data-open-custom>Custom size request</button><button type="button" class="footer-action" data-open-brochure>Download catalogue</button></div>
-                <div class="footer-contact"><h3>Contact us</h3><strong data-site-name>Shaw Enterprise</strong><p>30, Beniatola Lane (College Street), Kolkata – 700009, West Bengal, India</p><p><strong>Mr Indrajit Shaw</strong><br><span>Proprietor</span></p><p><strong>Phone:</strong><br><a href="tel:+919933944007">09933944007</a><br><a href="tel:+917003779114">07003779114</a></p><p><strong>Email:</strong><br><a href="mailto:shaw.entt.edu@gmail.com">shaw.entt.edu@gmail.com</a></p></div>
+                <div>
+                    <a class="brand brand-footer" href="/" aria-label="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> home"><span class="brand-mark">SE</span></a>
+                    <p data-footer-tagline><?= htmlspecialchars($footerTagline, ENT_QUOTES, 'UTF-8') ?></p>
+                    <div class="footer-social-links" data-footer-social-links aria-label="Social media"></div>
+                </div>
+                <div>
+                    <h3>Explore</h3>
+                    <a href="/products">Products</a>
+                    <a href="/about">About us</a>
+                    <a href="/clients">Our clients</a>
+                    <a href="/blogs">Blog & guides</a>
+                    <a href="/contact">Contact</a>
+                    <button type="button" class="footer-action" data-open-custom>Custom size request</button>
+                    <button type="button" class="footer-action" data-open-brochure>Download catalogue</button>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact us</h3>
+                    <strong data-site-name><?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?></strong>
+                    <p data-footer-address><?= htmlspecialchars($footerAddress, ENT_QUOTES, 'UTF-8') ?></p>
+                    <p data-footer-proprietor <?= empty($footerProprietor) ? 'hidden' : '' ?>><strong><?= htmlspecialchars($footerProprietor, ENT_QUOTES, 'UTF-8') ?></strong><br><span>Proprietor</span></p>
+                    <p data-footer-phones>
+                        <strong>Phone:</strong><br>
+                        <a data-footer-phone href="tel:<?= htmlspecialchars($footerPhoneHref, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($footerPhone, ENT_QUOTES, 'UTF-8') ?></a>
+                        <?php if (!empty($footerPhoneSecondary)): ?>
+                        <br><a data-footer-phone-secondary href="tel:<?= htmlspecialchars($footerPhoneSecondaryHref, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($footerPhoneSecondary, ENT_QUOTES, 'UTF-8') ?></a>
+                        <?php endif; ?>
+                    </p>
+                    <p data-footer-email-block>
+                        <strong>Email:</strong><br>
+                        <a data-footer-email href="mailto:<?= htmlspecialchars($footerEmail, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($footerEmail, ENT_QUOTES, 'UTF-8') ?></a>
+                    </p>
+                </div>
             </div>
-            <div class="footer-bottom"><span>© <span data-year></span> Shaw Enterprise. All rights reserved. | Developed by <a href="https://preconetindia.com/" target="_blank" rel="noopener noreferrer">Preconet Global Solutions Pvt Ltd</a></span><a href="/admin/login">Admin</a></div>
+            <div class="footer-bottom">
+                <span>© <span data-year><?= date('Y') ?></span> <span data-site-name><?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?></span>. All rights reserved. | Developed by <a href="https://preconetindia.com/" target="_blank" rel="noopener noreferrer">Preconet Global Solutions Pvt Ltd</a></span>
+                <a href="/admin/login">Admin</a>
+            </div>
         </footer>
-        <a class="floating-whatsapp" data-floating-whatsapp href="https://wa.me/919933944007" target="_blank" rel="noopener noreferrer" aria-label="Need help? Chat with Shaw Enterprise on WhatsApp" title="Chat with us on WhatsApp">
+        <a class="floating-whatsapp" data-floating-whatsapp href="https://wa.me/<?= htmlspecialchars($footerWhatsappDigits, ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" aria-label="Need help? Chat with <?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> on WhatsApp" title="Chat with us on WhatsApp">
             <span class="floating-whatsapp-label">Need Help? Chat with us</span>
             <span class="floating-whatsapp-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C8.87 3 3.04 8.82 3.04 15.98c0 2.29.6 4.52 1.74 6.5L3 29l6.7-1.75a13 13 0 0 0 6.33 1.62h.01c7.16 0 12.99-5.82 13-12.98A12.91 12.91 0 0 0 25.24 6.7 12.9 12.9 0 0 0 16.04 3Zm0 23.67h-.01a10.76 10.76 0 0 1-5.48-1.5l-.39-.23-3.98 1.04 1.06-3.88-.25-.4a10.75 10.75 0 0 1-1.65-5.72c0-5.92 4.82-10.74 10.76-10.74 2.87 0 5.57 1.12 7.6 3.15a10.67 10.67 0 0 1 3.14 7.6c0 5.92-4.82 10.74-10.8 10.74Zm5.9-8.04c-.32-.16-1.9-.94-2.2-1.05-.3-.1-.51-.16-.73.16-.21.32-.84 1.05-1.03 1.27-.19.21-.38.24-.7.08-.32-.16-1.35-.5-2.57-1.58-.95-.84-1.59-1.88-1.78-2.2-.19-.31-.02-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.22 0-.57.08-.87.4-.3.32-1.14 1.1-1.14 2.68s1.17 3.1 1.33 3.31c.16.21 2.3 3.52 5.58 4.93.78.34 1.39.55 1.86.7.78.25 1.49.22 2.05.13.63-.1 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.53-.08-.13-.3-.21-.62-.37Z"/></svg></span>
         </a>

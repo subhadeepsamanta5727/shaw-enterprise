@@ -52,6 +52,14 @@
     return url.startsWith('/') ? url : `/uploads/${url.replace(/^uploads\//, '')}`;
   }
 
+  function siteLogoUrl(settings) {
+    const configuredLogo = settings.logo_url || settings.site_logo || '';
+    const placeholderLogo = /whatsapp-image-2026-11-19-at-7-05-04-pm-1795161854-1284/i.test(configuredLogo);
+    return !configuredLogo || placeholderLogo
+      ? '/uploads/l0go-removebg-preview-1793182225716-5106.png'
+      : configuredLogo;
+  }
+
   function toast(message, error = false) {
     const region = document.querySelector('[data-toast-region]');
     const item = document.createElement('div');
@@ -185,7 +193,7 @@
     }
     document.querySelectorAll('[data-site-name]').forEach((el) => { el.textContent = settings.site_name || 'Shaw Enterprise'; });
     document.querySelectorAll('.brand-mark').forEach((el) => {
-      const logoUrl = settings.logo_url || settings.site_logo;
+      const logoUrl = siteLogoUrl(settings);
       el.classList.toggle('has-logo', Boolean(logoUrl));
       el.innerHTML = logoUrl
         ? `<img src="${escapeHtml(imageUrl(logoUrl))}" alt="${escapeHtml(settings.site_name || 'Shaw Enterprise')}" class="site-logo-img" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.textContent='SE';">`
@@ -234,6 +242,66 @@
         favicon.removeAttribute('type');
       }
     }
+
+    const footerTagline = document.querySelector('[data-footer-tagline]');
+    if (footerTagline) {
+      footerTagline.textContent = settings.tagline || 'Manufacturer, Wholesaler & Retailer of Writing Boards, Display Systems & Educational Accessories';
+    }
+
+    const footerAddress = document.querySelector('[data-footer-address]');
+    if (footerAddress) {
+      const address = settings.registered_office_address || settings.address || '';
+      if (address) footerAddress.textContent = address;
+    }
+
+    const footerProprietor = document.querySelector('[data-footer-proprietor]');
+    if (footerProprietor) {
+      const proprietor = String(settings.proprietor || '').trim();
+      if (proprietor) {
+        footerProprietor.innerHTML = `<strong>${escapeHtml(proprietor)}</strong><br><span>Proprietor</span>`;
+        footerProprietor.hidden = false;
+      } else {
+        footerProprietor.hidden = true;
+      }
+    }
+
+    const footerPhone = document.querySelector('[data-footer-phone]');
+    if (footerPhone) {
+      const phone = String(settings.phone || '+91 9933944007').trim();
+      footerPhone.textContent = phone;
+      footerPhone.href = `tel:${phone.replace(/[^\d+]/g, '')}`;
+    }
+
+    const footerSecondaryPhone = document.querySelector('[data-footer-phone-secondary]');
+    const secondaryPhone = String(settings.phone_secondary || '').trim();
+    if (footerSecondaryPhone) {
+      if (secondaryPhone) {
+        footerSecondaryPhone.textContent = secondaryPhone;
+        footerSecondaryPhone.href = `tel:${secondaryPhone.replace(/[^\d+]/g, '')}`;
+        footerSecondaryPhone.hidden = false;
+      } else {
+        footerSecondaryPhone.hidden = true;
+      }
+    } else if (secondaryPhone) {
+      const phonesBlock = document.querySelector('[data-footer-phones]');
+      if (phonesBlock && !phonesBlock.querySelector('[data-footer-phone-secondary]')) {
+        const br = document.createElement('br');
+        const a = document.createElement('a');
+        a.setAttribute('data-footer-phone-secondary', '');
+        a.href = `tel:${secondaryPhone.replace(/[^\d+]/g, '')}`;
+        a.textContent = secondaryPhone;
+        phonesBlock.appendChild(br);
+        phonesBlock.appendChild(a);
+      }
+    }
+
+    const footerEmail = document.querySelector('[data-footer-email]');
+    if (footerEmail) {
+      const email = String(settings.email || 'shaw.entt.edu@gmail.com').trim();
+      footerEmail.textContent = email;
+      footerEmail.href = `mailto:${email}`;
+    }
+
     renderFooterSocials(settings.social_links || {});
   }
 
@@ -242,10 +310,16 @@
       facebook: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8h3.4Z"/></svg>',
       instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="social-icon-dot" cx="17.6" cy="6.8" r="1"/></svg>',
       twitter: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 5.9a8 8 0 0 1-2.4.7 4.2 4.2 0 0 0 1.8-2.3 8.3 8.3 0 0 1-2.7 1 4.1 4.1 0 0 0-7 3.8 11.7 11.7 0 0 1-8.5-4.3 4.1 4.1 0 0 0 1.3 5.5 4 4 0 0 1-1.9-.5v.1a4.1 4.1 0 0 0 3.3 4 4 4 0 0 1-1.8.1 4.1 4.1 0 0 0 3.8 2.9A8.3 8.3 0 0 1 2 18.6a11.7 11.7 0 0 0 17.9-9.9v-.5A8.4 8.4 0 0 0 22 5.9Z"/></svg>',
+      youtube: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.3-1.9.5-3.8.5-5.8 0-2-.2-3.9-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>',
+      linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0-.02-3.28 1.64 1.64 0 0 0 .02 3.28M5.07 18.5h2.79v-8.37H5.07v8.37Z"/></svg>',
+      whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.92 0-2.65-1.03-5.14-2.9-7.01A9.81 9.81 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.25-4.38c0-4.54 3.7-8.24 8.25-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.4-.12-.57.13-.17.25-.65.81-.8 1-.15.16-.3.18-.55.06-.25-.13-1.04-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.3.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.57-1.37-.78-1.88-.2-.49-.41-.42-.57-.43h-.49c-.17 0-.44.06-.67.31-.23.25-.89.87-.89 2.12s.91 2.46 1.04 2.62c.12.17 1.79 2.74 4.34 3.84.61.26 1.08.42 1.45.54.61.19 1.16.17 1.6.1.49-.08 1.48-.61 1.69-1.2.21-.59.21-1.1.15-1.2-.06-.1-.23-.16-.48-.28Z"/></svg>',
     };
     const socials = document.querySelector('[data-footer-social-links]');
     if (!socials) return;
-    socials.innerHTML = Object.entries(icons).map(([name, icon]) => {
+    const defaultKeys = ['facebook', 'instagram', 'twitter'];
+    const keysToShow = Object.keys(icons).filter((key) => defaultKeys.includes(key) || Boolean(socialLinks[key]));
+    socials.innerHTML = keysToShow.map((name) => {
+      const icon = icons[name];
       const url = String(socialLinks[name] || '').trim();
       let safeUrl = '';
       try {
@@ -254,10 +328,11 @@
       } catch {
         safeUrl = '';
       }
-      const contents = `${icon}<span class="visually-hidden">${name}</span>`;
+      const label = name.charAt(0).toUpperCase() + name.slice(1);
+      const contents = `${icon}<span class="visually-hidden">${escapeHtml(label)}</span>`;
       return safeUrl
-        ? `<a class="footer-social-link" href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${name}">${contents}</a>`
-        : `<span class="footer-social-link unavailable" aria-label="${name} profile not configured" title="${name} profile not configured">${contents}</span>`;
+        ? `<a class="footer-social-link" href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(label)}">${contents}</a>`
+        : `<span class="footer-social-link unavailable" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)} profile not configured">${contents}</span>`;
     }).join('');
   }
 

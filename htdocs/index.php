@@ -62,4 +62,59 @@ $title = htmlspecialchars($title, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 $encodedSlug = htmlspecialchars($slug, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 $cssPath = '/assets/css/app.css';
 $jsPath = '/assets/js/app.js';
+
+$footerSiteName = 'Shaw Enterprise';
+$footerTagline = 'Manufacturer, Wholesaler & Retailer of Writing Boards, Display Systems & Educational Accessories';
+$footerAddress = '44/1B, Beniatola Lane (College Street), Kolkata – 700009, W.B';
+$footerProprietor = 'Mr. Indrajit Shaw';
+$footerPhone = '+91 9933944007';
+$footerPhoneSecondary = '+91 7003779114';
+$footerEmail = 'shaw.entt.edu@gmail.com';
+$footerWhatsapp = '+91 9933944007';
+
+try {
+    require_once __DIR__ . '/app/Support/Database.php';
+    $db = Database::getConnection();
+    $stmt = $db->query("SELECT setting_value FROM settings WHERE setting_key = 'general' LIMIT 1");
+    $rawSettings = $stmt ? $stmt->fetchColumn() : null;
+    if ($rawSettings) {
+        $settingsData = json_decode((string)$rawSettings, true);
+        if (is_array($settingsData)) {
+            if (!empty($settingsData['site_name'])) {
+                $footerSiteName = trim((string)$settingsData['site_name']);
+            }
+            if (!empty($settingsData['tagline'])) {
+                $footerTagline = trim((string)$settingsData['tagline']);
+            }
+            $addr = $settingsData['registered_office_address'] ?? $settingsData['address'] ?? '';
+            if (!empty($addr)) {
+                $footerAddress = trim((string)$addr);
+            }
+            if (isset($settingsData['proprietor'])) {
+                $footerProprietor = trim((string)$settingsData['proprietor']);
+            }
+            if (!empty($settingsData['phone'])) {
+                $footerPhone = trim((string)$settingsData['phone']);
+            }
+            if (isset($settingsData['phone_secondary'])) {
+                $footerPhoneSecondary = trim((string)$settingsData['phone_secondary']);
+            }
+            if (!empty($settingsData['email'])) {
+                $footerEmail = trim((string)$settingsData['email']);
+            }
+            if (!empty($settingsData['whatsapp'])) {
+                $footerWhatsapp = trim((string)$settingsData['whatsapp']);
+            } elseif (!empty($footerPhone)) {
+                $footerWhatsapp = $footerPhone;
+            }
+        }
+    }
+} catch (\Throwable $e) {
+    // Graceful fallback to default values if database is temporarily unavailable
+}
+
+$footerPhoneHref = preg_replace('/[^\d+]/', '', $footerPhone);
+$footerPhoneSecondaryHref = preg_replace('/[^\d+]/', '', $footerPhoneSecondary);
+$footerWhatsappDigits = preg_replace('/\D/', '', $footerWhatsapp);
+
 require __DIR__ . '/app/Views/storefront.php';
