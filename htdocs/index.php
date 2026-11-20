@@ -145,10 +145,10 @@ $footerPhoneHref = preg_replace('/[^\d+]/', '', $footerPhone);
 $footerPhoneSecondaryHref = preg_replace('/[^\d+]/', '', $footerPhoneSecondary);
 $footerWhatsappDigits = preg_replace('/\D/', '', $footerWhatsapp);
 
-// Dynamic years calculation: count from established date - 1
+// Dynamic experience years: (current year - established year) - 1
 $estYearNum = (int)$establishedYear ?: 2014;
 $currentYear = (int)date('Y');
-$dynamicYears = max(1, $currentYear - ($estYearNum - 1));
+$dynamicYears = max(1, $currentYear - $estYearNum - 1);
 
 // Page Title, Meta Description, OG Image logic
 $ogType = 'website';
