@@ -113,8 +113,11 @@
     return `<article class="card"><a class="card-image" href="/blogs/${encodeURIComponent(blog.slug || blog.id)}"><img loading="lazy" src="${escapeHtml(imageUrl(blog.thumbnail_image))}" alt="${escapeHtml(blog.title)}"></a><div class="card-body"><p>${escapeHtml(blog.author_name || 'Shaw Enterprise')} · ${escapeHtml(blog.created_at || '')}</p><a class="card-title" href="/blogs/${encodeURIComponent(blog.slug || blog.id)}">${escapeHtml(blog.title)}</a><p>${escapeHtml((blog.meta_description || blog.content || '').replace(/<[^>]*>/g, '').slice(0, 130))}</p><a class="button button-outline" href="/blogs/${encodeURIComponent(blog.slug || blog.id)}">Read article</a></div></article>`;
   }
 
-  function pageBanner(title, copy = '') {
-    return `<section class="page-banner"><div class="container"><div class="breadcrumbs"><a href="/">Home</a> / ${escapeHtml(title)}</div><h1>${escapeHtml(title)}</h1>${copy ? `<p class="lead">${escapeHtml(copy)}</p>` : ''}</div></section>`;
+  function pageBanner(title, copy = '', crumbs = null) {
+    const breadcrumbLinks = Array.isArray(crumbs) && crumbs.length
+      ? `<a href="/">Home</a> / ${crumbs.map(([label, url]) => url ? `<a href="${escapeHtml(url)}">${escapeHtml(label)}</a>` : escapeHtml(label)).join(' / ')}`
+      : `<a href="/">Home</a> / ${escapeHtml(title)}`;
+    return `<section class="page-banner"><div class="container"><div class="breadcrumbs">${breadcrumbLinks}</div><h1>${escapeHtml(title)}</h1>${copy ? `<p class="lead">${escapeHtml(copy)}</p>` : ''}</div></section>`;
   }
 
   function setContent(html) {
@@ -504,7 +507,14 @@
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc && item.short_description) metaDesc.setAttribute('content', item.short_description);
     const images = (item.images?.length ? item.images : [item.main_image]).filter(Boolean);
-    setContent(`${pageBanner(item.title)}<section class="section"><div class="container product-detail">
+    const categoryName = item.category_name || 'Writing & Display Boards';
+    const categorySlug = item.category_slug ? `/products?category=${encodeURIComponent(item.category_slug)}` : '/products';
+    const crumbs = [
+      ['Products', '/products'],
+      [categoryName, categorySlug],
+      [item.title, null],
+    ];
+    setContent(`${pageBanner(item.title, '', crumbs)}<section class="section"><div class="container product-detail">
       <div>${images.length ? `<button class="product-image-viewer" type="button" data-open-product-image aria-label="View larger image: ${escapeHtml(item.title)}"><img class="product-main-image" data-main-image src="${escapeHtml(imageUrl(images[0]))}" alt="${escapeHtml(item.title)}"></button><div class="gallery-thumbs">${images.map((src, index) => `<img class="${index === 0 ? 'active' : ''}" data-gallery-image src="${escapeHtml(imageUrl(src))}" alt="${escapeHtml(item.title)} image ${index + 1}">`).join('')}</div>` : '<div class="product-image-empty product-detail-image-empty" role="img" aria-label="No product image available">Image coming soon</div>'}</div>
       <div><span class="eyebrow">${escapeHtml(item.category_name || 'Shaw Enterprise')}</span><h2>${escapeHtml(item.title)}</h2><p class="muted">${escapeHtml(item.sku || '')}</p>
       ${item.short_description ? `<p class="product-short-description">${escapeHtml(item.short_description)}</p>` : ''}
@@ -582,7 +592,11 @@
     const result = await request(`/blogs/${encodeURIComponent(root.dataset.slug)}`);
     const blog = result.data || result;
     document.title = `${blog.title} | Shaw Enterprise Blog`;
-    setContent(`${pageBanner(blog.title, 'By ' + (blog.author_name || 'Shaw Enterprise'))}<article class="section"><div class="container" style="max-width:850px"><img class="product-main-image" style="height:360px" src="${escapeHtml(imageUrl(blog.thumbnail_image))}" alt="${escapeHtml(blog.title)}"><div class="article-content">${safeRichText(blog.content || '').replace(/\n/g, '<br>')}</div>${blog.video_url ? `<p><a class="button button-dark" href="${escapeHtml(blog.video_url)}" target="_blank" rel="noreferrer">Watch video</a></p>` : ''}<a href="/blogs" class="button button-outline">← All articles</a></div></article>`);
+    const crumbs = [
+      ['Blog', '/blogs'],
+      [blog.title, null],
+    ];
+    setContent(`${pageBanner(blog.title, 'By ' + (blog.author_name || 'Shaw Enterprise'), crumbs)}<article class="section"><div class="container" style="max-width:850px"><img class="product-main-image" style="height:360px" src="${escapeHtml(imageUrl(blog.thumbnail_image))}" alt="${escapeHtml(blog.title)}"><div class="article-content">${safeRichText(blog.content || '').replace(/\n/g, '<br>')}</div>${blog.video_url ? `<p><a class="button button-dark" href="${escapeHtml(blog.video_url)}" target="_blank" rel="noreferrer">Watch video</a></p>` : ''}<a href="/blogs" class="button button-outline">← All articles</a></div></article>`);
   }
 
   function renderImages() {
