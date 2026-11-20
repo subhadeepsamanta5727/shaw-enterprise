@@ -166,7 +166,7 @@
     const navProducts = document.querySelector('[data-nav-products]');
     if (!menu || !navProducts || !state.categories.length) return;
     const categories = orderedProductCategories();
-    menu.innerHTML = `<div class="products-menu-categories" aria-label="Product categories">${categories.map((category, index) => `<a class="products-menu-category${index === 0 ? ' active' : ''}" href="/products?category=${encodeURIComponent(category.slug)}" data-menu-category="${escapeHtml(category.id)}" ${index === 0 ? 'aria-current="true"' : ''}><span class="products-menu-serial">${String(index + 1).padStart(2, '0')}</span><span>${escapeHtml(category.name)}</span><span aria-hidden="true">›</span></a>`).join('')}</div><div class="products-menu-preview" data-products-menu-preview></div>`;
+    menu.innerHTML = `<div class="products-menu-categories" aria-label="Product categories"><a class="products-menu-all" href="/products">All products <span aria-hidden="true">→</span></a>${categories.map((category, index) => `<a class="products-menu-category${index === 0 ? ' active' : ''}" href="/products?category=${encodeURIComponent(category.slug)}" data-menu-category="${escapeHtml(category.id)}" ${index === 0 ? 'aria-current="true"' : ''}><span class="products-menu-serial">${String(index + 1).padStart(2, '0')}</span><span>${escapeHtml(category.name)}</span><span aria-hidden="true">›</span></a>`).join('')}</div><div class="products-menu-preview" data-products-menu-preview></div>`;
     renderProductsMenuProducts(categories[0]);
     const selectCategory = (event) => {
       const link = event.target.closest('[data-menu-category]');
@@ -760,17 +760,24 @@
       const nav = document.querySelector('[data-main-nav]');
       const open = nav.classList.toggle('open');
       event.currentTarget.setAttribute('aria-expanded', String(open));
-      if (window.matchMedia('(max-width: 680px)').matches) {
+      if (!open && window.matchMedia('(max-width: 680px)').matches) {
         const productsTrigger = document.querySelector('[data-nav-products] .nav-products-trigger');
         const productsMenu = document.querySelector('[data-products-mega-menu]');
-        productsTrigger?.setAttribute('aria-expanded', String(open));
-        if (productsMenu) productsMenu.hidden = !open;
+        productsTrigger?.setAttribute('aria-expanded', 'false');
+        if (productsMenu) productsMenu.hidden = true;
       }
     });
     const productsNav = document.querySelector('[data-nav-products]');
     const productsTrigger = productsNav?.querySelector('.nav-products-trigger');
     const productsMenu = productsNav?.querySelector('[data-products-mega-menu]');
     if (productsNav && productsTrigger) {
+      productsTrigger.addEventListener('click', (event) => {
+        if (!window.matchMedia('(max-width: 680px)').matches) return;
+        event.preventDefault();
+        const expanded = productsTrigger.getAttribute('aria-expanded') === 'true';
+        productsTrigger.setAttribute('aria-expanded', String(!expanded));
+        if (productsMenu) productsMenu.hidden = expanded;
+      });
       productsNav.addEventListener('pointerenter', () => {
         if (window.matchMedia('(min-width: 681px)').matches) {
           if (productsMenu) productsMenu.hidden = false;
@@ -778,14 +785,17 @@
         }
       });
       productsNav.addEventListener('pointerleave', () => {
+        if (!window.matchMedia('(min-width: 681px)').matches) return;
         if (!productsNav.contains(document.activeElement)) {
-          if (productsMenu && window.matchMedia('(min-width: 681px)').matches) productsMenu.hidden = true;
+          if (productsMenu) productsMenu.hidden = true;
           productsTrigger.setAttribute('aria-expanded', 'false');
         }
       });
       productsNav.addEventListener('focusin', () => {
-        if (productsMenu) productsMenu.hidden = false;
-        productsTrigger.setAttribute('aria-expanded', 'true');
+        if (window.matchMedia('(min-width: 681px)').matches) {
+          if (productsMenu) productsMenu.hidden = false;
+          productsTrigger.setAttribute('aria-expanded', 'true');
+        }
       });
       productsNav.addEventListener('focusout', () => window.setTimeout(() => {
         if (!productsNav.contains(document.activeElement) && !productsNav.matches(':hover')) {
