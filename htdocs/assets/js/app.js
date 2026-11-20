@@ -409,7 +409,7 @@
       ${item.short_description ? `<p class="product-short-description">${escapeHtml(item.short_description)}</p>` : ''}
       ${productPricingMarkup(item, state.selectedVariant, true)}
       ${item.variants?.length ? `<h3>Choose size</h3><div class="variant-list">${item.variants.map((variant, index) => `<button type="button" class="variant-option ${index === 0 ? 'active' : ''}" data-variant="${index}">${escapeHtml(variant.size_label || variant.label || 'Standard')}</button>`).join('')}</div>` : ''}
-      <div class="hero-actions"><button class="button button-dark" type="button" data-product-quote>Product Inquiry</button></div>
+      <div class="hero-actions"><button class="button button-dark" type="button" data-product-quote>Enquire on WhatsApp</button></div>
       ${item.full_description ? `<div class="product-description">${safeRichText(item.full_description)}</div>` : ''}
       ${item.specifications?.length ? `<div class="panel"><h3>Specifications</h3>${item.specifications.map((spec) => `<p><strong>${escapeHtml(spec.specification_key || spec.spec_key || spec.key || '')}:</strong> ${escapeHtml(spec.specification_value || spec.spec_value || spec.value || '')}</p>`).join('')}</div>` : ''}
       </div></div></section><section class="section section-tight"><div class="container"><h2>You may also like</h2><div class="grid">${(item.relatedProducts || state.products.filter((p) => p.id !== item.id).slice(0, 4)).map(productCard).join('')}</div></div></section>`);
@@ -729,7 +729,7 @@
     },
     inquiries: {
       path: '/inquiries',
-      title: 'Inquiries',
+      title: 'WhatsApp Inquiries',
       fields: [],
       columns: ['id', 'created_at', 'client_name', 'phone', 'organization_name', 'product_title', 'quantity', 'delivery_city', 'status'],
       booleans: [],
@@ -788,8 +788,8 @@
       return;
     }
     const tabs = ['overview', ...Object.keys(adminResources), 'site-settings', 'page-settings'];
-    const tabLabels = { 'site-settings': 'Site settings', 'page-settings': 'Page settings' };
-    const tabIcons = { overview: '⌂', products: '▦', categories: '◫', inquiries: '✉', clients: '♧', blogs: '▤', testimonials: '☆', 'site-settings': '⚙', 'page-settings': '▧' };
+    const tabLabels = { inquiries: 'WhatsApp', 'site-settings': 'Site settings', 'page-settings': 'Page settings' };
+    const tabIcons = { overview: '⌂', products: '▦', categories: '◫', inquiries: '💬', clients: '♧', blogs: '▤', testimonials: '☆', 'site-settings': '⚙', 'page-settings': '▧' };
     setContent(`<div class="admin-shell"><aside class="admin-nav"><a class="admin-nav-brand" href="/admin"><span>SE</span><strong>Shaw Enterprise</strong><small>Content management</small></a><div class="admin-nav-label">Workspace</div>${tabs.map((tab) => `<button type="button" data-admin-tab="${tab}" class="${state.adminTab === tab ? 'active' : ''}"><span class="admin-nav-icon" aria-hidden="true">${tabIcons[tab] || '•'}</span>${tabLabels[tab] || `${tab[0].toUpperCase()}${tab.slice(1)}`}</button>`).join('')}<div class="admin-nav-spacer"></div><button type="button" data-admin-logout><span class="admin-nav-icon" aria-hidden="true">↪</span>Sign out</button></aside><section class="admin-main"><header class="admin-topbar"><span><span class="admin-status-dot"></span>Management console</span><button type="button" class="admin-menu-toggle" data-admin-menu-toggle aria-label="Open admin menu" aria-expanded="false"><span aria-hidden="true">⋮</span></button><a href="/" target="_blank" rel="noreferrer">View website <span aria-hidden="true">↗</span></a></header><div class="admin-content" data-admin-view></div></section></div>`);
     loadAdminTab();
   }
@@ -813,11 +813,11 @@
         const stats = [
           ['products', 'Products', products.count ?? (products.data || []).length, '▦'],
           ['categories', 'Categories', categories.count ?? (categories.data || []).length, '◫'],
-          ['inquiries', 'Inquiries', inquiries.count ?? (inquiries.data || []).length, '✉'],
+          ['inquiries', 'WhatsApp', inquiries.count ?? (inquiries.data || []).length, '💬'],
           ['clients', 'Clients', clients.count ?? (clients.data || []).length, '♧'],
           ['blogs', 'Blogs', blogs.count ?? (blogs.data || []).length, '▤'],
         ];
-        view.innerHTML = `<section class="admin-dashboard"><div class="admin-dashboard-heading"><span class="eyebrow">Workspace summary</span><h1>Dashboard overview</h1><p>Manage your catalogue and keep your storefront content up to date.</p></div><div class="stats-row">${stats.map(([tab, label, count, icon]) => `<button type="button" class="stat admin-stat" data-admin-shortcut="${tab}"><span class="admin-stat-icon" aria-hidden="true">${icon}</span><span class="admin-stat-copy"><strong>${escapeHtml(count)}</strong><span>${label}</span></span><span class="admin-stat-arrow" aria-hidden="true">↗</span></button>`).join('')}</div><section class="admin-quick-actions"><div class="admin-section-heading"><div><span class="eyebrow">Shortcuts</span><h2>Quick actions</h2><p>Jump directly to the content you want to manage.</p></div></div><div class="admin-shortcut-grid"><button type="button" data-admin-shortcut-create="products"><span class="admin-shortcut-icon">＋</span><span><strong>Add a product</strong><small>Create a new catalogue listing</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="categories"><span class="admin-shortcut-icon">◫</span><span><strong>Manage categories</strong><small>Organize your product range</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="inquiries"><span class="admin-shortcut-icon">✉</span><span><strong>View inquiries</strong><small>Customer quote requests</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut-create="blogs"><span class="admin-shortcut-icon">＋</span><span><strong>Write a blog</strong><small>Publish a new article</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="clients"><span class="admin-shortcut-icon">♧</span><span><strong>Manage clients</strong><small>Update your client showcase</small></span><span class="admin-stat-arrow">→</span></button></div></section></section>`;
+        view.innerHTML = `<section class="admin-dashboard"><div class="admin-dashboard-heading"><span class="eyebrow">Workspace summary</span><h1>Dashboard overview</h1><p>Manage your catalogue and keep your storefront content up to date.</p></div><div class="stats-row">${stats.map(([tab, label, count, icon]) => `<button type="button" class="stat admin-stat" data-admin-shortcut="${tab}"><span class="admin-stat-icon" aria-hidden="true">${icon}</span><span class="admin-stat-copy"><strong>${escapeHtml(count)}</strong><span>${label}</span></span><span class="admin-stat-arrow" aria-hidden="true">↗</span></button>`).join('')}</div><section class="admin-quick-actions"><div class="admin-section-heading"><div><span class="eyebrow">Shortcuts</span><h2>Quick actions</h2><p>Jump directly to the content you want to manage.</p></div></div><div class="admin-shortcut-grid"><button type="button" data-admin-shortcut-create="products"><span class="admin-shortcut-icon">＋</span><span><strong>Add a product</strong><small>Create a new catalogue listing</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="categories"><span class="admin-shortcut-icon">◫</span><span><strong>Manage categories</strong><small>Organize your product range</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="inquiries"><span class="admin-shortcut-icon">💬</span><span><strong>WhatsApp inquiries</strong><small>Customer quote requests</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut-create="blogs"><span class="admin-shortcut-icon">＋</span><span><strong>Write a blog</strong><small>Publish a new article</small></span><span class="admin-stat-arrow">→</span></button><button type="button" data-admin-shortcut="clients"><span class="admin-shortcut-icon">♧</span><span><strong>Manage clients</strong><small>Update your client showcase</small></span><span class="admin-stat-arrow">→</span></button></div></section></section>`;
       } catch (error) {
         if (loadSequence === state.adminLoadSequence) view.innerHTML = `<div class="notice notice-error">${escapeHtml(error.message)}</div>`;
       }

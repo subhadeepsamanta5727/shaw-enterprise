@@ -75,7 +75,7 @@
             <label>Products / requirements *<textarea name="message" rows="4" required></textarea></label>
             <input type="hidden" name="product_title" value="Bulk quote request">
             <input type="hidden" name="variant_details" value="Standard">
-            <button class="button button-primary" type="submit">Send enquiry</button>
+            <button class="button button-primary" type="submit">Enquire on WhatsApp</button>
         </form>
     </dialog>
     <dialog class="site-dialog" data-dialog="custom">
@@ -109,7 +109,7 @@
     </dialog>
     <dialog class="site-dialog" data-dialog="inquiry-detail">
         <button class="dialog-close" type="button" data-close-dialog aria-label="Close">×</button>
-        <h2 data-inquiry-detail-title>Inquiry Details</h2>
+        <h2 data-inquiry-detail-title>WhatsApp Inquiry Details</h2>
         <div data-inquiry-detail-content class="panel"></div>
     </dialog>
     <dialog class="site-dialog gallery-dialog" data-dialog="gallery">
