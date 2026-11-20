@@ -188,7 +188,7 @@
       const logoUrl = settings.logo_url || settings.site_logo;
       el.classList.toggle('has-logo', Boolean(logoUrl));
       el.innerHTML = logoUrl
-        ? `<img src="${escapeHtml(imageUrl(logoUrl))}" alt="" style="width:100%;height:100%;object-fit:contain">`
+        ? `<img src="${escapeHtml(imageUrl(logoUrl))}" alt="${escapeHtml(settings.site_name || 'Shaw Enterprise')}" class="site-logo-img" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.textContent='SE';">`
         : 'SE';
     });
     document.querySelectorAll('[data-announcement]').forEach((el) => {
@@ -419,22 +419,23 @@
     const settings = state.settings;
     const about = settings.sections?.about_home || {};
     const markets = ['West Bengal', 'Bihar', 'Jharkhand', 'Odisha', 'Assam', 'Tripura', 'Sikkim', 'Manipur'];
+    const establishedYear = String(settings.established_year || '2014').trim();
     const profile = [
       ['Business type', 'Manufacturer, exporter, wholesaler & retailer'],
-      ['Established', '2014'],
+      ['Established', establishedYear],
       ['Ownership', 'Sole proprietorship'],
       ['Team size', 'Fewer than 10 people'],
       ['Annual turnover', 'Below ₹1 crore'],
-      ['GST number', '19DOWPS0212F1ZO'],
+      ['GST number', settings.gst_number || '19DOWPS0212F1ZO'],
     ];
     setContent(`${pageBanner('About Shaw Enterprise', 'A Kolkata-based manufacturer and supplier of writing boards and educational products.')}
       <section class="section about-intro"><div class="container about-intro-grid">
         <div class="about-story"><span class="eyebrow">Our company</span><h2>Products made with care. Service built around you.</h2>
-          <p>Established in 2014, Shaw Enterprise manufactures and supplies writing boards and related products to customers across eastern and northeastern India. We serve clients through manufacturing, export, wholesale and retail.</p>
+          <p>Established in ${escapeHtml(establishedYear)}, Shaw Enterprise manufactures and supplies writing boards and related products to customers across eastern and northeastern India. We serve clients through manufacturing, export, wholesale and retail.</p>
           <p>Our team works to understand each customer’s requirements, offers customization and packaging options, and coordinates delivery within an agreed timeframe.</p>
           <a class="button button-primary" href="/contact">Talk to our team <span aria-hidden="true">→</span></a>
         </div>
-        <div class="about-visual"><img src="${escapeHtml(imageUrl(about.image || settings.hero_banner_url))}" alt="Writing boards and educational products from Shaw Enterprise"><div class="about-established"><strong>2014</strong><span>Serving customers for over a decade</span></div></div>
+        <div class="about-visual"><img src="${escapeHtml(imageUrl(about.image || settings.hero_banner_url))}" alt="Writing boards and educational products from Shaw Enterprise"><div class="about-established"><strong>${escapeHtml(establishedYear)}</strong><span>Established</span></div></div>
       </div></section>
       <section class="section about-approach"><div class="container"><div class="section-heading"><div><span class="eyebrow">From requirement to dispatch</span><h2>A considered approach at every stage</h2></div></div>
         <div class="about-approach-grid"><article class="about-approach-card"><span>01</span><h3>Understand your needs</h3><p>Our team works with clients to understand product specifications and discuss suitable options.</p></article><article class="about-approach-card"><span>02</span><h3>Customize with care</h3><p>Customization and packaging options can be arranged to suit the order and customer requirements.</p></article><article class="about-approach-card"><span>03</span><h3>Check before dispatch</h3><p>Products are checked at multiple stages for performance and reliability before they leave our facility.</p></article><article class="about-approach-card"><span>04</span><h3>Coordinate delivery</h3><p>We coordinate dispatch to serve customers throughout our regional distribution markets.</p></article></div>
