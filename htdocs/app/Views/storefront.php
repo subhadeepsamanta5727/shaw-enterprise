@@ -8,7 +8,7 @@
     <meta name="description" content="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> — manufacturer and wholesaler of writing boards, display systems, educational accessories and office furniture in Kolkata.">
     <title><?= $title ?> | <?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="icon" data-favicon>
-    <link rel="stylesheet" href="<?= $cssPath ?>">
+    <link rel="stylesheet" href="<?= $cssPath ?>?v=<?= filemtime(__DIR__ . '/../../assets/css/app.css') ?>">
     <script defer src="<?= $jsPath ?>?v=<?= filemtime(__DIR__ . '/../../assets/js/app.js') ?>"></script>
 </head>
 <body>
@@ -27,7 +27,13 @@
         </div>
         <header class="site-header">
             <a class="brand" href="/" aria-label="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> home">
-                <span class="brand-mark">SE</span>
+                <?php if (!empty($siteLogoUrl)): ?>
+                    <span class="brand-mark has-logo" style="height: 50px; max-height: 50px; overflow: hidden; display: inline-flex; align-items: center;">
+                        <img src="<?= htmlspecialchars($siteLogoUrl, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?>" class="site-logo-img" style="max-height: 50px; width: auto; max-width: 100%; object-fit: contain; display: block;" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.removeAttribute('style'); this.parentElement.textContent='SE';">
+                    </span>
+                <?php else: ?>
+                    <span class="brand-mark">SE</span>
+                <?php endif; ?>
             </a>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation" data-menu-toggle>☰</button>
             <nav class="main-nav" data-main-nav>
@@ -53,7 +59,15 @@
         <footer class="site-footer">
             <div class="footer-grid">
                 <div>
-                    <a class="brand brand-footer" href="/" aria-label="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> home"><span class="brand-mark">SE</span></a>
+                    <a class="brand brand-footer" href="/" aria-label="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> home">
+                        <?php if (!empty($siteLogoUrl)): ?>
+                            <span class="brand-mark has-logo" style="height: 44px; max-height: 44px; overflow: hidden; display: inline-flex; align-items: center; border-radius: 8px; background: #ffffff; padding: 2px;">
+                                <img src="<?= htmlspecialchars($siteLogoUrl, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?>" class="site-logo-img" style="max-height: 40px; width: auto; max-width: 100%; object-fit: contain; display: block;" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.removeAttribute('style'); this.parentElement.textContent='SE';">
+                            </span>
+                        <?php else: ?>
+                            <span class="brand-mark">SE</span>
+                        <?php endif; ?>
+                    </a>
                     <p data-footer-tagline><?= htmlspecialchars($footerTagline, ENT_QUOTES, 'UTF-8') ?></p>
                     <div class="footer-social-links" data-footer-social-links aria-label="Social media"></div>
                 </div>

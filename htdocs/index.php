@@ -71,6 +71,7 @@ $footerPhone = '+91 9933944007';
 $footerPhoneSecondary = '+91 7003779114';
 $footerEmail = 'shaw.entt.edu@gmail.com';
 $footerWhatsapp = '+91 9933944007';
+$siteLogoUrl = '';
 
 try {
     require_once __DIR__ . '/app/Support/Database.php';
@@ -106,6 +107,13 @@ try {
                 $footerWhatsapp = trim((string)$settingsData['whatsapp']);
             } elseif (!empty($footerPhone)) {
                 $footerWhatsapp = $footerPhone;
+            }
+            $rawLogo = $settingsData['logo_url'] ?? $settingsData['site_logo'] ?? $settingsData['logo'] ?? '';
+            if (!empty($rawLogo)) {
+                $siteLogoUrl = trim((string)$rawLogo);
+                if (!str_starts_with($siteLogoUrl, 'http://') && !str_starts_with($siteLogoUrl, 'https://') && !str_starts_with($siteLogoUrl, '/')) {
+                    $siteLogoUrl = '/uploads/' . ltrim($siteLogoUrl, '/');
+                }
             }
         }
     }

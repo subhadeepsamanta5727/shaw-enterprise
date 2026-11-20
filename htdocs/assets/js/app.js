@@ -53,11 +53,7 @@
   }
 
   function siteLogoUrl(settings) {
-    const configuredLogo = settings.logo_url || settings.site_logo || '';
-    const placeholderLogo = /whatsapp-image-2026-11-19-at-7-05-04-pm-1795161854-1284/i.test(configuredLogo);
-    return !configuredLogo || placeholderLogo
-      ? '/uploads/l0go-removebg-preview-1793182225716-5106.png'
-      : configuredLogo;
+    return settings.logo_url || settings.site_logo || settings.logo || '';
   }
 
   function toast(message, error = false) {
@@ -195,8 +191,15 @@
     document.querySelectorAll('.brand-mark').forEach((el) => {
       const logoUrl = siteLogoUrl(settings);
       el.classList.toggle('has-logo', Boolean(logoUrl));
+      if (logoUrl) {
+        el.style.maxHeight = '50px';
+        el.style.overflow = 'hidden';
+      } else {
+        el.style.maxHeight = '';
+        el.style.overflow = '';
+      }
       el.innerHTML = logoUrl
-        ? `<img src="${escapeHtml(imageUrl(logoUrl))}" alt="${escapeHtml(settings.site_name || 'Shaw Enterprise')}" class="site-logo-img" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.textContent='SE';">`
+        ? `<img src="${escapeHtml(imageUrl(logoUrl))}" alt="${escapeHtml(settings.site_name || 'Shaw Enterprise')}" class="site-logo-img" style="max-height: 50px; width: auto; max-width: 100%; object-fit: contain; display: block;" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.removeAttribute('style'); this.parentElement.textContent='SE';">`
         : 'SE';
     });
     document.querySelectorAll('[data-announcement]').forEach((el) => {
