@@ -54,9 +54,9 @@
 
   function siteLogoUrl(settings) {
     const logoUrl = settings.logo_url || settings.site_logo || settings.logo || '';
-    return /(?:^|\/)whatsapp-image-2026-11-19-at-7-05-04-pm-1795161854-1284\.jpeg(?:[?#]|$)/i.test(logoUrl)
+    return /(?:^|\/)(?:whatsapp-image-2026-11-19-at-7-05-04-pm|l0go-removebg-preview)-[^\/?#]+\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(logoUrl)
       ? '/assets/images/shaw-enterprise-logo-20261120.jpeg'
-      : logoUrl;
+      : logoUrl || '/assets/images/shaw-enterprise-logo-20261120.jpeg';
   }
 
   function toast(message, error = false) {
@@ -1071,7 +1071,8 @@
       const renderSettingField = ([key, label]) => {
         const type = ['email', 'email_official'].includes(key) ? 'email' : 'text';
         const fallbackValue = key === 'email_official' ? 'shawenterprise.in@gmail.com' : '';
-        return `<label>${label}<input name="${key}" type="${type}" value="${escapeHtml(state.settings[key] || fallbackValue)}">${['logo_url', 'favicon_url', 'catalog_pdf_url'].includes(key) ? `<input type="file" data-setting-upload="${key}" accept="${key === 'catalog_pdf_url' ? 'application/pdf' : key === 'favicon_url' ? '.ico,image/x-icon,image/png,image/svg+xml,image/jpeg' : 'image/*'}">` : ''}</label>`;
+        const value = key === 'logo_url' ? siteLogoUrl(state.settings) : state.settings[key] || fallbackValue;
+        return `<label>${label}<input name="${key}" type="${type}" value="${escapeHtml(value)}">${['logo_url', 'favicon_url', 'catalog_pdf_url'].includes(key) ? `<input type="file" data-setting-upload="${key}" accept="${key === 'catalog_pdf_url' ? 'application/pdf' : key === 'favicon_url' ? '.ico,image/x-icon,image/png,image/svg+xml,image/jpeg' : 'image/*'}">` : ''}</label>`;
       };
       const currentSocialLinks = state.settings.social_links && typeof state.settings.social_links === 'object' && !Array.isArray(state.settings.social_links) ? state.settings.social_links : {};
       const socialLinkKeys = [...new Set(['facebook', 'instagram', 'twitter', 'youtube', 'linkedin', 'whatsapp', ...Object.keys(currentSocialLinks)])];
@@ -1614,7 +1615,7 @@
       catch { toast(`${key.replaceAll('_', ' ')} must be valid JSON.`, true); return; }
     }
     if (Object.prototype.hasOwnProperty.call(updated, 'logo_url')) {
-      updated.logo_url = updated.logo_url || state.settings.logo_url || '';
+      updated.logo_url = updated.logo_url || siteLogoUrl(state.settings);
       updated.site_logo = updated.logo_url;
       updated.logo = updated.logo_url;
     }

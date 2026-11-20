@@ -74,7 +74,7 @@ $footerPhone = '+91 9933944007';
 $footerPhoneSecondary = '+91 7003779114';
 $footerEmail = 'shaw.entt.edu@gmail.com';
 $footerWhatsapp = '+91 9933944007';
-$siteLogoUrl = '';
+$siteLogoUrl = '/assets/images/shaw-enterprise-logo-20261120.jpeg';
 $canonicalDomain = '';
 $googleSiteVerification = '';
 $googleAnalyticsId = '';
@@ -111,7 +111,7 @@ try {
                 if (!str_starts_with($siteLogoUrl, 'http://') && !str_starts_with($siteLogoUrl, 'https://') && !str_starts_with($siteLogoUrl, '/')) {
                     $siteLogoUrl = '/uploads/' . ltrim($siteLogoUrl, '/');
                 }
-                if (preg_match('~(?:^|/)whatsapp-image-2026-11-19-at-7-05-04-pm-1795161854-1284\.jpeg(?:[?#]|$)~i', $siteLogoUrl)) {
+                if (preg_match('~(?:^|/)(?:whatsapp-image-2026-11-19-at-7-05-04-pm|l0go-removebg-preview)-[^/?#]+\.(?:jpe?g|png|webp)(?:[?#]|$)~i', $siteLogoUrl)) {
                     $siteLogoUrl = '/assets/images/shaw-enterprise-logo-20261120.jpeg';
                 }
             }
