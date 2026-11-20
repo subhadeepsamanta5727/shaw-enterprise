@@ -69,17 +69,19 @@ class UploadController {
             if (in_array($ext, ['jpg', 'jpeg', 'png'], true) && function_exists('imagewebp')) {
                 $webpName = $cleanName . '-' . time() . '-' . rand(1000, 9999) . '.webp';
                 $webpDestination = $this->uploadDir . DIRECTORY_SEPARATOR . $webpName;
-                $img = match ($ext) {
-                    'jpg', 'jpeg' => @imagecreatefromjpeg($destination),
-                    'png' => @imagecreatefrompng($destination),
-                    default => null,
-                };
+                $fileContent = @file_get_contents($destination);
+                $img = $fileContent ? @imagecreatefromstring($fileContent) : null;
+                if (!$img) {
+                    $img = match ($ext) {
+                        'jpg', 'jpeg' => @imagecreatefromjpeg($destination),
+                        'png' => @imagecreatefrompng($destination),
+                        default => null,
+                    };
+                }
                 if ($img) {
-                    if ($ext === 'png') {
-                        imagepalettetotruecolor($img);
-                        imagealphablending($img, true);
-                        imagesavealpha($img, true);
-                    }
+                    imagepalettetotruecolor($img);
+                    imagealphablending($img, true);
+                    imagesavealpha($img, true);
                     if (@imagewebp($img, $webpDestination, 85)) {
                         imagedestroy($img);
                         @unlink($destination); // Remove original heavier file

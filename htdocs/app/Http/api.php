@@ -37,15 +37,48 @@ if (strpos($uri, '/uploads/') === 0 || strpos($uri, '/storage/') === 0) {
         ?: dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'uploads';
     $filePath = rtrim($uploadsDirectory, '/\\') . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $subPath);
 
+    // Resolve candidate file or cross-extension fallback (e.g. .webp <-> .png/.jpg)
+    $candidateFile = null;
     if (file_exists($filePath) && is_file($filePath)) {
-        $mime = mime_content_type($filePath) ?: 'application/octet-stream';
+        $candidateFile = $filePath;
+    } else {
+        $ext = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+        if (in_array($ext, ['png', 'jpg', 'jpeg'], true)) {
+            $webpAlternative = preg_replace('/\.(png|jpe?g)$/i', '.webp', $filePath);
+            if (file_exists($webpAlternative) && is_file($webpAlternative)) {
+                $candidateFile = $webpAlternative;
+            }
+        } elseif ($ext === 'webp') {
+            foreach (['png', 'jpg', 'jpeg'] as $fallbackExt) {
+                $legacyAlternative = preg_replace('/\.webp$/i', '.' . $fallbackExt, $filePath);
+                if (file_exists($legacyAlternative) && is_file($legacyAlternative)) {
+                    $candidateFile = $legacyAlternative;
+                    break;
+                }
+            }
+        }
+    }
+
+    if ($candidateFile !== null) {
+        $fileExt = strtolower(pathinfo($candidateFile, PATHINFO_EXTENSION));
+        $mimeMap = [
+            'webp' => 'image/webp',
+            'png'  => 'image/png',
+            'jpg'  => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif'  => 'image/gif',
+            'svg'  => 'image/svg+xml',
+            'ico'  => 'image/x-icon',
+            'pdf'  => 'application/pdf',
+        ];
+        $mime = $mimeMap[$fileExt] ?? (mime_content_type($candidateFile) ?: 'application/octet-stream');
         header("Content-Type: {$mime}");
-        if (strtolower(pathinfo($filePath, PATHINFO_EXTENSION)) === 'pdf') {
+        if ($fileExt === 'pdf') {
             header('Content-Disposition: attachment; filename="Shaw-Enterprise-Catalog.pdf"');
         }
-        header("Content-Length: " . filesize($filePath));
+        header("Content-Length: " . filesize($candidateFile));
         header("Cache-Control: public, max-age=31536000");
-        readfile($filePath);
+        readfile($candidateFile);
         exit;
     } else {
         // Fallback placeholder SVG so browser images never break or receive HTML
