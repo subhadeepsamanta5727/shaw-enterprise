@@ -61,8 +61,8 @@
                 <div>
                     <a class="brand brand-footer" href="/" aria-label="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> home">
                         <?php if (!empty($siteLogoUrl)): ?>
-                            <span class="brand-mark has-logo" style="height: 44px; max-height: 44px; overflow: hidden; display: inline-flex; align-items: center; border-radius: 8px; background: #ffffff; padding: 2px;">
-                                <img src="<?= htmlspecialchars($siteLogoUrl, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?>" class="site-logo-img" style="max-height: 40px; width: auto; max-width: 100%; object-fit: contain; display: block;" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.removeAttribute('style'); this.parentElement.textContent='SE';">
+                            <span class="brand-mark has-logo" style="height: 70px; max-height: 70px; min-width: 70px; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; background: #ffffff; padding: 4px;">
+                                <img src="<?= htmlspecialchars($siteLogoUrl, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?>" class="site-logo-img" style="max-height: 64px; width: auto; max-width: 100%; object-fit: contain; display: block;" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.removeAttribute('style'); this.parentElement.textContent='SE';">
                             </span>
                         <?php else: ?>
                             <span class="brand-mark">SE</span>

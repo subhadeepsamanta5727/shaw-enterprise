@@ -189,17 +189,22 @@
     }
     document.querySelectorAll('[data-site-name]').forEach((el) => { el.textContent = settings.site_name || 'Shaw Enterprise'; });
     document.querySelectorAll('.brand-mark').forEach((el) => {
+      const isFooter = Boolean(el.closest('.brand-footer'));
       const logoUrl = siteLogoUrl(settings);
       el.classList.toggle('has-logo', Boolean(logoUrl));
       if (logoUrl) {
-        el.style.maxHeight = '50px';
+        const height = isFooter ? '70px' : '50px';
+        el.style.height = height;
+        el.style.maxHeight = height;
         el.style.overflow = 'hidden';
       } else {
+        el.style.height = '';
         el.style.maxHeight = '';
         el.style.overflow = '';
       }
+      const imgMaxHeight = isFooter ? '64px' : '50px';
       el.innerHTML = logoUrl
-        ? `<img src="${escapeHtml(imageUrl(logoUrl))}" alt="${escapeHtml(settings.site_name || 'Shaw Enterprise')}" class="site-logo-img" style="max-height: 50px; width: auto; max-width: 100%; object-fit: contain; display: block;" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.removeAttribute('style'); this.parentElement.textContent='SE';">`
+        ? `<img src="${escapeHtml(imageUrl(logoUrl))}" alt="${escapeHtml(settings.site_name || 'Shaw Enterprise')}" class="site-logo-img" style="max-height: ${imgMaxHeight}; width: auto; max-width: 100%; object-fit: contain; display: block;" onerror="this.parentElement.classList.remove('has-logo'); this.parentElement.removeAttribute('style'); this.parentElement.textContent='SE';">`
         : 'SE';
     });
     document.querySelectorAll('[data-announcement]').forEach((el) => {
