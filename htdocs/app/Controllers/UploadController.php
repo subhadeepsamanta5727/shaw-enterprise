@@ -65,6 +65,31 @@ class UploadController {
         $destination = $this->uploadDir . DIRECTORY_SEPARATOR . $uniqueName;
 
         if (move_uploaded_file($file['tmp_name'], $destination)) {
+            // Auto-convert JPG/PNG to WebP if GD supports it for smaller file size and faster mobile loading
+            if (in_array($ext, ['jpg', 'jpeg', 'png'], true) && function_exists('imagewebp')) {
+                $webpName = $cleanName . '-' . time() . '-' . rand(1000, 9999) . '.webp';
+                $webpDestination = $this->uploadDir . DIRECTORY_SEPARATOR . $webpName;
+                $img = match ($ext) {
+                    'jpg', 'jpeg' => @imagecreatefromjpeg($destination),
+                    'png' => @imagecreatefrompng($destination),
+                    default => null,
+                };
+                if ($img) {
+                    if ($ext === 'png') {
+                        imagepalettetotruecolor($img);
+                        imagealphablending($img, true);
+                        imagesavealpha($img, true);
+                    }
+                    if (@imagewebp($img, $webpDestination, 85)) {
+                        imagedestroy($img);
+                        @unlink($destination); // Remove original heavier file
+                        $uniqueName = $webpName;
+                    } else {
+                        imagedestroy($img);
+                    }
+                }
+            }
+
             $relativeUrl = '/uploads/' . $uniqueName;
             $fullUrl = $this->baseUrl . $relativeUrl;
 

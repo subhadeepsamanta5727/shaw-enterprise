@@ -346,6 +346,7 @@
 
   function renderHome() {
     const settings = state.settings;
+    document.title = 'Shaw Enterprise | Manufacturer of Writing Boards & Office Furniture Kolkata';
     const categories = state.categories.slice(0, 8);
     const featured = state.products.filter((item) => item.is_featured).slice(0, 8);
     const configuredHeroProducts = Array.isArray(settings.sections?.hero_products)
@@ -360,7 +361,7 @@
       return `<article class="hero-slide${index === 0 ? ' active' : ''}" data-hero-slide-panel="${index}" aria-hidden="${index === 0 ? 'false' : 'true'}">
         <div class="container hero-slide-layout">
           <div class="hero-copy">
-            <h1>${escapeHtml(slide.title)}</h1>
+            <h2 class="hero-slide-title">${escapeHtml(slide.title)}</h2>
             <div class="hero-actions">
               <a class="button button-primary" href="/products/${encodeURIComponent(slide.slug || slide.id)}">Explore product <span aria-hidden="true">→</span></a>
             </div>
@@ -374,11 +375,12 @@
       </article>`;
     }).join('');
     setContent(`<section class="hero"><div class="hero-carousel" data-hero-carousel aria-label="Featured products" aria-roledescription="carousel">
+      <h1 class="visually-hidden">Shaw Enterprise — Kolkata's Premier Manufacturer &amp; Wholesaler of Writing Boards &amp; Display Systems</h1>
       <div class="hero-slides">${heroSlidesMarkup}</div>
       <div class="container hero-carousel-controls"><button class="hero-arrow" type="button" data-hero-previous aria-label="Previous product">‹</button><div class="hero-dots">${heroSlides.map((slide, index) => `<button type="button" class="hero-dot${index === 0 ? ' active' : ''}" data-hero-slide="${index}" aria-label="Show product ${index + 1}: ${escapeHtml(slide.title)}" aria-current="${index === 0 ? 'true' : 'false'}"></button>`).join('')}</div><button class="hero-arrow" type="button" data-hero-next aria-label="Next product">›</button></div>
     </div></section>
     <section class="section home-categories"><div class="container"><div class="section-heading"><div><span class="eyebrow">Browse our range</span><h2>Browse by category</h2></div><a href="/products" class="button button-outline">View all products</a></div>
-      <div class="grid">${categories.map((category) => `<a class="category-card" href="/products?category=${encodeURIComponent(category.slug)}"><img loading="lazy" src="${escapeHtml(imageUrl(category.image))}" alt=""><span>${escapeHtml(category.name)}</span></a>`).join('') || '<p class="empty-state">Product categories will appear here.</p>'}</div></div></section>
+      <div class="grid">${categories.map((category) => `<a class="category-card" href="/products?category=${encodeURIComponent(category.slug)}"><img loading="lazy" src="${escapeHtml(imageUrl(category.image))}" alt="${escapeHtml(category.name)} range by Shaw Enterprise"><span>${escapeHtml(category.name)}</span></a>`).join('') || '<p class="empty-state">Product categories will appear here.</p>'}</div></div></section>
     ${featured.length ? `<section class="section section-tight home-featured"><div class="container"><div class="section-heading"><div><span class="eyebrow">Made for work & learning</span><h2>Featured products</h2></div><a href="/products" class="button button-outline">Explore catalogue</a></div><div class="grid">${featured.map(productCard).join('')}</div></div></section>` : ''}
     <section class="section quality-section"><div class="container quality-panel"><div class="quality-copy"><span class="eyebrow">Our commitment</span><h2>Quality Assurance</h2><p>Quality is a prime factor for our company, and we always provide qualitative products to our precious clients. Our manufactured, exported, wholesale-supplied, and retail products give full satisfaction to our clients. Our quality team checks final products at various stages for performance and reliability. Before dispatch, every product is quality-assured by our team.</p></div><div class="quality-checks" aria-label="Our quality assurance process"><div class="quality-check"><span aria-hidden="true">01</span><div><strong>Multi-stage checks</strong><p>Products are checked at various stages of production.</p></div></div><div class="quality-check"><span aria-hidden="true">02</span><div><strong>Performance &amp; reliability</strong><p>Our quality team checks the finished product.</p></div></div><div class="quality-check"><span aria-hidden="true">03</span><div><strong>Pre-dispatch assurance</strong><p>Every product is checked before it is dispatched.</p></div></div></div></div></section>
     <section class="section why-us-section"><div class="container"><div class="section-heading"><div><span class="eyebrow">The Shaw Enterprise difference</span><h2>Why to Choose Us?</h2><p class="lead">Our company follows quality standards and industrial norms for manufacturing, exporting, wholesale supplying, and retailing. Some of the factors which set us apart are:</p></div></div><div class="why-us-grid">
@@ -498,6 +500,9 @@
     const item = product.data || product;
     state.selectedProduct = item;
     state.selectedVariant = item.variants?.[0] || null;
+    document.title = `${item.title} | Shaw Enterprise Kolkata`;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && item.short_description) metaDesc.setAttribute('content', item.short_description);
     const images = (item.images?.length ? item.images : [item.main_image]).filter(Boolean);
     setContent(`${pageBanner(item.title)}<section class="section"><div class="container product-detail">
       <div>${images.length ? `<button class="product-image-viewer" type="button" data-open-product-image aria-label="View larger image: ${escapeHtml(item.title)}"><img class="product-main-image" data-main-image src="${escapeHtml(imageUrl(images[0]))}" alt="${escapeHtml(item.title)}"></button><div class="gallery-thumbs">${images.map((src, index) => `<img class="${index === 0 ? 'active' : ''}" data-gallery-image src="${escapeHtml(imageUrl(src))}" alt="${escapeHtml(item.title)} image ${index + 1}">`).join('')}</div>` : '<div class="product-image-empty product-detail-image-empty" role="img" aria-label="No product image available">Image coming soon</div>'}</div>
@@ -516,6 +521,9 @@
     const about = settings.sections?.about_home || {};
     const markets = ['West Bengal', 'Bihar', 'Jharkhand', 'Odisha', 'Assam', 'Tripura', 'Sikkim', 'Manipur'];
     const establishedYear = String(settings.established_year || '2014').trim();
+    document.title = `About Shaw Enterprise | Writing Board Manufacturer Since ${establishedYear}`;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', `Founded in ${establishedYear} by Mr. Indrajit Shaw, Shaw Enterprise manufactures and supplies writing boards, bulletin display systems & educational furniture across Eastern India.`);
     const profile = [
       ['Business type', 'Manufacturer, exporter, wholesaler & retailer'],
       ['Established', establishedYear],
@@ -526,9 +534,9 @@
     ];
     setContent(`${pageBanner('About Shaw Enterprise', 'A Kolkata-based manufacturer and supplier of writing boards and educational products.')}
       <section class="section about-intro"><div class="container about-intro-grid">
-        <div class="about-story"><span class="eyebrow">Our company</span><h2>Products made with care. Service built around you.</h2>
-          <p>Established in ${escapeHtml(establishedYear)}, Shaw Enterprise manufactures and supplies writing boards and related products to customers across eastern and northeastern India. We serve clients through manufacturing, export, wholesale and retail.</p>
-          <p>Our team works to understand each customer’s requirements, offers customization and packaging options, and coordinates delivery within an agreed timeframe.</p>
+        <div class="about-story"><span class="eyebrow">${escapeHtml(about.badge || 'Our company')}</span><h2>${escapeHtml(about.title || 'Products made with care. Service built around you.')}</h2>
+          <p>${escapeHtml(about.p1 || `Established in ${establishedYear}, Shaw Enterprise manufactures and supplies writing boards and related products to customers across eastern and northeastern India. We serve clients through manufacturing, export, wholesale and retail.`)}</p>
+          <p>${escapeHtml(about.p2 || `Our team works to understand each customer’s requirements, offers customization and packaging options, and coordinates delivery within an agreed timeframe.`)}</p>
           <a class="button button-primary" href="/contact">Talk to our team <span aria-hidden="true">→</span></a>
         </div>
         <div class="about-visual"><img src="${escapeHtml(imageUrl(about.image || settings.hero_banner_url))}" alt="Writing boards and educational products from Shaw Enterprise"><div class="about-established"><strong>${escapeHtml(establishedYear)}</strong><span>Established</span></div></div>
@@ -543,6 +551,7 @@
   }
 
   function renderClients() {
+    document.title = 'Our Institutional Clients | Universities & Schools | Shaw Enterprise';
     const categories = [
       ['all', 'All Clients'], ['university_colleges', 'Universities & Colleges'], ['schools', 'Schools'],
       ['corporate_banks', 'Corporate / Bank'], ['others', 'Others'],
@@ -563,6 +572,7 @@
   }
 
   function renderBlogs() {
+    document.title = 'Insights & Guides | Shaw Enterprise Blog';
     const search = new URLSearchParams(location.search).get('search') || '';
     const rows = state.blogs.filter((blog) => `${blog.title} ${blog.content || ''}`.toLowerCase().includes(search.toLowerCase()));
     setContent(`${pageBanner('Insights & Guides', 'Product advice, classroom ideas and tips from our team.')}<section class="section"><div class="container"><div class="toolbar"><input class="search-field" type="search" value="${escapeHtml(search)}" placeholder="Search articles…" data-blog-search></div><div class="grid grid-3" data-blog-grid>${rows.map(blogCard).join('') || '<p class="empty-state">No articles found.</p>'}</div></div></section>`);
@@ -571,7 +581,8 @@
   async function renderBlog() {
     const result = await request(`/blogs/${encodeURIComponent(root.dataset.slug)}`);
     const blog = result.data || result;
-    setContent(`${pageBanner('Insights & Guides')}<article class="section"><div class="container" style="max-width:850px"><img class="product-main-image" style="height:360px" src="${escapeHtml(imageUrl(blog.thumbnail_image))}" alt="${escapeHtml(blog.title)}"><p class="eyebrow">${escapeHtml(blog.author_name || 'Shaw Enterprise')}</p><h1 style="font-size:38px">${escapeHtml(blog.title)}</h1><div class="article-content">${safeRichText(blog.content || '').replace(/\n/g, '<br>')}</div>${blog.video_url ? `<p><a class="button button-dark" href="${escapeHtml(blog.video_url)}" target="_blank" rel="noreferrer">Watch video</a></p>` : ''}<a href="/blogs" class="button button-outline">← All articles</a></div></article>`);
+    document.title = `${blog.title} | Shaw Enterprise Blog`;
+    setContent(`${pageBanner(blog.title, 'By ' + (blog.author_name || 'Shaw Enterprise'))}<article class="section"><div class="container" style="max-width:850px"><img class="product-main-image" style="height:360px" src="${escapeHtml(imageUrl(blog.thumbnail_image))}" alt="${escapeHtml(blog.title)}"><div class="article-content">${safeRichText(blog.content || '').replace(/\n/g, '<br>')}</div>${blog.video_url ? `<p><a class="button button-dark" href="${escapeHtml(blog.video_url)}" target="_blank" rel="noreferrer">Watch video</a></p>` : ''}<a href="/blogs" class="button button-outline">← All articles</a></div></article>`);
   }
 
   function renderImages() {
@@ -969,6 +980,7 @@
     }
     if (activeTab === 'page-settings') {
       const sections = state.settings.sections && typeof state.settings.sections === 'object' && !Array.isArray(state.settings.sections) ? state.settings.sections : {};
+      const activePageTab = state.adminPageSectionTab || 'home';
       let heroProducts = [];
       try {
         const productsResult = await request('/products?limit=100&admin=1');
@@ -981,47 +993,50 @@
         return;
       }
       const selectedHeroProducts = Array.isArray(sections.hero_products) ? sections.hero_products : [];
-      const editablePageSections = Object.entries(sections)
-        .filter(([sectionKey]) => !['hero', 'hero_products'].includes(sectionKey))
-        .map(([sectionKey, sectionValue]) => sectionKey === 'about_home'
-          ? [sectionKey, { image: sectionValue?.image || '' }]
-          : [sectionKey, sectionValue]);
       const heroProductFields = Array.from({ length: 5 }, (_, index) => {
         const selectedId = selectedHeroProducts[index] ?? '';
         const options = heroProducts.map((product) => `<option value="${escapeHtml(product.id)}" ${String(product.id) === String(selectedId) ? 'selected' : ''}>${escapeHtml(product.title)}${product.sku ? ` (${escapeHtml(product.sku)})` : ''}</option>`).join('');
         return `<label>Banner ${index + 1} product<select data-hero-product-slot="${index}"><option value="">Select a product</option>${options}</select></label>`;
       }).join('');
-      const formatPageFieldLabel = (key) => /^p\d+$/.test(key)
-        ? `Paragraph ${key.slice(1)}`
-        : key.replaceAll('_', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
-      const renderPageFields = (value, path) => {
-        if (Array.isArray(value)) {
-          return value.map((item, index) => {
-            const itemPath = [...path, index];
-            if (item && typeof item === 'object') {
-              return `<section class="admin-settings-subgroup"><h3>${formatPageFieldLabel(path.at(-1) || 'Item')} ${index + 1}</h3><div class="admin-settings-fields">${renderPageFields(item, itemPath)}</div></section>`;
-            }
-            return `<label>${formatPageFieldLabel(path.at(-1) || 'Item')} ${index + 1}<input data-page-setting-path="${escapeHtml(JSON.stringify(itemPath))}" value="${escapeHtml(item ?? '')}"></label>`;
-          }).join('');
-        }
-        if (value && typeof value === 'object') {
-          return Object.entries(value).filter(([key]) => key !== 'id').map(([key, item]) => {
-            const itemPath = [...path, key];
-            if (item && typeof item === 'object') return renderPageFields(item, itemPath);
-            const label = formatPageFieldLabel(key);
-            const isLongText = typeof item === 'string' && (item.length > 120 || /description|content|paragraph/i.test(key));
-            const isAboutPageImage = path.length === 1 && path[0] === 'about_home' && key === 'image';
-            const control = isLongText
-              ? `<textarea rows="4" data-page-setting-path="${escapeHtml(JSON.stringify(itemPath))}">${escapeHtml(item ?? '')}</textarea>`
-              : `<input${typeof item === 'number' ? ' type="number" step="any"' : ''} data-page-setting-path="${escapeHtml(JSON.stringify(itemPath))}" value="${escapeHtml(item ?? '')}">${isAboutPageImage ? '<input type="file" data-setting-upload="about_home_image" accept="image/*">' : ''}`;
-            return `<label${isLongText ? ' class="admin-settings-wide"' : ''}>${label}${control}</label>`;
-          }).join('');
-        }
-        const label = formatPageFieldLabel(path.at(-1) || 'Content');
-        return `<label>${label}<input data-page-setting-path="${escapeHtml(JSON.stringify(path))}" value="${escapeHtml(value ?? '')}"></label>`;
-      };
       const heroSliderSpeedField = `<label class="admin-settings-wide">Auto-slide interval (seconds)<input type="number" min="1" max="30" step="0.5" data-page-setting-path='["hero", "slider_seconds"]' value="${escapeHtml(sections.hero?.slider_seconds ?? 3.5)}"><small style="display:block;margin-top:4px;color:#64748b;">Duration each hero banner slide stays visible before rotating (default: 3.5 seconds).</small></label>`;
-      view.innerHTML = `<div class="admin-toolbar"><div><span class="eyebrow">Storefront content</span><h1>Page settings</h1></div><button class="button button-primary" data-save-settings>Save changes</button></div><p class="admin-settings-intro">Edit homepage imagery and content by section.</p><form class="admin-settings-form" data-settings-form data-settings-section="page"><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero banners</h2><p>Select up to five products. Each banner uses the selected product image and title and links to its product page.</p></div><div class="admin-settings-fields">${heroProductFields}${heroSliderSpeedField}</div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero fallback image</h2><p>Used when a selected product does not have an image.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">Fallback hero image<input name="hero_banner_url" value="${escapeHtml(state.settings.hero_banner_url || '')}"><input type="file" data-setting-upload="hero_banner_url" accept="image/*"></label></div></section>${editablePageSections.map(([sectionKey, sectionValue]) => `<section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>${sectionKey === 'about_home' ? 'About page image' : formatPageFieldLabel(sectionKey)}</h2><p>${sectionKey === 'about_home' ? 'Manage the image shown on the About page.' : 'Edit the content and items for this page section.'}</p></div><div class="admin-settings-fields">${renderPageFields(sectionValue, [sectionKey])}</div></section>`).join('')}</form>`;
+
+      const features = Array.isArray(sections.features) && sections.features.length ? sections.features : [
+        { id: 1, title: 'College Street Works', subtitle: 'Direct factory manufacture', icon: '🏭' },
+        { id: 2, title: 'Safe Wooden Packaging', subtitle: 'Reinforced corner battens', icon: '🚚' },
+        { id: 3, title: 'UPI / Cards / COD', subtitle: 'Instant QR scan or Cash on Delivery', icon: '📱' },
+        { id: 4, title: 'GST Tax Invoices', subtitle: 'Official GSTIN provided', icon: '📄' }
+      ];
+      const featuresMarkup = features.map((feat, index) => `
+        <div class="admin-settings-subgroup">
+          <h3>Feature badge ${index + 1}</h3>
+          <div class="admin-settings-fields">
+            <label>Icon (emoji or symbol)<input data-page-setting-path='["features", ${index}, "icon"]' value="${escapeHtml(feat.icon || '')}"></label>
+            <label>Title<input data-page-setting-path='["features", ${index}, "title"]' value="${escapeHtml(feat.title || '')}"></label>
+            <label class="admin-settings-wide">Subtitle / Description<input data-page-setting-path='["features", ${index}, "subtitle"]' value="${escapeHtml(feat.subtitle || '')}"></label>
+          </div>
+        </div>
+      `).join('');
+
+      const customBanner = sections.custom_size_banner || {};
+      const aboutHome = sections.about_home || {};
+      const aboutStats = Array.isArray(aboutHome.stats) && aboutHome.stats.length ? aboutHome.stats : [
+        { id: 1, label: 'Year Established', value: state.settings.established_year || '2014', sub: 'College Street, Kolkata' },
+        { id: 2, label: 'Surface Warranty', value: '25-Yr', sub: 'On Ceramic Green Boards' },
+        { id: 3, label: 'Boards Manufactured', value: '50,000+', sub: 'Delivered Pan-India' },
+        { id: 4, label: 'Genuine Virgin Alloy', value: '100%', sub: 'Alloy 6063-T6 Frames' }
+      ];
+      const aboutStatsMarkup = aboutStats.map((stat, index) => `
+        <div class="admin-settings-subgroup">
+          <h3>Stat highlight ${index + 1}</h3>
+          <div class="admin-settings-fields">
+            <label>Label<input data-page-setting-path='["about_home", "stats", ${index}, "label"]' value="${escapeHtml(stat.label || '')}"></label>
+            <label>Metric value<input data-page-setting-path='["about_home", "stats", ${index}, "value"]' value="${escapeHtml(stat.value || '')}"></label>
+            <label class="admin-settings-wide">Sub-label / Detail<input data-page-setting-path='["about_home", "stats", ${index}, "sub"]' value="${escapeHtml(stat.sub || '')}"></label>
+          </div>
+        </div>
+      `).join('');
+
+      view.innerHTML = `<div class="admin-toolbar"><div><span class="eyebrow">Storefront content</span><h1>Page settings</h1></div><button class="button button-primary" data-save-settings>Save changes</button></div><p class="admin-settings-intro">Edit page sections, messaging, images, and SEO metadata organized cleanly by page.</p><nav class="admin-subnav" aria-label="Page section navigation"><button type="button" class="admin-subnav-btn${activePageTab === 'home' ? ' active' : ''}" data-admin-page-tab="home">🏠 Home Page</button><button type="button" class="admin-subnav-btn${activePageTab === 'about' ? ' active' : ''}" data-admin-page-tab="about">📖 About Page</button><button type="button" class="admin-subnav-btn${activePageTab === 'seo' ? ' active' : ''}" data-admin-page-tab="seo">🔍 SEO &amp; Search Console</button></nav><form class="admin-settings-form" data-settings-form data-settings-section="page"><div data-admin-page-panel="home"${activePageTab === 'home' ? '' : ' hidden'}><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero banners</h2><p>Select up to five products and set the rotation duration.</p></div><div class="admin-settings-fields">${heroProductFields}${heroSliderSpeedField}</div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero fallback image</h2><p>Used when a selected product does not have an image.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">Fallback hero image<input name="hero_banner_url" value="${escapeHtml(state.settings.hero_banner_url || '')}"><input type="file" data-setting-upload="hero_banner_url" accept="image/*"></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage value badges (Features)</h2><p>The four trust badges displayed directly below the hero carousel.</p></div>${featuresMarkup}</section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Custom size calculator banner</h2><p>The call-to-action banner for custom size inquiries.</p></div><div class="admin-settings-fields"><label>Banner badge<input data-page-setting-path='["custom_size_banner", "badge"]' value="${escapeHtml(customBanner.badge || 'Need a Custom Non-Standard Size?')}"></label><label>Button text<input data-page-setting-path='["custom_size_banner", "btn_text"]' value="${escapeHtml(customBanner.btn_text || 'Open Custom Size Calculator →')}"></label><label class="admin-settings-wide">Headline title<input data-page-setting-path='["custom_size_banner", "title"]' value="${escapeHtml(customBanner.title || 'We Custom-Cut & Fabricate Any Board Dimension within 24 Hours')}"></label><label class="admin-settings-wide">Description<textarea rows="3" data-page-setting-path='["custom_size_banner", "description"]'>${escapeHtml(customBanner.description || '')}</textarea></label></div></section></div><div data-admin-page-panel="about"${activePageTab === 'about' ? '' : ' hidden'}><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Company story &amp; overview</h2><p>Manage the main narrative, established year, and founder details shown on the About page.</p></div><div class="admin-settings-fields"><label>Section badge<input data-page-setting-path='["about_home", "badge"]' value="${escapeHtml(aboutHome.badge || 'About Shaw Enterprise')}"></label><label>Established year<input name="established_year" value="${escapeHtml(state.settings.established_year || '2014')}"></label><label class="admin-settings-wide">Main title<input data-page-setting-path='["about_home", "title"]' value="${escapeHtml(aboutHome.title || '12+ Years of Manufacturing Excellence at College Street & Balagarh Works')}"></label><label class="admin-settings-wide">Story paragraph 1 (Founding &amp; Proprietor)<textarea rows="4" data-page-setting-path='["about_home", "p1"]'>${escapeHtml(aboutHome.p1 || '')}</textarea></label><label class="admin-settings-wide">Story paragraph 2 (Works &amp; Institutional Clients)<textarea rows="4" data-page-setting-path='["about_home", "p2"]'>${escapeHtml(aboutHome.p2 || '')}</textarea></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>About page showcase image</h2><p>The primary photograph displayed on the About page.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">About showcase image<input data-page-setting-path='["about_home", "image"]' value="${escapeHtml(aboutHome.image || '')}"><input type="file" data-setting-upload="about_home_image" accept="image/*"></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Company metrics &amp; stats</h2><p>The four key highlights (Established year, Surface warranty, Boards delivered, Frame alloy).</p></div>${aboutStatsMarkup}</section></div><div data-admin-page-panel="seo"${activePageTab === 'seo' ? '' : ' hidden'}><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Google Search Console &amp; Analytics</h2><p>Connect your webmaster verification and track storefront visitors.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">Google Search Console verification tag<input name="google_site_verification" value="${escapeHtml(state.settings.google_site_verification || '')}" placeholder="google-site-verification token or HTML meta content"><small style="display:block;margin-top:4px;color:#64748b;">Automatically adds &lt;meta name="google-site-verification"&gt; to site &lt;head&gt;.</small></label><label class="admin-settings-wide">Google Analytics 4 (GA4) measurement ID<input name="google_analytics_id" value="${escapeHtml(state.settings.google_analytics_id || '')}" placeholder="G-XXXXXXXXXX"><small style="display:block;margin-top:4px;color:#64748b;">Loads Google Tag (gtag.js) asynchronously across all pages.</small></label><label class="admin-settings-wide">Primary canonical domain<input name="canonical_domain" value="${escapeHtml(state.settings.canonical_domain || '')}" placeholder="https://shawenterprise.in"><small style="display:block;margin-top:4px;color:#64748b;">Primary live domain for canonical URLs, sitemaps, and Open Graph (default: auto-detected host).</small></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Search engine sitemap &amp; robots</h2><p>Direct URLs generated automatically for search engine crawlers.</p></div><div class="admin-settings-fields"><p class="admin-settings-wide" style="line-height:1.8;color:#475569;">• <strong>XML Sitemap:</strong> <a href="/sitemap.xml" target="_blank" rel="noreferrer" style="color:var(--navy);font-weight:700;text-decoration:underline;">View /sitemap.xml ↗</a> (Auto-updates with all products &amp; blogs)<br>• <strong>Robots.txt:</strong> <a href="/robots.txt" target="_blank" rel="noreferrer" style="color:var(--navy);font-weight:700;text-decoration:underline;">View /robots.txt ↗</a> (Controls crawler indexing permissions)</p></div></section></div></form>`;
       return;
     }
     const resource = adminResources[activeTab];
@@ -1166,6 +1181,17 @@
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Open admin menu');
         loadAdminTab();
+      }
+      const pageTabBtn = event.target.closest('[data-admin-page-tab]');
+      if (pageTabBtn) {
+        const targetTab = pageTabBtn.dataset.adminPageTab;
+        state.adminPageSectionTab = targetTab;
+        root.querySelectorAll('[data-admin-page-tab]').forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.adminPageTab === targetTab);
+        });
+        root.querySelectorAll('[data-admin-page-panel]').forEach((panel) => {
+          panel.hidden = panel.dataset.adminPagePanel !== targetTab;
+        });
       }
       const adminShortcut = event.target.closest('[data-admin-shortcut], [data-admin-shortcut-create]');
       if (adminShortcut) {
@@ -1513,7 +1539,9 @@
     if (page === 'contact') { renderContact(); return; }
     if (page === 'legal') { renderLegal(); return; }
     if (page === 'testimonials') { renderTestimonials(); return; }
-    setContent(`${pageBanner('Page not found')}<section class="section"><div class="container panel"><p>Sorry, this page could not be found.</p><a class="button button-primary" href="/">Return home</a></div></section>`);
+    document.title = 'Page Not Found | Shaw Enterprise';
+    const whatsappNum = String(state.settings.whatsapp || state.settings.phone || '9933944007').replace(/\D/g, '');
+    setContent(`${pageBanner('Page Not Found')}<section class="section"><div class="container panel" style="text-align:center;padding:48px 24px;max-width:640px;margin:0 auto;"><div style="font-size:52px;margin-bottom:14px;" aria-hidden="true">🔍</div><h2>We couldn't find the page you're looking for</h2><p class="muted" style="margin:12px auto 26px;max-width:480px;line-height:1.7;">The page or product link may have moved or been updated. You can browse our product catalogue or get in touch directly on WhatsApp.</p><div class="hero-actions" style="justify-content:center;gap:12px;"><a class="button button-primary" href="/products">Browse All Products</a><a class="button button-outline" href="/">Return Home</a><a class="button button-dark" href="https://wa.me/${escapeHtml(whatsappNum)}" target="_blank" rel="noopener noreferrer">WhatsApp Help</a></div></div></section>`);
   }
 
   async function init() {
