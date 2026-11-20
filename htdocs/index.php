@@ -142,6 +142,11 @@ $footerPhoneHref = preg_replace('/[^\d+]/', '', $footerPhone);
 $footerPhoneSecondaryHref = preg_replace('/[^\d+]/', '', $footerPhoneSecondary);
 $footerWhatsappDigits = preg_replace('/\D/', '', $footerWhatsapp);
 
+// Dynamic years calculation: count from established date - 1
+$estYearNum = (int)$establishedYear ?: 2014;
+$currentYear = (int)date('Y');
+$dynamicYears = max(1, $currentYear - ($estYearNum - 1));
+
 // Page Title, Meta Description, OG Image logic
 $ogType = 'website';
 $ogImage = $siteLogoUrl;
@@ -163,7 +168,7 @@ if ($pageType === 'product' && $matchedProduct) {
 } else {
     $metaDescriptions = [
         'home' => 'Shaw Enterprise (Est. ' . $establishedYear . ') is Kolkata\'s premier manufacturer of ceramic green boards, magnetic whiteboards, display stands, notice boards & school TLM products.',
-        'about' => 'Founded in ' . $establishedYear . ' by Mr. Indrajit Shaw, Shaw Enterprise manufactures and supplies writing boards, bulletin display systems & educational furniture across Eastern India.',
+        'about' => 'Founded in ' . $establishedYear . ' (' . $dynamicYears . '+ years of manufacturing excellence) by Mr. Indrajit Shaw, Shaw Enterprise manufactures and supplies writing boards, bulletin display systems & educational furniture across Eastern India.',
         'products' => 'Browse Kolkata\'s widest range of ceramic chalkboards, magnetic whiteboards, pin-up notice boards, exhibition stands, and school TLM products at factory rates.',
         'clients' => 'Trusted supplier to Presidency University, Calcutta University, St. Xavier\'s College, South Point, and 500+ schools, colleges, and corporate offices.',
         'blogs' => 'Read guides, buying tips, and maintenance advice for writing boards, classroom furniture, and institutional display systems from Shaw Enterprise.',
@@ -175,7 +180,7 @@ if ($pageType === 'product' && $matchedProduct) {
 
     $pageTitles = [
         'home' => 'Shaw Enterprise | Manufacturer of Writing Boards & Office Furniture Kolkata',
-        'about' => 'About Shaw Enterprise | Writing Board Manufacturer Since ' . $establishedYear,
+        'about' => 'About Shaw Enterprise | ' . $dynamicYears . '+ Years of Writing Board Manufacturing Excellence',
         'products' => 'Products Catalogue | Writing & Display Boards | Shaw Enterprise',
         'clients' => 'Our Institutional Clients | Universities & Schools | Shaw Enterprise',
         'blogs' => 'Insights & Guides | Shaw Enterprise Blog',

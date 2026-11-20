@@ -184,6 +184,17 @@
 
   function applySettings() {
     const settings = state.settings;
+    const callLink = document.querySelector('[data-floating-call]');
+    if (callLink) {
+      const rawPhone = String(settings.phone || settings.whatsapp || '').trim();
+      const phoneDigits = rawPhone.replace(/[^\d+]/g, '');
+      callLink.hidden = phoneDigits.length < 7;
+      if (phoneDigits.length >= 7) {
+        callLink.href = `tel:${phoneDigits}`;
+        const callLabel = callLink.querySelector('.floating-call-label');
+        if (callLabel && rawPhone) callLabel.textContent = `Call: ${rawPhone}`;
+      }
+    }
     const whatsappLink = document.querySelector('[data-floating-whatsapp]');
     if (whatsappLink) {
       const whatsappNumber = String(settings.whatsapp || settings.phone || '').replace(/\D/g, '');
@@ -531,26 +542,68 @@
     const about = settings.sections?.about_home || {};
     const markets = ['West Bengal', 'Bihar', 'Jharkhand', 'Odisha', 'Assam', 'Tripura', 'Sikkim', 'Manipur'];
     const establishedYear = String(settings.established_year || '2014').trim();
-    document.title = `About Shaw Enterprise | Writing Board Manufacturer Since ${establishedYear}`;
+    const estYearNum = parseInt(establishedYear, 10) || 2014;
+    const currentYear = new Date().getFullYear();
+    // Dynamic years: count from established date - 1
+    const dynamicYears = Math.max(1, currentYear - (estYearNum - 1));
+
+    document.title = `About Shaw Enterprise | ${dynamicYears}+ Years of Writing Board Manufacturing Excellence`;
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', `Founded in ${establishedYear} by Mr. Indrajit Shaw, Shaw Enterprise manufactures and supplies writing boards, bulletin display systems & educational furniture across Eastern India.`);
+    if (metaDesc) metaDesc.setAttribute('content', `Founded in ${establishedYear} (${dynamicYears}+ years of manufacturing excellence) by Mr. Indrajit Shaw, Shaw Enterprise manufactures and supplies writing boards, bulletin display systems & educational furniture across Eastern India.`);
+
+    const defaultTitle = `${dynamicYears}+ Years of Manufacturing Excellence at College Street & Balagarh Works`;
+    let aboutTitle = String(about.title || defaultTitle).trim();
+    if (/\{years\}|\{year\}|\{count\}|\{\d+\}/i.test(aboutTitle)) {
+      aboutTitle = aboutTitle.replace(/\{years\}|\{year\}|\{count\}|\{\d+\}/gi, `${dynamicYears}`);
+    } else if (/\b\d+\+?\s*Years\b/i.test(aboutTitle)) {
+      aboutTitle = aboutTitle.replace(/\b\d+\+?\s*Years\b/i, `${dynamicYears}+ Years`);
+    }
+
+    let aboutP1 = String(about.p1 || `Founded in ${establishedYear} by proprietor Mr. Indrajit Shaw, Shaw Enterprise has established itself as one of West Bengal's leading manufacturers, wholesalers, and retailers of writing boards, display bulletin systems, mobile stands, and school accessories.`).trim();
+    if (/\{years\}|\{year\}|\{count\}|\{\d+\}/i.test(aboutP1)) {
+      aboutP1 = aboutP1.replace(/\{years\}|\{year\}|\{count\}|\{\d+\}/gi, `${dynamicYears}`);
+    } else if (/\b\d+\+?\s*Years\b/i.test(aboutP1)) {
+      aboutP1 = aboutP1.replace(/\b\d+\+?\s*Years\b/i, `${dynamicYears}+ Years`);
+    }
+
     const profile = [
       ['Business type', 'Manufacturer, exporter, wholesaler & retailer'],
-      ['Established', establishedYear],
-      ['Ownership', 'Sole proprietorship'],
+      ['Established', `${establishedYear} (${dynamicYears}+ Years of Excellence)`],
+      ['Ownership', 'Sole proprietorship (Prop. Mr. Indrajit Shaw)'],
+      ['Manufacturing units', 'College Street (Kolkata) & Balagarh Industrial Works'],
       ['Team size', 'Fewer than 10 people'],
       ['Annual turnover', 'Below ₹1 crore'],
-      ['GST number', settings.gst_number || '19DOWPS0212F1ZO'],
+      ['GST number', settings.gst_number || '19AAIFS4821N1ZM'],
     ];
+
+    const stats = Array.isArray(about.stats) && about.stats.length ? about.stats : [
+      { label: 'Year Established', value: establishedYear, sub: 'College Street, Kolkata' },
+      { label: 'Experience', value: `${dynamicYears}+ Yrs`, sub: 'Manufacturing Excellence' },
+      { label: 'Surface Warranty', value: '25-Yr', sub: 'On Ceramic Green Boards' },
+      { label: 'Boards Delivered', value: '50,000+', sub: 'Delivered Pan-India' },
+    ];
+
     setContent(`${pageBanner('About Shaw Enterprise', 'A Kolkata-based manufacturer and supplier of writing boards and educational products.')}
       <section class="section about-intro"><div class="container about-intro-grid">
-        <div class="about-story"><span class="eyebrow">${escapeHtml(about.badge || 'Our company')}</span><h2>${escapeHtml(about.title || 'Products made with care. Service built around you.')}</h2>
-          <p>${escapeHtml(about.p1 || `Established in ${establishedYear}, Shaw Enterprise manufactures and supplies writing boards and related products to customers across eastern and northeastern India. We serve clients through manufacturing, export, wholesale and retail.`)}</p>
-          <p>${escapeHtml(about.p2 || `Our team works to understand each customer’s requirements, offers customization and packaging options, and coordinates delivery within an agreed timeframe.`)}</p>
-          <a class="button button-primary" href="/contact">Talk to our team <span aria-hidden="true">→</span></a>
+        <div class="about-story"><span class="eyebrow">${escapeHtml(about.badge || 'About Shaw Enterprise')}</span><h2>${escapeHtml(aboutTitle)}</h2>
+          <p>${escapeHtml(aboutP1)}</p>
+          <p>${escapeHtml(about.p2 || `Operating our registered office at 44/1B, Beniatola Lane, College Street, and manufacturing workshop at Balagarh Industrial (Suryapur, Navarand, Kolkata – 700121), we supply both individual students and renowned institutions including Presidency University, Calcutta University, St. Xavier's, and South Point with precision-engineered products.`)}</p>
+          <div class="hero-actions" style="margin-top:20px;gap:12px;">
+            <a class="button button-primary" href="/contact">Talk to our team <span aria-hidden="true">→</span></a>
+            <a class="button button-outline" href="tel:${escapeHtml(String(settings.phone || '').replace(/[^\d+]/g, ''))}">📞 Call Directly</a>
+          </div>
         </div>
-        <div class="about-visual"><img src="${escapeHtml(imageUrl(about.image || settings.hero_banner_url))}" alt="Writing boards and educational products from Shaw Enterprise"><div class="about-established"><strong>${escapeHtml(establishedYear)}</strong><span>Established</span></div></div>
+        <div class="about-visual"><img src="${escapeHtml(imageUrl(about.image || settings.hero_banner_url))}" alt="Writing boards and educational products from Shaw Enterprise"><div class="about-established"><strong>${escapeHtml(establishedYear)}</strong><span>Est. (${dynamicYears}+ Yrs)</span></div></div>
       </div></section>
+      <section class="section section-tight about-stats-section"><div class="container"><div class="grid about-stats-grid">
+        ${stats.map((st) => `
+          <article class="panel about-stat-card">
+            <span class="stat-value">${escapeHtml(st.value || '')}</span>
+            <strong>${escapeHtml(st.label || '')}</strong>
+            <p>${escapeHtml(st.sub || '')}</p>
+          </article>
+        `).join('')}
+      </div></div></section>
       <section class="section about-approach"><div class="container"><div class="section-heading"><div><span class="eyebrow">From requirement to dispatch</span><h2>A considered approach at every stage</h2></div></div>
         <div class="about-approach-grid"><article class="about-approach-card"><span>01</span><h3>Understand your needs</h3><p>Our team works with clients to understand product specifications and discuss suitable options.</p></article><article class="about-approach-card"><span>02</span><h3>Customize with care</h3><p>Customization and packaging options can be arranged to suit the order and customer requirements.</p></article><article class="about-approach-card"><span>03</span><h3>Check before dispatch</h3><p>Products are checked at multiple stages for performance and reliability before they leave our facility.</p></article><article class="about-approach-card"><span>04</span><h3>Coordinate delivery</h3><p>We coordinate dispatch to serve customers throughout our regional distribution markets.</p></article></div>
       </div></section>
@@ -1033,11 +1086,14 @@
 
       const customBanner = sections.custom_size_banner || {};
       const aboutHome = sections.about_home || {};
+      const adminEstYear = parseInt(state.settings.established_year || '2014', 10) || 2014;
+      const adminCurrentYear = new Date().getFullYear();
+      const adminDynamicYears = Math.max(1, adminCurrentYear - (adminEstYear - 1));
       const aboutStats = Array.isArray(aboutHome.stats) && aboutHome.stats.length ? aboutHome.stats : [
         { id: 1, label: 'Year Established', value: state.settings.established_year || '2014', sub: 'College Street, Kolkata' },
-        { id: 2, label: 'Surface Warranty', value: '25-Yr', sub: 'On Ceramic Green Boards' },
-        { id: 3, label: 'Boards Manufactured', value: '50,000+', sub: 'Delivered Pan-India' },
-        { id: 4, label: 'Genuine Virgin Alloy', value: '100%', sub: 'Alloy 6063-T6 Frames' }
+        { id: 2, label: 'Experience', value: `${adminDynamicYears}+ Yrs`, sub: 'Manufacturing Excellence' },
+        { id: 3, label: 'Surface Warranty', value: '25-Yr', sub: 'On Ceramic Green Boards' },
+        { id: 4, label: 'Boards Manufactured', value: '50,000+', sub: 'Delivered Pan-India' }
       ];
       const aboutStatsMarkup = aboutStats.map((stat, index) => `
         <div class="admin-settings-subgroup">
@@ -1050,7 +1106,7 @@
         </div>
       `).join('');
 
-      view.innerHTML = `<div class="admin-toolbar"><div><span class="eyebrow">Storefront content</span><h1>Page settings</h1></div><button class="button button-primary" data-save-settings>Save changes</button></div><p class="admin-settings-intro">Edit page sections, messaging, images, and SEO metadata organized cleanly by page.</p><nav class="admin-subnav" aria-label="Page section navigation"><button type="button" class="admin-subnav-btn${activePageTab === 'home' ? ' active' : ''}" data-admin-page-tab="home">🏠 Home Page</button><button type="button" class="admin-subnav-btn${activePageTab === 'about' ? ' active' : ''}" data-admin-page-tab="about">📖 About Page</button><button type="button" class="admin-subnav-btn${activePageTab === 'seo' ? ' active' : ''}" data-admin-page-tab="seo">🔍 SEO &amp; Search Console</button></nav><form class="admin-settings-form" data-settings-form data-settings-section="page"><div data-admin-page-panel="home"${activePageTab === 'home' ? '' : ' hidden'}><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero banners</h2><p>Select up to five products and set the rotation duration.</p></div><div class="admin-settings-fields">${heroProductFields}${heroSliderSpeedField}</div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero fallback image</h2><p>Used when a selected product does not have an image.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">Fallback hero image<input name="hero_banner_url" value="${escapeHtml(state.settings.hero_banner_url || '')}"><input type="file" data-setting-upload="hero_banner_url" accept="image/*"></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage value badges (Features)</h2><p>The four trust badges displayed directly below the hero carousel.</p></div>${featuresMarkup}</section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Custom size calculator banner</h2><p>The call-to-action banner for custom size inquiries.</p></div><div class="admin-settings-fields"><label>Banner badge<input data-page-setting-path='["custom_size_banner", "badge"]' value="${escapeHtml(customBanner.badge || 'Need a Custom Non-Standard Size?')}"></label><label>Button text<input data-page-setting-path='["custom_size_banner", "btn_text"]' value="${escapeHtml(customBanner.btn_text || 'Open Custom Size Calculator →')}"></label><label class="admin-settings-wide">Headline title<input data-page-setting-path='["custom_size_banner", "title"]' value="${escapeHtml(customBanner.title || 'We Custom-Cut & Fabricate Any Board Dimension within 24 Hours')}"></label><label class="admin-settings-wide">Description<textarea rows="3" data-page-setting-path='["custom_size_banner", "description"]'>${escapeHtml(customBanner.description || '')}</textarea></label></div></section></div><div data-admin-page-panel="about"${activePageTab === 'about' ? '' : ' hidden'}><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Company story &amp; overview</h2><p>Manage the main narrative, established year, and founder details shown on the About page.</p></div><div class="admin-settings-fields"><label>Section badge<input data-page-setting-path='["about_home", "badge"]' value="${escapeHtml(aboutHome.badge || 'About Shaw Enterprise')}"></label><label>Established year<input name="established_year" value="${escapeHtml(state.settings.established_year || '2014')}"></label><label class="admin-settings-wide">Main title<input data-page-setting-path='["about_home", "title"]' value="${escapeHtml(aboutHome.title || '12+ Years of Manufacturing Excellence at College Street & Balagarh Works')}"></label><label class="admin-settings-wide">Story paragraph 1 (Founding &amp; Proprietor)<textarea rows="4" data-page-setting-path='["about_home", "p1"]'>${escapeHtml(aboutHome.p1 || '')}</textarea></label><label class="admin-settings-wide">Story paragraph 2 (Works &amp; Institutional Clients)<textarea rows="4" data-page-setting-path='["about_home", "p2"]'>${escapeHtml(aboutHome.p2 || '')}</textarea></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>About page showcase image</h2><p>The primary photograph displayed on the About page.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">About showcase image<input data-page-setting-path='["about_home", "image"]' value="${escapeHtml(aboutHome.image || '')}"><input type="file" data-setting-upload="about_home_image" accept="image/*"></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Company metrics &amp; stats</h2><p>The four key highlights (Established year, Surface warranty, Boards delivered, Frame alloy).</p></div>${aboutStatsMarkup}</section></div><div data-admin-page-panel="seo"${activePageTab === 'seo' ? '' : ' hidden'}><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Google Search Console &amp; Analytics</h2><p>Connect your webmaster verification and track storefront visitors.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">Google Search Console verification tag<input name="google_site_verification" value="${escapeHtml(state.settings.google_site_verification || '')}" placeholder="google-site-verification token or HTML meta content"><small style="display:block;margin-top:4px;color:#64748b;">Automatically adds &lt;meta name="google-site-verification"&gt; to site &lt;head&gt;.</small></label><label class="admin-settings-wide">Google Analytics 4 (GA4) measurement ID<input name="google_analytics_id" value="${escapeHtml(state.settings.google_analytics_id || '')}" placeholder="G-XXXXXXXXXX"><small style="display:block;margin-top:4px;color:#64748b;">Loads Google Tag (gtag.js) asynchronously across all pages.</small></label><label class="admin-settings-wide">Primary canonical domain<input name="canonical_domain" value="${escapeHtml(state.settings.canonical_domain || '')}" placeholder="https://shawenterprise.in"><small style="display:block;margin-top:4px;color:#64748b;">Primary live domain for canonical URLs, sitemaps, and Open Graph (default: auto-detected host).</small></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Search engine sitemap &amp; robots</h2><p>Direct URLs generated automatically for search engine crawlers.</p></div><div class="admin-settings-fields"><p class="admin-settings-wide" style="line-height:1.8;color:#475569;">• <strong>XML Sitemap:</strong> <a href="/sitemap.xml" target="_blank" rel="noreferrer" style="color:var(--navy);font-weight:700;text-decoration:underline;">View /sitemap.xml ↗</a> (Auto-updates with all products &amp; blogs)<br>• <strong>Robots.txt:</strong> <a href="/robots.txt" target="_blank" rel="noreferrer" style="color:var(--navy);font-weight:700;text-decoration:underline;">View /robots.txt ↗</a> (Controls crawler indexing permissions)</p></div></section></div></form>`;
+      view.innerHTML = `<div class="admin-toolbar"><div><span class="eyebrow">Storefront content</span><h1>Page settings</h1></div><button class="button button-primary" data-save-settings>Save changes</button></div><p class="admin-settings-intro">Edit page sections, messaging, images, and SEO metadata organized cleanly by page.</p><nav class="admin-subnav" aria-label="Page section navigation"><button type="button" class="admin-subnav-btn${activePageTab === 'home' ? ' active' : ''}" data-admin-page-tab="home">🏠 Home Page</button><button type="button" class="admin-subnav-btn${activePageTab === 'about' ? ' active' : ''}" data-admin-page-tab="about">📖 About Page</button><button type="button" class="admin-subnav-btn${activePageTab === 'seo' ? ' active' : ''}" data-admin-page-tab="seo">🔍 SEO &amp; Search Console</button></nav><form class="admin-settings-form" data-settings-form data-settings-section="page"><div data-admin-page-panel="home"${activePageTab === 'home' ? '' : ' hidden'}><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero banners</h2><p>Select up to five products and set the rotation duration.</p></div><div class="admin-settings-fields">${heroProductFields}${heroSliderSpeedField}</div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage hero fallback image</h2><p>Used when a selected product does not have an image.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">Fallback hero image<input name="hero_banner_url" value="${escapeHtml(state.settings.hero_banner_url || '')}"><input type="file" data-setting-upload="hero_banner_url" accept="image/*"></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Homepage value badges (Features)</h2><p>The four trust badges displayed directly below the hero carousel.</p></div>${featuresMarkup}</section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Custom size calculator banner</h2><p>The call-to-action banner for custom size inquiries.</p></div><div class="admin-settings-fields"><label>Banner badge<input data-page-setting-path='["custom_size_banner", "badge"]' value="${escapeHtml(customBanner.badge || 'Need a Custom Non-Standard Size?')}"></label><label>Button text<input data-page-setting-path='["custom_size_banner", "btn_text"]' value="${escapeHtml(customBanner.btn_text || 'Open Custom Size Calculator →')}"></label><label class="admin-settings-wide">Headline title<input data-page-setting-path='["custom_size_banner", "title"]' value="${escapeHtml(customBanner.title || 'We Custom-Cut & Fabricate Any Board Dimension within 24 Hours')}"></label><label class="admin-settings-wide">Description<textarea rows="3" data-page-setting-path='["custom_size_banner", "description"]'>${escapeHtml(customBanner.description || '')}</textarea></label></div></section></div><div data-admin-page-panel="about"${activePageTab === 'about' ? '' : ' hidden'}><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Company story &amp; overview</h2><p>Manage the main narrative, established year, and founder details shown on the About page.</p></div><div class="admin-settings-fields"><label>Section badge<input data-page-setting-path='["about_home", "badge"]' value="${escapeHtml(aboutHome.badge || 'About Shaw Enterprise')}"></label><label>Established year<input name="established_year" value="${escapeHtml(state.settings.established_year || '2014')}"></label><label class="admin-settings-wide">Main title<input data-page-setting-path='["about_home", "title"]' value="${escapeHtml(aboutHome.title || `${adminDynamicYears}+ Years of Manufacturing Excellence at College Street & Balagarh Works`)}"><small style="display:block;margin-top:4px;color:#64748b;">Tip: Use <code>{years}+ Years</code> to dynamically increment every year (currently <strong>${adminDynamicYears}+ Years</strong> based on ${adminEstYear} - 1).</small></label><label class="admin-settings-wide">Story paragraph 1 (Founding &amp; Proprietor)<textarea rows="4" data-page-setting-path='["about_home", "p1"]'>${escapeHtml(aboutHome.p1 || '')}</textarea></label><label class="admin-settings-wide">Story paragraph 2 (Works &amp; Institutional Clients)<textarea rows="4" data-page-setting-path='["about_home", "p2"]'>${escapeHtml(aboutHome.p2 || '')}</textarea></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>About page showcase image</h2><p>The primary photograph displayed on the About page.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">About showcase image<input data-page-setting-path='["about_home", "image"]' value="${escapeHtml(aboutHome.image || '')}"><input type="file" data-setting-upload="about_home_image" accept="image/*"></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Company metrics &amp; stats</h2><p>The four key highlights (Established year, Surface warranty, Boards delivered, Frame alloy).</p></div>${aboutStatsMarkup}</section></div><div data-admin-page-panel="seo"${activePageTab === 'seo' ? '' : ' hidden'}><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Google Search Console &amp; Analytics</h2><p>Connect your webmaster verification and track storefront visitors.</p></div><div class="admin-settings-fields"><label class="admin-settings-wide">Google Search Console verification tag<input name="google_site_verification" value="${escapeHtml(state.settings.google_site_verification || '')}" placeholder="google-site-verification token or HTML meta content"><small style="display:block;margin-top:4px;color:#64748b;">Automatically adds &lt;meta name="google-site-verification"&gt; to site &lt;head&gt;.</small></label><label class="admin-settings-wide">Google Analytics 4 (GA4) measurement ID<input name="google_analytics_id" value="${escapeHtml(state.settings.google_analytics_id || '')}" placeholder="G-XXXXXXXXXX"><small style="display:block;margin-top:4px;color:#64748b;">Loads Google Tag (gtag.js) asynchronously across all pages.</small></label><label class="admin-settings-wide">Primary canonical domain<input name="canonical_domain" value="${escapeHtml(state.settings.canonical_domain || '')}" placeholder="https://shawenterprise.in"><small style="display:block;margin-top:4px;color:#64748b;">Primary live domain for canonical URLs, sitemaps, and Open Graph (default: auto-detected host).</small></label></div></section><section class="admin-settings-group"><div class="admin-settings-group-heading"><h2>Search engine sitemap &amp; robots</h2><p>Direct URLs generated automatically for search engine crawlers.</p></div><div class="admin-settings-fields"><p class="admin-settings-wide" style="line-height:1.8;color:#475569;">• <strong>XML Sitemap:</strong> <a href="/sitemap.xml" target="_blank" rel="noreferrer" style="color:var(--navy);font-weight:700;text-decoration:underline;">View /sitemap.xml ↗</a> (Auto-updates with all products &amp; blogs)<br>• <strong>Robots.txt:</strong> <a href="/robots.txt" target="_blank" rel="noreferrer" style="color:var(--navy);font-weight:700;text-decoration:underline;">View /robots.txt ↗</a> (Controls crawler indexing permissions)</p></div></section></div></form>`;
       return;
     }
     const resource = adminResources[activeTab];

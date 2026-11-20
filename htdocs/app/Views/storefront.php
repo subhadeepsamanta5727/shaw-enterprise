@@ -182,10 +182,18 @@
                 <a href="/admin/login">Admin</a>
             </div>
         </footer>
-        <a class="floating-whatsapp" data-floating-whatsapp href="https://wa.me/<?= htmlspecialchars($footerWhatsappDigits, ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" aria-label="Need help? Chat with <?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> on WhatsApp" title="Chat with us on WhatsApp">
-            <span class="floating-whatsapp-label">Need Help? Chat with us</span>
-            <span class="floating-whatsapp-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C8.87 3 3.04 8.82 3.04 15.98c0 2.29.6 4.52 1.74 6.5L3 29l6.7-1.75a13 13 0 0 0 6.33 1.62h.01c7.16 0 12.99-5.82 13-12.98A12.91 12.91 0 0 0 25.24 6.7 12.9 12.9 0 0 0 16.04 3Zm0 23.67h-.01a10.76 10.76 0 0 1-5.48-1.5l-.39-.23-3.98 1.04 1.06-3.88-.25-.4a10.75 10.75 0 0 1-1.65-5.72c0-5.92 4.82-10.74 10.76-10.74 2.87 0 5.57 1.12 7.6 3.15a10.67 10.67 0 0 1 3.14 7.6c0 5.92-4.82 10.74-10.8 10.74Zm5.9-8.04c-.32-.16-1.9-.94-2.2-1.05-.3-.1-.51-.16-.73.16-.21.32-.84 1.05-1.03 1.27-.19.21-.38.24-.7.08-.32-.16-1.35-.5-2.57-1.58-.95-.84-1.59-1.88-1.78-2.2-.19-.31-.02-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.22 0-.57.08-.87.4-.3.32-1.14 1.1-1.14 2.68s1.17 3.1 1.33 3.31c.16.21 2.3 3.52 5.58 4.93.78.34 1.39.55 1.86.7.78.25 1.49.22 2.05.13.63-.1 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.53-.08-.13-.3-.21-.62-.37Z"/></svg></span>
-        </a>
+        <div class="floating-contact-stack" aria-label="Quick contact buttons">
+            <a class="floating-call" data-floating-call href="tel:<?= htmlspecialchars($footerPhoneHref, ENT_QUOTES, 'UTF-8') ?>" aria-label="Call <?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> directly" title="Call us: <?= htmlspecialchars($footerPhone, ENT_QUOTES, 'UTF-8') ?>">
+                <span class="floating-call-label">Call: <?= htmlspecialchars($footerPhone, ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="floating-call-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.053 15.053 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 3.93c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.55c0-.55-.45-1-.99-1z"/></svg>
+                </span>
+            </a>
+            <a class="floating-whatsapp" data-floating-whatsapp href="https://wa.me/<?= htmlspecialchars($footerWhatsappDigits, ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" aria-label="Need help? Chat with <?= htmlspecialchars($footerSiteName, ENT_QUOTES, 'UTF-8') ?> on WhatsApp" title="Chat with us on WhatsApp">
+                <span class="floating-whatsapp-label">Need Help? Chat with us</span>
+                <span class="floating-whatsapp-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C8.87 3 3.04 8.82 3.04 15.98c0 2.29.6 4.52 1.74 6.5L3 29l6.7-1.75a13 13 0 0 0 6.33 1.62h.01c7.16 0 12.99-5.82 13-12.98A12.91 12.91 0 0 0 25.24 6.7 12.9 12.9 0 0 0 16.04 3Zm0 23.67h-.01a10.76 10.76 0 0 1-5.48-1.5l-.39-.23-3.98 1.04 1.06-3.88-.25-.4a10.75 10.75 0 0 1-1.65-5.72c0-5.92 4.82-10.74 10.76-10.74 2.87 0 5.57 1.12 7.6 3.15a10.67 10.67 0 0 1 3.14 7.6c0 5.92-4.82 10.74-10.8 10.74Zm5.9-8.04c-.32-.16-1.9-.94-2.2-1.05-.3-.1-.51-.16-.73.16-.21.32-.84 1.05-1.03 1.27-.19.21-.38.24-.7.08-.32-.16-1.35-.5-2.57-1.58-.95-.84-1.59-1.88-1.78-2.2-.19-.31-.02-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.22 0-.57.08-.87.4-.3.32-1.14 1.1-1.14 2.68s1.17 3.1 1.33 3.31c.16.21 2.3 3.52 5.58 4.93.78.34 1.39.55 1.86.7.78.25 1.49.22 2.05.13.63-.1 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.53-.08-.13-.3-.21-.62-.37Z"/></svg></span>
+            </a>
+        </div>
         <nav class="mobile-sticky-action-bar" aria-label="Quick contact actions">
             <a class="mobile-action-btn mobile-call-btn" href="tel:<?= htmlspecialchars($footerPhoneHref, ENT_QUOTES, 'UTF-8') ?>" aria-label="Call Shaw Enterprise directly">
                 <span class="mobile-action-icon" aria-hidden="true">📞</span>
