@@ -52,7 +52,8 @@ $pageType = match ($page) {
     'privacy-policy', 'terms', 'terms-conditions', 'terms-and-conditions', 'payment-policy', 'disclaimer' => 'legal',
     'admin' => 'admin',
     'testimonials' => 'home',
-    default => ($route === '' ? 'home' : 'not-found'),
+    'index.php' => 'home',
+    default => ($route === '' || $route === 'index.php' ? 'home' : 'not-found'),
 };
 
 if ($pageType === 'admin' && $slug === 'login') {
@@ -84,7 +85,7 @@ $matchedBlog = null;
 
 try {
     require_once __DIR__ . '/app/Support/Database.php';
-    $db = Database::getConnection();
+    $db = Database::getConnection(false);
     $stmt = $db->query("SELECT setting_value FROM settings WHERE setting_key = 'general' LIMIT 1");
     $rawSettings = $stmt ? $stmt->fetchColumn() : null;
     if ($rawSettings) {

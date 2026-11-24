@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: https://shaw-enterprise-does.onrender.com/sitemap.xml
+Sitemap: https://shawenterprise.in/sitemap.xml

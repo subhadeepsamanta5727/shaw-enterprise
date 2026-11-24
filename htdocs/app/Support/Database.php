@@ -6,7 +6,7 @@
 class Database {
     private static ?PDO $instance = null;
 
-    public static function getConnection(): PDO {
+    public static function getConnection(bool $exitOnError = true): ?PDO {
         if (self::$instance === null) {
             $config = require dirname(__DIR__, 2) . '/config/database.php';
             $db = $config['db'];
@@ -32,14 +32,17 @@ class Database {
             try {
                 self::$instance = new PDO($dsn, $db['user'], $db['password'], $options);
             } catch (PDOException $e) {
-                http_response_code(500);
-                header('Content-Type: application/json');
-                echo json_encode([
-                    'success' => false,
-                    'message' => 'Database connection failed. Please ensure the MySQL database is running and credentials are valid.'
-                ]);
                 error_log('MySQL Connection Error: ' . $e->getMessage());
-                exit;
+                if ($exitOnError) {
+                    http_response_code(500);
+                    header('Content-Type: application/json');
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Database connection failed. Please ensure the MySQL database is running and credentials are valid.'
+                    ]);
+                    exit;
+                }
+                throw $e;
             }
         }
 

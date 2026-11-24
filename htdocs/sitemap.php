@@ -9,7 +9,7 @@ $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
     || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https')
     || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
 $protocol = $isHttps ? 'https' : 'http';
-$host = $_SERVER['HTTP_HOST'] ?? 'shaw-enterprise-does.onrender.com';
+$host = $_SERVER['HTTP_HOST'] ?? 'shawenterprise.in';
 $baseUrl = $protocol . '://' . $host;
 
 try {
